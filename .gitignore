@@ -91,6 +91,7 @@ target/
 # CUSTOM HERE
 .venv/
 data_processing/data/*
+.vscode/
 
 # Unity gitignore
 /[Ll]ibrary/

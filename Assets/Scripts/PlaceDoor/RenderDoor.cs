@@ -6,13 +6,13 @@ public class RenderDoor : MonoBehaviour
 {
     public GameObject doorPrefab;
     // Prefabs for the spheres
-    public GameObject anchorPointLeft;
-    public GameObject anchorPointRight;
-    public GameObject areaPlane;
+    public GameObject anchorPointLeftPrefab;
+    public GameObject anchorPointRightPrefab;
+    public GameObject areaPlanePrefab;
 
     // Define the positions where the spheres will appear
-    private Vector3 anchorPointLeftInitialOffset = new Vector3(-0.043f, 0.03f, 0.223f);
-    private Vector3 anchorPointRightInitialOffset = new Vector3(0.043f, -0.03f, 0.223f);
+    private Vector3 anchorPointLeftPrefabInitialOffset = new Vector3(-0.043f, 0.03f, 0.223f);
+    private Vector3 anchorPointRightPrefabInitialOffset = new Vector3(0.043f, -0.03f, 0.223f);
 
     private GameObject leftSphere;
     private GameObject rightSphere;
@@ -23,13 +23,17 @@ public class RenderDoor : MonoBehaviour
     {
         // Get camera position
         Vector3 cameraPosition = Camera.main.transform.position;
-        Vector3 anchorPointLeftInitialPosition = cameraPosition + anchorPointLeftInitialOffset;
-        Vector3 anchorPointRightInitialPosition = cameraPosition + anchorPointRightInitialOffset;
+        Vector3 anchorPointLeftPrefabInitialPosition = cameraPosition + anchorPointLeftPrefabInitialOffset;
+        Vector3 anchorPointRightPrefabInitialPosition = cameraPosition + anchorPointRightPrefabInitialOffset;
 
+
+        if (leftSphere != null && rightSphere != null && plane != null){
+            cancelAnchorPoints();
+        }
         // Instantiate the spheres at the specified positions
-        leftSphere = Instantiate(anchorPointLeft, anchorPointLeftInitialPosition, Quaternion.identity);
-        rightSphere = Instantiate(anchorPointRight, anchorPointRightInitialPosition, Quaternion.identity);
-        plane = Instantiate(areaPlane);
+        leftSphere = Instantiate(anchorPointLeftPrefab, anchorPointLeftPrefabInitialPosition, Quaternion.identity);
+        rightSphere = Instantiate(anchorPointRightPrefab, anchorPointRightPrefabInitialPosition, Quaternion.identity);
+        plane = Instantiate(areaPlanePrefab);
 
         AdjustPlane();
     }
@@ -62,20 +66,31 @@ public class RenderDoor : MonoBehaviour
         if (leftSphere != null && rightSphere != null && plane != null)
         {
             Vector3 doorOffset = new Vector3(-4.22f,-1.63f,1.4f);
-            Vector3 doorPosition = plane.transform.position + doorOffset;
+            Vector3 doorPosition = plane.transform.position;
 
             float planeWidth = plane.transform.localScale.x; 
 
             Debug.Log(doorPosition);
             
-            doorPrefab = Instantiate(doorPrefab, doorPosition, Quaternion.identity);
-            doorPrefab.transform.rotation = Quaternion.Euler(-90, 0, 0);
+            doorPrefab = Instantiate(doorPrefab, doorPosition, Quaternion.Euler(-90, 0, 0));
 
             doorPrefab.transform.localScale = new Vector3(planeWidth/0.16583f, planeWidth/0.16583f,planeWidth/0.16583f);
+            doorPrefab.transform.position = plane.transform.position;
 
         }else
         {
             Debug.Log("no anchor points created");
+        }
+    }
+
+    // destroy anchor points for door placement
+    public void cancelAnchorPoints()
+    {
+        if(leftSphere != null && rightSphere != null && plane != null)
+        {
+            Destroy(leftSphere);
+            Destroy(rightSphere);
+            Destroy(plane);
         }
     }
 

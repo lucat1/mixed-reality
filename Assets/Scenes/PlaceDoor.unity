@@ -691,6 +691,41 @@ PrefabInstance:
       propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 6922232475604193032, guid: 180d4d2203473be4fa3fef18d0bec80e,
+        type: 3}
+      propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922232475604193032, guid: 180d4d2203473be4fa3fef18d0bec80e,
+        type: 3}
+      propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922232475604193032, guid: 180d4d2203473be4fa3fef18d0bec80e,
+        type: 3}
+      propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1510642528}
+    - target: {fileID: 6922232475604193032, guid: 180d4d2203473be4fa3fef18d0bec80e,
+        type: 3}
+      propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922232475604193032, guid: 180d4d2203473be4fa3fef18d0bec80e,
+        type: 3}
+      propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: cancelAnchorPoints
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922232475604193032, guid: 180d4d2203473be4fa3fef18d0bec80e,
+        type: 3}
+      propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: RenderDoor, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922232475604193032, guid: 180d4d2203473be4fa3fef18d0bec80e,
+        type: 3}
+      propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7776007855563873072, guid: 180d4d2203473be4fa3fef18d0bec80e,
         type: 3}
       propertyPath: m_text
@@ -700,6 +735,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: Anchor points
+      objectReference: {fileID: 0}
+    - target: {fileID: 7776007857239841183, guid: 180d4d2203473be4fa3fef18d0bec80e,
+        type: 3}
+      propertyPath: m_text
+      value: Cancel
+      objectReference: {fileID: 0}
+    - target: {fileID: 8256070623735881500, guid: 180d4d2203473be4fa3fef18d0bec80e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1050,11 +1095,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorPrefab: {fileID: 919132149155446097, guid: c446aecccdff3e946a1025bd667cadfd,
     type: 3}
-  anchorPointLeft: {fileID: 7432443185241540560, guid: 33009308d9b36c842ad3eee566c28a5e,
+  anchorPointLeftPrefab: {fileID: 7432443185241540560, guid: 33009308d9b36c842ad3eee566c28a5e,
     type: 3}
-  anchorPointRight: {fileID: 7432443185241540560, guid: bacc018296d6d8a4498f1562230dcb21,
+  anchorPointRightPrefab: {fileID: 7432443185241540560, guid: bacc018296d6d8a4498f1562230dcb21,
     type: 3}
-  areaPlane: {fileID: 3029941343368223762, guid: f0a74b2c8781c4548bf14fc5f7aec7a9,
+  areaPlanePrefab: {fileID: 3029941343368223762, guid: f0a74b2c8781c4548bf14fc5f7aec7a9,
     type: 3}
 --- !u!1 &1750253604 stripped
 GameObject:
@@ -1168,6 +1213,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MRTK XR Rig
+      objectReference: {fileID: 0}
+    - target: {fileID: 7294214612838230065, guid: acbf65a81ce2cf94f82a0809298acf70,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

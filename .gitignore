@@ -93,6 +93,7 @@ target/
 data_processing/data/*
 .vscode/
 data/*
+
 # Unity gitignore
 /[Ll]ibrary/
 /[Tt]emp/

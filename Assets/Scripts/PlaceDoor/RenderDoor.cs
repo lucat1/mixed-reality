@@ -72,10 +72,17 @@ public class RenderDoor : MonoBehaviour
 
             Debug.Log(doorPosition);
             
-            doorPrefab = Instantiate(doorPrefab, doorPosition, Quaternion.Euler(-90, 0, 0));
+            doorPrefab = Instantiate(doorPrefab, doorPosition, Quaternion.Euler(0, 0, 0));
 
-            doorPrefab.transform.localScale = new Vector3(planeWidth/0.16583f, planeWidth/0.16583f,planeWidth/0.16583f);
             doorPrefab.transform.position = plane.transform.position;
+            
+            Transform DoorScaleTrasform = doorPrefab.transform.Find("DoorContainer/DoorScale");
+            DoorScaleTrasform.localScale = new Vector3(planeWidth/0.16583f, planeWidth/0.16583f,planeWidth/0.16583f);
+
+            Transform DoorResetPosition = doorPrefab.transform.Find("DoorContainer");
+            DoorResetPosition.localPosition = Vector3.zero;
+
+
 
         }else
         {

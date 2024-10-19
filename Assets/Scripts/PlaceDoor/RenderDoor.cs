@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class RenderDoor : MonoBehaviour
 {
-    public GameObject doorPrefab;
-    // Prefabs for the spheres
+    public GameObject Door;
     public GameObject anchorPointLeftPrefab;
     public GameObject anchorPointRightPrefab;
     public GameObject areaPlanePrefab;
@@ -68,18 +67,20 @@ public class RenderDoor : MonoBehaviour
             Vector3 doorOffset = new Vector3(-4.22f,-1.63f,1.4f);
             Vector3 doorPosition = plane.transform.position;
 
-            float planeWidth = plane.transform.localScale.x; 
+            float planeWidth = plane.transform.localScale.x;
 
             Debug.Log(doorPosition);
             
-            doorPrefab = Instantiate(doorPrefab, doorPosition, Quaternion.Euler(0, 0, 0));
+            // Door = Instantiate(doorPrefab, doorPosition, Quaternion.Euler(0, 0, 0));
+            Door.transform.position = doorPosition;
+            Door.SetActive(true);
 
-            doorPrefab.transform.position = plane.transform.position;
+            Door.transform.position = plane.transform.position;
             
-            Transform DoorScaleTrasform = doorPrefab.transform.Find("DoorContainer/DoorScale");
+            Transform DoorScaleTrasform = Door.transform.Find("DoorContainer/DoorScale");
             DoorScaleTrasform.localScale = new Vector3(planeWidth/0.16583f, planeWidth/0.16583f,planeWidth/0.16583f);
 
-            Transform DoorResetPosition = doorPrefab.transform.Find("DoorContainer");
+            Transform DoorResetPosition = Door.transform.Find("DoorContainer");
             DoorResetPosition.localPosition = Vector3.zero;
 
 

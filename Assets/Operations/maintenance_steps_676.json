@@ -1,0 +1,41 @@
+{
+    "collections" : {
+        "prova_1" : [
+            {
+                "stepN": 0,
+                "step_description": "Close the door leaf.",
+                "component_code": "25-310-0566-202"
+            },
+            {
+                "stepN": 1,
+                "step_description": "On the inside of the left door leaf, remove 2 hexagonal socket screws from the cover of the door leaf distributor (SW 4).",
+                "component_code": "25-716-1124-303"
+            },
+            {
+                "stepN": 2,
+                "step_description": "Remove the cover of the distribution box.",
+                "component_code": "25-375-0205-301"
+            }
+
+        ],
+        "prova_2":
+        [
+            {
+                "stepN": 0,
+                "step_description": "Close the door leaf.",
+                "component_code": "25-310-0566-202"
+            },
+            {
+                "stepN": 1,
+                "step_description": "On the inside of the left door leaf, remove 2 hexagonal socket screws from the cover of the door leaf distributor (SW 4).",
+                "component_code": "25-716-1124-303"
+            },
+            {
+                "stepN": 2,
+                "step_description": "Remove the cover of the distribution box.",
+                "component_code": "25-375-0205-301"
+            }
+
+        ]
+    }
+}

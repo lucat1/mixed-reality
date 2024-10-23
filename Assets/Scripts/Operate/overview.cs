@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using TMPro;
 
 public class overview : MonoBehaviour
 {
@@ -10,8 +11,10 @@ public class overview : MonoBehaviour
     public RenderDoor renderDoor;
     public GameObject placeDoorMenu;
     public GameObject Door;
+    public GameObject overviewMenu;
     private StepsWrapper stepsData;
     private List<string> components;
+    private List<string> step_description;
 
 
 
@@ -21,30 +24,31 @@ public class overview : MonoBehaviour
         placeDoorMenu.SetActive(false);
         visibilityScript.highlightObjects(components);
         renderDoor.cancelAnchorPoints();
+        createOverviewMenu();
         
     }
 
-    // private void pointSmall()
-    // {
-    //     Renderer[] rendererComponents = Door.GetComponentsInChildren<Renderer>();
-    //     float doorWidth = Door.GetComponent<SpriteRenderer>().bounds.size.x;
-    //     Debug.Log(doorWidth);
+    void createOverviewMenu()
+    {
+        Vector3 cameraPosition = Camera.main.transform.position;
 
-    //     foreach(Renderer component in rendererComponents)
-    //     {
-    //         // get components to modify
-    //         if(components.Contains(component.name))
-    //         {
-    //             // check size w.r.t. the door
-    //             float DoorComponent = 
-
-    //         }
-    //     }
-    // }
-    // Start is called before the first frame update
+        overviewMenu = Instantiate(overviewMenu, cameraPosition + new Vector3(0,0,0.3f) , Quaternion.identity);
+        Transform textTransform = overviewMenu.transform.Find("ManipulationContainer/ManipulationBar/content/Text");
+        TMP_Text instructionText = textTransform.GetComponent<TMP_Text>();
+        string composedText = "";
+        int i = 0;
+        foreach(string step in step_description)
+        {
+            composedText += "step: " + i + ")  " + step + "\n" + "<br>";
+            i ++;
+        }
+        instructionText.text = composedText;
+    }
     void Start()
     {
         components = new List<string>();
+        step_description = new List<string>();
+
         // Load JSON from file
         string filePath = Path.Combine(Application.dataPath, OperationsFile);
 
@@ -60,6 +64,7 @@ public class overview : MonoBehaviour
             {
                 Debug.Log(step.component_code);
                 components.Add(step.component_code);
+                step_description.Add(step.step_description);
             }
         }
         else

@@ -71,7 +71,6 @@ public class RenderDoor : MonoBehaviour
 
             Debug.Log(doorPosition);
             
-            // Door = Instantiate(doorPrefab, doorPosition, Quaternion.Euler(0, 0, 0));
             Door.transform.position = doorPosition;
             Door.SetActive(true);
 

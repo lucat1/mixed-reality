@@ -5,15 +5,15 @@ using UnityEngine;
 public class Step
 {
     public int stepN;
-    public string step_description; // Matches the JSON key
-    public string component_code; // Matches the JSON key
+    public string step_description;
+    public string component_code;
 }
 
 [System.Serializable]
 public class StepsWrapper
 {
     public string name;
-    public List<Step> steps; // List of collections
+    public List<Step> steps;
 
     public static StepsWrapper CreateFromJSON(string jsonString)
     {

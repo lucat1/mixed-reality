@@ -19,7 +19,7 @@ public class cahngeObjectsVisibility : MonoBehaviour
         {
             component.materials = new Material[0];
             Debug.Log(component.name);
-            // Apply the new glowing material if the component is a target
+
             if (componentsToHighlight.Contains(component.name))
             {
                 component.material = glowingMaterial;

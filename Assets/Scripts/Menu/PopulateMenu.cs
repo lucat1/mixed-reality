@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using MixedReality.Toolkit.UX;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
-
+using UnityEngine.SceneManagement;
 class Item {
     public String name;
 
@@ -26,15 +27,12 @@ public class PopulateMenu : MonoBehaviour
     public GameObject listGrid;
     public GameObject listEntry;
 
+    public string sceneName;
+
     private List<Section> sections = new List<Section>() {
         new("Section 1", new List<Item>() {
             new("Task 1"),
             new("Task 2")
-        }),
-        new("Section 2", new List<Item>() {
-            new("Task 1"),
-            new("Task 2"),
-            new("Task 3")
         }),
     };
 
@@ -59,6 +57,8 @@ public class PopulateMenu : MonoBehaviour
             grid.transform.localPosition = new Vector3(0, 0, 0);
             foreach (Item item in section.items) {
                 GameObject itm = Instantiate(listEntry, new Vector3(0, 0, 0), Quaternion.identity, grid.transform);
+                addItemAction(itm);
+
                 // Force local transform to be relative to the parent
                 itm.transform.localPosition = new Vector3(0, 0, 0);
                 TextMeshProUGUI itemText = itm.GetComponentInChildren<TextMeshProUGUI>();
@@ -66,6 +66,15 @@ public class PopulateMenu : MonoBehaviour
                 itemText.SetText(item.name);
             }
         }
+    }
+
+    private void addItemAction(GameObject item) {
+        PressableButton pb = item.GetComponent<PressableButton>();
+        pb.OnClicked.AddListener(LoadScene);
+    }
+
+    void LoadScene() {
+        SceneManager.LoadScene(sceneName);
     }
 
     // Update is called once per frame

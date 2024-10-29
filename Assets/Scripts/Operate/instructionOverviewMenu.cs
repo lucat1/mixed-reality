@@ -15,7 +15,7 @@ public class instructionOverviewMenu : MonoBehaviour
     private StepsWrapper stepsData;
 
 
-
+    private string textPath = "ManipulationContainer/content/Text";
 
     public void startManteinance()
     {
@@ -24,7 +24,7 @@ public class instructionOverviewMenu : MonoBehaviour
         stepOverviewMenu.transform.position = cameraPosition + new Vector3(0.2f,0,0.323f);
         stepOverviewMenu.SetActive(true);
         // Transform textTransform = stepOverviewMenu.transform.Find("ManipulationContainer/ManipulationBar/content/Text");
-        Transform textTransform = stepOverviewMenu.transform.Find("content/Text");
+        Transform textTransform = stepOverviewMenu.transform.Find(textPath);
         TMP_Text instructionText = textTransform.GetComponent<TMP_Text>();
 
         string composedText = "<size=90>Step " + (stepCount+1).ToString() + "</size>" + "<br>" +  "<size=70><b>" + step_description[0] + "</b></size>";
@@ -39,7 +39,7 @@ public class instructionOverviewMenu : MonoBehaviour
         if(stepCount <= step_description.Count -1)
         {
 
-            Transform textTransform = stepOverviewMenu.transform.Find("content/Text");
+            Transform textTransform = stepOverviewMenu.transform.Find(textPath);
             TMP_Text instructionText = textTransform.GetComponent<TMP_Text>();
 
             string composedText = "<size=90>Step " + (stepCount+1).ToString() + "</size>" + "<br>" +  "<size=70><b>" + step_description[stepCount] + "</b></size>";
@@ -57,7 +57,7 @@ public class instructionOverviewMenu : MonoBehaviour
         stepCount--;
         if(stepCount >= 0)
         {
-            Transform textTransform = stepOverviewMenu.transform.Find("content/Text");
+            Transform textTransform = stepOverviewMenu.transform.Find(textPath);
             TMP_Text instructionText = textTransform.GetComponent<TMP_Text>();
 
             string composedText = "<size=90>Step " + (stepCount+1).ToString() + "</size>" + "<br>" +  "<size=70><b>" + step_description[stepCount] + "</b></size>";

@@ -21,7 +21,7 @@ public class instructionOverviewMenu : MonoBehaviour
     {
         Vector3 cameraPosition = Camera.main.transform.position;
 
-        stepOverviewMenu.transform.position = cameraPosition + new Vector3(0,0,0.3f);
+        stepOverviewMenu.transform.position = cameraPosition + new Vector3(0.2f,0,0.323f);
         stepOverviewMenu.SetActive(true);
         Transform textTransform = stepOverviewMenu.transform.Find("ManipulationContainer/ManipulationBar/content/Text");
         TMP_Text instructionText = textTransform.GetComponent<TMP_Text>();
@@ -76,7 +76,7 @@ public class instructionOverviewMenu : MonoBehaviour
         step_description = new List<string>();
 
         // Load JSON from file
-        string filePath = Path.Combine(Application.dataPath, OperationsFile);
+        string filePath = Path.Combine(Application.streamingAssetsPath, OperationsFile);
 
         if (File.Exists(filePath))
         {

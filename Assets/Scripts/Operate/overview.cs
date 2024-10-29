@@ -24,7 +24,7 @@ public class overview : MonoBehaviour
         placeDoorMenu.SetActive(false);
         visibilityScript.highlightObjects(components);
         renderDoor.cancelAnchorPoints();
-        createOverviewMenu();
+        // createOverviewMenu();
         
     }
 
@@ -50,7 +50,7 @@ public class overview : MonoBehaviour
         step_description = new List<string>();
 
         // Load JSON from file
-        string filePath = Path.Combine(Application.dataPath, OperationsFile);
+        string filePath = Path.Combine(Application.streamingAssetsPath, OperationsFile);
 
         if (File.Exists(filePath))
         {

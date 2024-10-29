@@ -1,0 +1,28 @@
+{
+    "tasks": [
+        {
+            "priority": 3,
+            "train_number": "015-5",
+            "door_number": "3",
+            "problem": "Primärdrehfalle tauschen"
+        },
+        {
+            "priority": 3,
+            "train_number": "001-5",
+            "door_number": "1",
+            "problem": "-ET-Antriebsmotor 1 gestört-zeitwei..."
+        },
+        {
+            "priority": 3,
+            "train_number": "047-8",
+            "door_number": "3",
+            "problem": "-ET-Rechner 3 Stör.Aktiv"
+        },
+        {
+            "priority": 3,
+            "train_number": "023-9",
+            "door_number": "2",
+            "problem": "-ET-Rechner 2 schliesst nicht"
+        }
+    ]
+}

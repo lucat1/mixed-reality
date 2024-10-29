@@ -338,6 +338,7 @@ MonoBehaviour:
   listEntry: {fileID: 4392119019578410244, guid: 1d8afa6d1207b2549b71416584cd4484,
     type: 3}
   sceneName: PlaceDoor
+  jsonFile: {fileID: 4900000, guid: 36f1ec715664dbc4aaa734cd45a12a9b, type: 3}
 --- !u!1001 &1572080672
 PrefabInstance:
   m_ObjectHideFlags: 0

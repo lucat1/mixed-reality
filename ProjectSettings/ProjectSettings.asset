@@ -140,7 +140,11 @@ PlayerSettings:
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
   bundleVersion: 0.1.0
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 11400000, guid: c677e5c4eb85b7849a8da406775c299d, type: 2}
+  - {fileID: -1319234712615847355, guid: 46f5e41618a8bf442930802fbc29c51d, type: 2}
+  - {fileID: 11400000, guid: e69ae59d70ac6774ca7e855b86448387, type: 2}
+  - {fileID: -8166047350060851619, guid: d2cc81336f35654489b795a2f85c6e66, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -235,6 +239,7 @@ PlayerSettings:
   iOSMetalForceHardShadows: 0
   metalEditorSupport: 1
   metalAPIValidation: 1
+  metalCompileShaderBinary: 0
   iOSRenderExtraFrameOnPause: 0
   iosCopyPluginsCodeInsteadOfSymlink: 0
   appleDeveloperTeamID: 
@@ -846,7 +851,7 @@ PlayerSettings:
   metroCertificatePassword: 
   metroCertificateSubject: MixedRealityETHZ
   metroCertificateIssuer: MixedRealityETHZ
-  metroCertificateNotAfter: 807e549c1b49dc01
+  metroCertificateNotAfter: 00e292bb0249dc01
   metroApplicationDescription: mixed-reality
   wsaImages: {}
   metroTileShortName: mixed-reality
@@ -862,6 +867,7 @@ PlayerSettings:
   metroSplashScreenBackgroundColor: {r: 0.12941177, g: 0.17254902, b: 0.21568628,
     a: 1}
   metroSplashScreenUseBackgroundColor: 0
+  syncCapabilities: 0
   platformCapabilities:
     WindowsStoreApps:
       GazeInput: True

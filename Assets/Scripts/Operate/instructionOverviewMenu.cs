@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using TMPro;
+using UnityEngine.SceneManagement; // Add this line
+
 
 public class instructionOverviewMenu : MonoBehaviour
 {
@@ -15,7 +17,8 @@ public class instructionOverviewMenu : MonoBehaviour
     private StepsWrapper stepsData;
 
 
-    private string textPath = "ManipulationContainer/content/Text";
+    private string textPath = "content/Text";
+    private string DoneButtonPath = "content/Done";
 
     public void startManteinance()
     {
@@ -48,7 +51,8 @@ public class instructionOverviewMenu : MonoBehaviour
         }
         else
         {
-        stepCount--;
+            stepOverviewMenu.transform.Find(DoneButtonPath).gameObject.SetActive(true);
+            stepCount--;
         }
     }
     public void previousStep()
@@ -68,6 +72,12 @@ public class instructionOverviewMenu : MonoBehaviour
         {
             stepCount++;
         }
+    }
+
+    public void Done()
+    {
+        SceneManager.LoadScene("Menu");
+
     }
 
     // Start is called before the first frame update

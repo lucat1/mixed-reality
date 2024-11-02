@@ -9,6 +9,7 @@ public class RenderDoor : MonoBehaviour
     public GameObject anchorPointRightPrefab;
     public GameObject areaPlanePrefab;
 
+
     // Define the positions where the spheres will appear
     private Vector3 anchorPointLeftPrefabInitialOffset = new Vector3(-0.043f, 0.03f, 0.223f);
     private Vector3 anchorPointRightPrefabInitialOffset = new Vector3(0.043f, -0.03f, 0.223f);

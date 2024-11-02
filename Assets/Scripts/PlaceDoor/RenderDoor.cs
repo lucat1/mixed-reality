@@ -11,8 +11,8 @@ public class RenderDoor : MonoBehaviour
 
 
     // Define the positions where the spheres will appear
-    private Vector3 anchorPointLeftPrefabInitialOffset = new Vector3(-0.043f, 0.03f, 0.223f);
-    private Vector3 anchorPointRightPrefabInitialOffset = new Vector3(0.043f, -0.03f, 0.223f);
+    private Vector3 anchorPointLeftPrefabInitialOffset = new Vector3(-0.143f, 0.03f, 0.323f);
+    private Vector3 anchorPointRightPrefabInitialOffset = new Vector3(-0.057f, -0.03f, 0.323f);
 
     private GameObject leftSphere;
     private GameObject rightSphere;

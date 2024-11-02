@@ -15,18 +15,19 @@ public class instructionOverviewMenu : MonoBehaviour
     private StepsWrapper stepsData;
 
 
-
+    private string textPath = "ManipulationContainer/content/Text";
 
     public void startManteinance()
     {
         Vector3 cameraPosition = Camera.main.transform.position;
 
-        stepOverviewMenu.transform.position = cameraPosition + new Vector3(0,0,0.3f);
+        stepOverviewMenu.transform.position = cameraPosition + new Vector3(0.2f,0,0.323f);
         stepOverviewMenu.SetActive(true);
-        Transform textTransform = stepOverviewMenu.transform.Find("ManipulationContainer/ManipulationBar/content/Text");
+        // Transform textTransform = stepOverviewMenu.transform.Find("ManipulationContainer/ManipulationBar/content/Text");
+        Transform textTransform = stepOverviewMenu.transform.Find(textPath);
         TMP_Text instructionText = textTransform.GetComponent<TMP_Text>();
 
-        string composedText = "<size=60><b>Step " + (stepCount+1).ToString() + "</size></b>" + "<br>" +  step_description[0];
+        string composedText = "<size=90>Step " + (stepCount+1).ToString() + "</size>" + "<br>" +  "<size=70><b>" + step_description[0] + "</b></size>";
         instructionText.text = composedText;
         visibilityScript.highlightObjects(new List<string> { components[0] });
     }
@@ -38,10 +39,10 @@ public class instructionOverviewMenu : MonoBehaviour
         if(stepCount <= step_description.Count -1)
         {
 
-            Transform textTransform = stepOverviewMenu.transform.Find("ManipulationContainer/ManipulationBar/content/Text");
+            Transform textTransform = stepOverviewMenu.transform.Find(textPath);
             TMP_Text instructionText = textTransform.GetComponent<TMP_Text>();
 
-            string composedText = "<size=60><b>Step " + (stepCount+1).ToString() + "</size></b>" + "<br>" +  step_description[stepCount];
+            string composedText = "<size=90>Step " + (stepCount+1).ToString() + "</size>" + "<br>" +  "<size=70><b>" + step_description[stepCount] + "</b></size>";
             instructionText.text = composedText;
             visibilityScript.highlightObjects(new List<string> { components[stepCount] });
         }
@@ -56,10 +57,10 @@ public class instructionOverviewMenu : MonoBehaviour
         stepCount--;
         if(stepCount >= 0)
         {
-            Transform textTransform = stepOverviewMenu.transform.Find("ManipulationContainer/ManipulationBar/content/Text");
+            Transform textTransform = stepOverviewMenu.transform.Find(textPath);
             TMP_Text instructionText = textTransform.GetComponent<TMP_Text>();
 
-            string composedText = "<size=60><b>Step " + (stepCount+1).ToString() + "</size></b>" + "<br>" +  step_description[stepCount];
+            string composedText = "<size=90>Step " + (stepCount+1).ToString() + "</size>" + "<br>" +  "<size=70><b>" + step_description[stepCount] + "</b></size>";
             instructionText.text = composedText;
             visibilityScript.highlightObjects(new List<string> { components[stepCount] });
         }
@@ -76,7 +77,7 @@ public class instructionOverviewMenu : MonoBehaviour
         step_description = new List<string>();
 
         // Load JSON from file
-        string filePath = Path.Combine(Application.dataPath, OperationsFile);
+        string filePath = Path.Combine(Application.streamingAssetsPath, OperationsFile);
 
         if (File.Exists(filePath))
         {

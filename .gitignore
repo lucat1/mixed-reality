@@ -167,8 +167,5 @@ crashlytics-build.properties
 
 # Door
 .Assets/Prefabs/Door_1.fbx
-Door_1.fbx
-Door_1.fbx.meta
-*Door_1*
-*Door 1*
+*Door_1 no parents.fbx*
 

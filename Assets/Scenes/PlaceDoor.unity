@@ -128,6 +128,105 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 815380161}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &52196903
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4125495309553998321, guid: a57a3cef6911f9d48819be128077b16e,
+        type: 3}
+      propertyPath: m_Name
+      value: stepsMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4125495309553998321, guid: a57a3cef6911f9d48819be128077b16e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205010513405509735, guid: a57a3cef6911f9d48819be128077b16e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205010513405509735, guid: a57a3cef6911f9d48819be128077b16e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0003
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205010513405509735, guid: a57a3cef6911f9d48819be128077b16e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205010513405509735, guid: a57a3cef6911f9d48819be128077b16e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205010513405509735, guid: a57a3cef6911f9d48819be128077b16e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205010513405509735, guid: a57a3cef6911f9d48819be128077b16e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205010513405509735, guid: a57a3cef6911f9d48819be128077b16e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205010513405509735, guid: a57a3cef6911f9d48819be128077b16e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205010513405509735, guid: a57a3cef6911f9d48819be128077b16e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205010513405509735, guid: a57a3cef6911f9d48819be128077b16e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2492495985330668824, guid: a57a3cef6911f9d48819be128077b16e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 9014297338586270436, guid: a57a3cef6911f9d48819be128077b16e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 1144049024416781430, guid: a57a3cef6911f9d48819be128077b16e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 5795660794895621002, guid: a57a3cef6911f9d48819be128077b16e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 3858297894742241774, guid: a57a3cef6911f9d48819be128077b16e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+  m_SourcePrefab: {fileID: 100100000, guid: a57a3cef6911f9d48819be128077b16e, type: 3}
+--- !u!1 &52196904 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4125495309553998321, guid: a57a3cef6911f9d48819be128077b16e,
+    type: 3}
+  m_PrefabInstance: {fileID: 52196903}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &117828175
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,7 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab2e57f403e48a439451ed448dff1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepOverviewMenu: {fileID: 0}
+  stepOverviewMenu: {fileID: 52196904}
   OperationsFile: prova.json
   visibilityScript: {fileID: 386402216}
 --- !u!4 &117828177
@@ -1185,3 +1284,4 @@ SceneRoots:
   - {fileID: 386402217}
   - {fileID: 117828177}
   - {fileID: 1548963186}
+  - {fileID: 52196903}

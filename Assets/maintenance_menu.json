@@ -1,28 +1,28 @@
 {
     "tasks": [
         {
-            "priority": 3,
+            "priority": 1,
             "train_number": "015-5",
             "door_number": "3",
-            "problem": "Primärdrehfalle tauschen"
+            "problem": "Replace primary latch"
         },
         {
-            "priority": 3,
+            "priority": 2,
             "train_number": "001-5",
             "door_number": "1",
-            "problem": "-ET-Antriebsmotor 1 gestört-zeitwei..."
+            "problem": "Drive motor malfunction"
         },
         {
             "priority": 3,
             "train_number": "047-8",
             "door_number": "3",
-            "problem": "-ET-Rechner 3 Stör.Aktiv"
+            "problem": "Computer error"
         },
         {
-            "priority": 3,
+            "priority": 2,
             "train_number": "023-9",
             "door_number": "2",
-            "problem": "-ET-Rechner 2 schliesst nicht"
+            "problem": "Computer does not work"
         }
     ]
 }

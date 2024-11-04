@@ -4,25 +4,25 @@
             "priority": 1,
             "train_number": "015-5",
             "door_number": "3",
-            "problem": "Replace primary latch"
+            "problem": "Replace primary latch    "
         },
         {
             "priority": 2,
             "train_number": "001-5",
             "door_number": "1",
-            "problem": "Drive motor malfunction"
+            "problem": "Drive motor malfunction  "
         },
         {
             "priority": 3,
             "train_number": "047-8",
             "door_number": "3",
-            "problem": "Computer error"
+            "problem": "Computer error           "
         },
         {
             "priority": 2,
             "train_number": "023-9",
             "door_number": "2",
-            "problem": "Computer does not work"
+            "problem": "Computer does not work   "
         }
     ]
 }

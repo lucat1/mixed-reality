@@ -6,6 +6,7 @@ using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 [Serializable]
 class Tasks {
@@ -63,10 +64,40 @@ public class PopulateMenu : MonoBehaviour
 
             // Force local transform to be relative to the parent
             itm.transform.localPosition = new Vector3(0, 0, 0);
-            TextMeshProUGUI itemText = itm.GetComponentInChildren<TextMeshProUGUI>();
-            Assert.AreNotEqual(itemText, null);
-            itemText.SetText(entry.problem);
+            TextMeshProUGUI[] texts = itm.GetComponentsInChildren<TextMeshProUGUI>();
+            Assert.AreNotEqual(texts, null);
+            texts[0].SetText(entry.problem);
+            texts[1].SetText(entry.train_number);
+            texts[2].SetText(entry.door_number);
+
+
+            // Encode priority color
+            Image[] backgrounds = itm.GetComponentsInChildren<Image>(true);
+            foreach (Image background in backgrounds)
+            { 
+                 if (background.name == "PriorityColor")
+            {
+                switch (entry.priority)
+                {
+                    case 1:
+                        background.color = Color.red;
+                        break;
+                    case 2:
+                        background.color = new Color(1f, 0.65f, 0f);
+                        break;
+                    case 3:
+                        background.color = new Color(0f, 0.8f, 0f);
+                        break;
+                }
+            }
+            else
+            {
+                Debug.Log("Ignored ");
+            }
+            }
         }
+
+
     }
 
     private void addItemAction(GameObject item) {

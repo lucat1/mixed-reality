@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class RenderDoor : MonoBehaviour
 {
     public GameObject Door;
@@ -106,6 +106,12 @@ public class RenderDoor : MonoBehaviour
     void Start()
     {
         
+    }
+
+        public void Done()
+    {
+        SceneManager.LoadScene("Menu");
+
     }
 
     // Update is called once per frame

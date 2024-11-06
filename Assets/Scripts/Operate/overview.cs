@@ -13,7 +13,7 @@ public class overview : MonoBehaviour
     public GameObject Door;
     public GameObject overviewMenu;
     private StepsWrapper stepsData;
-    private List<string> components;
+    private HashSet<string> components;
     private List<string> step_description;
 
 
@@ -46,7 +46,7 @@ public class overview : MonoBehaviour
     }
     void Start()
     {
-        components = new List<string>();
+        components = new HashSet<string>();
         step_description = new List<string>();
 
         // Load JSON from file
@@ -57,18 +57,14 @@ public class overview : MonoBehaviour
             // Read the JSON file
             string jsonString = File.ReadAllText(filePath);
             stepsData = StepsWrapper.CreateFromJSON(jsonString);
-            Debug.Log(stepsData.steps.Count);
 
             // add object to show
             foreach(Step step in stepsData.steps)
             {
-                Debug.Log(step.component_code);
                 components.Add(step.component_code);
                 step_description.Add(step.step_description);
             }
-        }
-        else
-        {
+        } else {
             Debug.LogError("JSON file not found at " + filePath);
         }
     }

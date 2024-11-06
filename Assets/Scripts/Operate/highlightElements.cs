@@ -1,7 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Unity.Collections;
+using UnityEngine.Assertions;
+using UnityEditor.Animations;
 
 public class cahngeObjectsVisibility : MonoBehaviour
 {
@@ -9,28 +11,57 @@ public class cahngeObjectsVisibility : MonoBehaviour
     public Material glowingMaterial;
     public Material transparentMaterial;
     public GameObject Door;
-    private List<string> Highlited = new List<string>();
+    private HashSet<string> Highlited = new ();
+
+    // Recursively search for children of a Transform with a BFS
+    private Transform recursiveFind(Transform parent, string target) {
+        Queue<Transform> q = new ();
+        foreach(Transform c in parent)
+            q.Enqueue(c);
+
+        while(q.Count > 0) {
+            var child = q.Dequeue();
+            if(child.name == target)
+                return child;
+            
+            foreach(Transform cc in child)
+                q.Enqueue(cc);
+        }
+
+        return null;
+    }
+
+    private Renderer getRendererObject(string componentName) {
+        return recursiveFind(Door.transform, componentName)?.GetComponent<Renderer>();
+    }
     
-    public void highlightObjects(List<string> componentsToHighlight)
+    public void highlightObjects(HashSet<string> highlightSet)
     {
+        foreach(string componentName in highlightSet){
+            if (Highlited.Contains(componentName))
+                // This component is already highlighted and we want to keep it like that
+                continue;
 
-        List<string> toHighlight = componentsToHighlight.Except(Highlited).ToList();
-        List<string> toHide = Highlited.Except(componentsToHighlight).ToList();
-        foreach(string componentName in toHighlight){
-            Renderer childrenToHighlight = Door.transform.Find(componentName)?.GetComponent<Renderer>();
-            childrenToHighlight.materials = new Material[0];
-            childrenToHighlight.material = glowingMaterial;
-
-            Highlited.Add(componentName);        
+            Debug.Log("highlighting: " + componentName);
+            Renderer toHighlight = getRendererObject(componentName);
+            Assert.IsNotNull(toHighlight);
+            toHighlight.materials = new Material[0];
+            toHighlight.material = glowingMaterial;
         }
 
-        foreach(string componentName in toHide){
-            Renderer childrenToHide = Door.transform.Find(componentName)?.GetComponent<Renderer>();
-            childrenToHide.materials = new Material[0];
-            childrenToHide.material = transparentMaterial;
+        foreach(string componentName in Highlited){
+            if (highlightSet.Contains(componentName))
+                // This component is already highlighted and we want to keep it like that
+                continue;
 
-            Highlited.Remove(componentName);           
+            Debug.Log("making transparent: " + componentName);
+            Renderer toDeHighlight = getRendererObject(componentName);
+            Assert.IsNotNull(toDeHighlight);
+            toDeHighlight.materials = new Material[0];
+            toDeHighlight.material = transparentMaterial;
         }
+
+        Highlited = highlightSet;
     }
 
     public void hideComponents(List<string> componentsToHide)

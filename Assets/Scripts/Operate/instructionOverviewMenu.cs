@@ -31,7 +31,7 @@ public class instructionOverviewMenu : MonoBehaviour
 
         string composedText = "<size=90>Step " + (stepCount+1).ToString() + "</size>" + "<br>" +  "<size=70><b>" + step_description[0] + "</b></size>";
         instructionText.text = composedText;
-        visibilityScript.highlightObjects(new List<string> { components[0] });
+        visibilityScript.highlightObjects(new HashSet<string> { components[0] });
     }
 
     public void nextStep()
@@ -47,7 +47,7 @@ public class instructionOverviewMenu : MonoBehaviour
 
             string composedText = "<size=90>Step " + (stepCount+1).ToString() + "</size>" + "<br>" +  "<size=70><b>" + step_description[stepCount] + "</b></size>";
             instructionText.text = composedText;
-            visibilityScript.highlightObjects(new List<string> { components[stepCount] });
+            visibilityScript.highlightObjects(new HashSet<string> { components[stepCount] });
         }
         else
         {
@@ -66,7 +66,7 @@ public class instructionOverviewMenu : MonoBehaviour
 
             string composedText = "<size=90>Step " + (stepCount+1).ToString() + "</size>" + "<br>" +  "<size=70><b>" + step_description[stepCount] + "</b></size>";
             instructionText.text = composedText;
-            visibilityScript.highlightObjects(new List<string> { components[stepCount] });
+            visibilityScript.highlightObjects(new HashSet<string> { components[stepCount] });
         }
         else
         {

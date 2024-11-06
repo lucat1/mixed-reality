@@ -17,8 +17,7 @@ public class instructionOverviewMenu : MonoBehaviour
     private StepsWrapper stepsData;
 
 
-    private string textPath = "content/Text";
-    private string DoneButtonPath = "content/Done";
+    private string textPath = "UIContainer_steps/StepsContent/Text";
 
     public void startManteinance()
     {
@@ -39,6 +38,7 @@ public class instructionOverviewMenu : MonoBehaviour
     {
 
         stepCount++;
+        activateDone();
         if(stepCount <= step_description.Count -1)
         {
 
@@ -51,7 +51,6 @@ public class instructionOverviewMenu : MonoBehaviour
         }
         else
         {
-            stepOverviewMenu.transform.Find(DoneButtonPath).gameObject.SetActive(true);
             stepCount--;
         }
     }
@@ -59,6 +58,7 @@ public class instructionOverviewMenu : MonoBehaviour
     {
 
         stepCount--;
+        activateDone();
         if(stepCount >= 0)
         {
             Transform textTransform = stepOverviewMenu.transform.Find(textPath);
@@ -71,6 +71,19 @@ public class instructionOverviewMenu : MonoBehaviour
         else
         {
             stepCount++;
+        }
+    }
+
+    private void activateDone()
+    {
+        if(stepCount == step_description.Count -1)
+        {
+            stepOverviewMenu.transform.Find("UIContainer_steps/StepsContent/Done").gameObject.SetActive(true);
+            stepOverviewMenu.transform.Find("UIContainer_steps/StepsContent/NextButton").gameObject.SetActive(false);
+        }else
+        {
+            stepOverviewMenu.transform.Find("UIContainer_steps/StepsContent/Done").gameObject.SetActive(false);
+            stepOverviewMenu.transform.Find("UIContainer_steps/StepsContent/NextButton").gameObject.SetActive(true);
         }
     }
 

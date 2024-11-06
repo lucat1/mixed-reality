@@ -122,7 +122,7 @@ Material:
     - _ZTest: 4
     - _ZWrite: 1
     m_Colors:
-    - _Base_Color_: {r: 0.29402852, g: 1, b: 0, a: 1}
+    - _Base_Color_: {r: 0.2735744, g: 0.6698113, b: 0.108475655, a: 1}
     - _Bottom_Left_: {r: 0.12084446, g: 0.8784314, b: 0, a: 1}
     - _Bottom_Right_: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}

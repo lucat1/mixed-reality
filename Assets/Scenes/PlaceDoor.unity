@@ -2018,12 +2018,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Door: {fileID: 1085849289}
-  anchorPointLeftPrefab: {fileID: 7432443185241540560, guid: 33009308d9b36c842ad3eee566c28a5e,
+  anchorPointsPrefab: {fileID: 4514921769817056588, guid: 066ee5702cd2c71419d63168238cefde,
     type: 3}
-  anchorPointRightPrefab: {fileID: 7432443185241540560, guid: bacc018296d6d8a4498f1562230dcb21,
-    type: 3}
-  areaPlanePrefab: {fileID: 3029941343368223762, guid: f0a74b2c8781c4548bf14fc5f7aec7a9,
-    type: 3}
+  anchorPoints: {fileID: 0}
 --- !u!1 &1529641998
 GameObject:
   m_ObjectHideFlags: 0
@@ -2179,6 +2176,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7726253687024816176, guid: 398171464b5f01044b8cb1358224d316,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 7726253687024816176, guid: 398171464b5f01044b8cb1358224d316,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.378
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4555226586034456021, guid: 398171464b5f01044b8cb1358224d316, type: 3}

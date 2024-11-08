@@ -23,7 +23,7 @@ public class overview : MonoBehaviour
         // disable place deoor menu 
         placeDoorMenu.SetActive(false);
         visibilityScript.highlightObjects(components);
-        renderDoor.cancelAnchorPoints();
+        Destroy(renderDoor.anchorPoints);
         // createOverviewMenu();
         
     }

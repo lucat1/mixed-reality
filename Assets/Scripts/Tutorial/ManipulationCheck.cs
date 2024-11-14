@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class ManipulationCheck : MonoBehaviour
 {
     public GameObject ManipulatorPopUp;
-    public GameObject MenuT;
+    public GameObject Step1;
     public GameObject ManipulatorCheck;
     private bool hasMoved = false;
     public void OnManipulationStarted()
@@ -24,6 +24,6 @@ public class ManipulationCheck : MonoBehaviour
     {
         ManipulatorPopUp.SetActive(false);
         ManipulatorCheck.SetActive(false);
-        MenuT.SetActive(true);
+        Step1.SetActive(true);
     }
 }

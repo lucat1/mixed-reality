@@ -60,7 +60,7 @@ public class cahngeObjectsVisibility : MonoBehaviour
                 smallComponentsOutline = Instantiate(smallComponentsSphere);
                 smallComponentsOutline.transform.SetParent(smallCompTr);
                 smallComponentsOutline.transform.position = smallCompTr.transform.position;
-                smallComponentsOutline.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+                smallComponentsOutline.transform.localScale = new Vector3(1f, 1f, 1f);
 
             }
         }

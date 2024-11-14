@@ -128,6 +128,51 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 815380161}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &17595475
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 17595476}
+  - component: {fileID: 17595477}
+  m_Layer: 0
+  m_Name: Data
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &17595476
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17595475}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1241290406}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &17595477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17595475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52c54ff9910c6284a9cbc4738bfa0392, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smallComponentsList: []
 --- !u!4 &45623966 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5092507605265006331, guid: c25d8f2d22117bd40ad824684551fbde,
@@ -419,7 +464,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stepOverviewMenu: {fileID: 52196904}
+  door: {fileID: 698441090}
   OperationsFile: prova.json
+  data: {fileID: 17595477}
   visibilityScript: {fileID: 386402216}
 --- !u!4 &117828177
 Transform:
@@ -616,7 +663,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   glowingMaterial: {fileID: 2100000, guid: 77ce57ec9b62e734f8b7dee90204c6e5, type: 2}
   transparentMaterial: {fileID: 2100000, guid: 35371f47de801c24eb9f7cbcddc51916, type: 2}
+  smallComponentsSphere: {fileID: -4320558180572046448, guid: 0a339d6c5a733184e9e0d852d2dac138,
+    type: 3}
   Door: {fileID: 698441090}
+  data: {fileID: 17595477}
 --- !u!4 &386402217
 Transform:
   m_ObjectHideFlags: 0
@@ -1920,6 +1970,7 @@ Transform:
   - {fileID: 386402217}
   - {fileID: 117828177}
   - {fileID: 1430028452}
+  - {fileID: 17595476}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1430028451
@@ -1967,6 +2018,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Door: {fileID: 698441090}
+  data: {fileID: 17595477}
 --- !u!4 &1502314865 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2045587447981033104, guid: a984b40f44325d44b935fc9a1c071630,

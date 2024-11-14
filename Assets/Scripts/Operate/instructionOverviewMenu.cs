@@ -9,8 +9,10 @@ using UnityEngine.SceneManagement; // Add this line
 public class instructionOverviewMenu : MonoBehaviour
 {
     public GameObject stepOverviewMenu;
+    public GameObject door;
     private int stepCount = 0;
     public string OperationsFile;
+    public DataLoader data;
     public cahngeObjectsVisibility visibilityScript;
     private List<string> components;
     private List<string> step_description;
@@ -21,6 +23,17 @@ public class instructionOverviewMenu : MonoBehaviour
 
     public void startManteinance()
     {
+        // activate small objects if the are hidden
+        foreach(string component in components)
+        {
+            if(data.smallComponentsList.Contains(component))
+            {
+                Debug.Log("activating component: " + component);
+                Transform obj = visibilityScript.recursiveFind(door.transform, component);
+                GameObject obj_ = obj.gameObject; 
+                obj_.SetActive(true);
+            }
+        }
         Vector3 cameraPosition = Camera.main.transform.position;
 
         stepOverviewMenu.transform.position = cameraPosition + new Vector3(0.2f,0,0.323f);
@@ -87,6 +100,7 @@ public class instructionOverviewMenu : MonoBehaviour
         }
     }
 
+
     public void Done()
     {
         SceneManager.LoadScene("Menu");
@@ -112,10 +126,11 @@ public class instructionOverviewMenu : MonoBehaviour
             // add object to show
             foreach(Step step in stepsData.steps)
             {
-                Debug.Log(step.component_code);
+                Debug.Log("step component: " + step.component_code);
                 components.Add(step.component_code);
                 step_description.Add(step.step_description);
             }
+
         }
         else
         {

@@ -7,6 +7,7 @@ using System.IO;
 public class handleComponentsRendering : MonoBehaviour
 {
     public GameObject Door;
+    public DataLoader data;
 
     private GameObject recursiveFind(Transform parent, string target) {
         Queue<Transform> q = new ();
@@ -25,36 +26,14 @@ public class handleComponentsRendering : MonoBehaviour
         return null;
     }
 
-    List<string> LoadStringsFromFile(string path)
-    {
-        List<string> strings = new List<string>();
-
-        if (File.Exists(path))
-        {
-            // Read all lines from the file
-            string[] lines = File.ReadAllLines(path);
-            strings.AddRange(lines);
-        }
-        else
-        {
-            Debug.LogError("File not found at: " + path);
-        }
-
-        return strings;
-    }
-
     // Start is called before the first frame update
     // On start we delete the small components
     void Start()
     {
-        
-        string filePath = Path.Combine(Application.streamingAssetsPath, "small_components.txt");
-        List<string> smallComponentsList = LoadStringsFromFile(filePath);
-        
+        Debug.Log("running small components ereasing");
         int componentsEreased = 0;
-        foreach(string component in smallComponentsList)
+        foreach(string component in data.smallComponentsList)
         {
-            Debug.Log(component);
             GameObject componentObj = recursiveFind(Door.transform, component);
             if(componentObj)
             {
@@ -63,7 +42,7 @@ public class handleComponentsRendering : MonoBehaviour
             }
         }
 
-        Debug.Log("Small component ereased: " + componentsEreased + "/" + smallComponentsList.Count);
+        Debug.Log("Small component ereased: " + componentsEreased + "/" + data.smallComponentsList.Count);
         
     }
 

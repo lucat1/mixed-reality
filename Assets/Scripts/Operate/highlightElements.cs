@@ -10,11 +10,15 @@ public class cahngeObjectsVisibility : MonoBehaviour
     
     public Material glowingMaterial;
     public Material transparentMaterial;
+    public GameObject smallComponentsSphere;
     public GameObject Door;
+    public DataLoader data;
     private HashSet<string> Highlited = new ();
+    private GameObject smallComponentsOutline;
+
 
     // Recursively search for children of a Transform with a BFS
-    private Transform recursiveFind(Transform parent, string target) {
+    public Transform recursiveFind(Transform parent, string target) {
         Queue<Transform> q = new ();
         foreach(Transform c in parent)
             q.Enqueue(c);
@@ -47,6 +51,18 @@ public class cahngeObjectsVisibility : MonoBehaviour
             Assert.IsNotNull(toHighlight);
             toHighlight.materials = new Material[0];
             toHighlight.material = glowingMaterial;
+
+            // check if it's a small components and add cricle
+            if(data.smallComponentsList.Contains(componentName))
+            {
+                Debug.Log("small component: " + componentName);
+                Transform smallCompTr = recursiveFind(Door.transform, componentName);
+                smallComponentsOutline = Instantiate(smallComponentsSphere);
+                smallComponentsOutline.transform.SetParent(smallCompTr);
+                smallComponentsOutline.transform.position = smallCompTr.transform.position;
+                smallComponentsOutline.transform.localScale = new Vector3(1f, 1f, 1f);
+
+            }
         }
 
         foreach(string componentName in Highlited){
@@ -59,6 +75,12 @@ public class cahngeObjectsVisibility : MonoBehaviour
             Assert.IsNotNull(toDeHighlight);
             toDeHighlight.materials = new Material[0];
             toDeHighlight.material = transparentMaterial;
+
+            // also remove the sphere if is a small component
+            if(data.smallComponentsList.Contains(componentName))
+            {
+                Destroy(smallComponentsOutline);
+            }
         }
 
         Highlited = highlightSet;
@@ -104,6 +126,11 @@ public class cahngeObjectsVisibility : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log("debug: " + smallComponentsOutline);
+        // make small components outline always face the player 
+        if(smallComponentsOutline != null)
+        {
+            smallComponentsOutline.transform.LookAt(Camera.main.transform);
+        }
     }
 }

@@ -166,6 +166,7 @@ crashlytics-build.properties
 >>>>>>> bc52b04 (add MRTK and experiment with the UI)
 
 # Door
-.Assets/Prefabs/Door_1.fbx
+/Assets/Prefabs/Door_1.fbx
+/Assets/Scenes/test.unity*
 Door_1 no parents.fbx
 

@@ -6317,8 +6317,8 @@ PrefabInstance:
       propertyPath: m_text
       value: 'Pinch the white bar under this pop-up and move it.
 
-        Click
-        on "Continue" if you already know how to use it'
+        Click on
+        "Continue" if you already know how to use it'
       objectReference: {fileID: 0}
     - target: {fileID: 1870069354148443517, guid: 43a1876c54fbb004099f878186357493,
         type: 3}

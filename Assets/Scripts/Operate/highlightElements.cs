@@ -1,9 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
-using Unity.Collections;
 using UnityEngine.Assertions;
-using UnityEditor.Animations;
 
 public class cahngeObjectsVisibility : MonoBehaviour
 {
@@ -126,7 +123,6 @@ public class cahngeObjectsVisibility : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("debug: " + smallComponentsOutline);
         // make small components outline always face the player 
         if(smallComponentsOutline != null)
         {

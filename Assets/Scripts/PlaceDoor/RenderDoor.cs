@@ -15,7 +15,6 @@ public class RenderDoor : MonoBehaviour
         // Get camera position
         Vector3 cameraPosition = Camera.main.transform.position;
 
-
         if (anchorPoints != null){
             Destroy(anchorPoints);
         }
@@ -45,7 +44,7 @@ public class RenderDoor : MonoBehaviour
 
         }else
         {
-            Debug.Log("no anchor points created");
+            Debug.LogError("no anchor points created");
         }
     }
 
@@ -58,7 +57,6 @@ public class RenderDoor : MonoBehaviour
     public void Done()
     {
         SceneManager.LoadScene("Menu");
-
     }
 
     // Update is called once per frame

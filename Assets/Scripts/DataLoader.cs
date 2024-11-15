@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-
 public class DataLoader : MonoBehaviour
 {
     public List<string> smallComponentsList = new List<string>();

@@ -24,7 +24,7 @@ public class DoorManager : MonoBehaviour
     public GameObject ringPrefab;
 
     // Recursively get all door components, filtered by the given function.
-    List<GameObject> GetDoorComponents(Func<GameObject, bool> f) {
+    public List<GameObject> GetDoorComponents(Func<GameObject, bool> f) {
         List<GameObject> list = new ();
         Queue<Transform> q = new ();
         foreach(Transform c in transform)
@@ -72,11 +72,21 @@ public class DoorManager : MonoBehaviour
 
     private HashSet<GameObject> currentlyHighlighted = new();
 
-    public void HighlightComponents(HashSet<string> toHighlightNames) {
+    public void HighlightComponents(HashSet<string> toHighlightNames, bool showRing = true) {
         var toHighlight = GetDoorComponents(go => toHighlightNames.Contains(go.name));
 
         // de-highlight currently highlighted components
-        foreach(var go in currentlyHighlighted) {
+        // foreach(var go in currentlyHighlighted) {
+        //     if (toHighlightNames.Contains(go.name))
+        //         // The component is already highlighted and should stay like that
+        //         continue;
+
+        //     SetMaterial(go, transparentMaterial);
+        //     currentlyHighlighted.Remove(go);
+        // }
+
+        for (int i = 0; i < currentlyHighlighted.Count; i++) {
+            var go = currentlyHighlighted.ElementAt(i);
             if (toHighlightNames.Contains(go.name))
                 // The component is already highlighted and should stay like that
                 continue;
@@ -93,7 +103,11 @@ public class DoorManager : MonoBehaviour
 
             SetMaterial(go, glowingMaterial);
             currentlyHighlighted.Add(go);
-            DisplayRing(go);
+
+            // check if render the circle
+            var mesh = go.transform.GetComponent<MeshRenderer>();
+            if(mesh.bounds.Volume() <= showRingVolumeThreshold && showRing)
+                DisplayRing(go);
         }
     }
 

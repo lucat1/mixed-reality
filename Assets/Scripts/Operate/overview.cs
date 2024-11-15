@@ -7,7 +7,6 @@ using TMPro;
 public class overview : MonoBehaviour
 {
     public string OperationsFile;
-    public cahngeObjectsVisibility visibilityScript;
     public RenderDoor renderDoor;
     public GameObject placeDoorMenu;
     public GameObject Door;
@@ -15,19 +14,6 @@ public class overview : MonoBehaviour
     private StepsWrapper stepsData;
     private HashSet<string> components;
     private List<string> step_description;
-
-
-
-    public void startOverviewMode()
-    {
-        // disable place deoor menu 
-        placeDoorMenu.SetActive(false);
-        visibilityScript.highlightObjects(components);
-        Destroy(renderDoor.anchorPoints);
-        // createOverviewMenu();
-        
-    }
-
     void createOverviewMenu()
     {
         Vector3 cameraPosition = Camera.main.transform.position;

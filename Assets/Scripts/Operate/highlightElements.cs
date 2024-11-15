@@ -38,7 +38,7 @@ public class cahngeObjectsVisibility : MonoBehaviour
     
     public void highlightObjects(HashSet<string> highlightSet)
     {
-        foreach(string componentName in highlightSet){
+        foreach(string componentName in highlightSet) {
             if (Highlited.Contains(componentName))
                 // This component is already highlighted and we want to keep it like that
                 continue;
@@ -81,30 +81,6 @@ public class cahngeObjectsVisibility : MonoBehaviour
         }
 
         Highlited = highlightSet;
-    }
-
-    public void hideComponents(List<string> componentsToHide)
-    {
-        Renderer[] components = Door.GetComponentsInChildren<Renderer>();
-        
-        foreach (Renderer component in components)
-        {
-            if(componentsToHide.Contains(component.name))
-            {
-                component.enabled = false;
-            }
-        }
-    }
-
-    public void hideAllComponents()
-    {
-        Renderer[] components = Door.GetComponentsInChildren<Renderer>();
-        
-        foreach (Renderer component in components)
-        {
-            component.materials = new Material[0];
-            component.material = transparentMaterial;
-        }
     }
 
     // Start is called before the first frame update

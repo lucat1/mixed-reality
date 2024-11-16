@@ -3,111 +3,122 @@ using UnityEngine.SceneManagement;
 
 public class MenuTutorial : MonoBehaviour
 {
-    public GameObject StartPopUp;
-    public GameObject ManipulatorPopUp;
-    public GameObject MenuT;
-    public GameObject ManipulatorCheck;
-    public GameObject Step1;
+    public GameObject start; // welcome user to menu tutorial
+    public GameObject step1; // teache user how to use manipulator handler
+    public GameObject menuT; // tasks menu popup
+    public GameObject manipulatorCheck; // handler object that has to be moved by user
+    public GameObject step1Completed; // tell user step 1 was successfully completed
+    public GameObject step2; // teach user how the tasks menu is structured
+    public GameObject step2Row; // teach user what each row represents
+    public GameObject step2Priority; // teach user what the colored square represents
+    public GameObject step2Pick; // teach user to read the table and select one task (highest priority one)
+    public GameObject correctPick; // if user clicks correct row 
+    public GameObject wrongPick; // if user clicks wrong row
+    private bool hasMoved = false; // check if user has moved the handler
 
-    public GameObject Step2Overview;
-    public GameObject Step2Row;
-    public GameObject Step2Priority;
-    public GameObject Step2Pick;
-
-    public GameObject CorrectP;
-    public GameObject WrongP;
-
-    // start configuration
+    // 0 - start configuration -> manage what should be displayed when scene is opened
     public void Start()
     {
-        ManipulatorPopUp.SetActive(false);
-        MenuT.SetActive(false);
-        ManipulatorCheck.SetActive(false);
-        StartPopUp.SetActive(true);
-        Step1.SetActive(false);
-        Step2Overview.SetActive(false);
-        Step2Row.SetActive(false);
-        Step2Priority.SetActive(false);
-        Step2Pick.SetActive(false);
+        step1.SetActive(false);
+        menuT.SetActive(false);
+        manipulatorCheck.SetActive(false);
+        start.SetActive(true);
+        step1Completed.SetActive(false);
+        step2.SetActive(false);
+        step2Row.SetActive(false);
+        step2Pick.SetActive(false);
+        step2Priority.SetActive(false);
     }
 
-    // 1 - if tutorial -> step 1 try manipulator
-    public void LoadManipulatorPopUp()
+    // 1 - if start && user clicks 'continue' -> go to step 1
+    public void LoadStep1()
     {
-        StartPopUp.SetActive(false);
-        ManipulatorPopUp.SetActive(true);
-        ManipulatorCheck.SetActive(true);
+        start.SetActive(false);
+        step1.SetActive(true);
+        manipulatorCheck.SetActive(true);
 
     }
 
-    // 2 - if skip step 1 -> go to step 2
-    public void LoadMenu()
+    // 2 - if step1 (or step1 completed) && 'continue' -> go to step 2
+    public void LoadStep2()
     {
-        ManipulatorPopUp.SetActive(false);
-        ManipulatorCheck.SetActive(false);
-        Step2Overview.SetActive(true);
-        MenuT.SetActive(true);
+        step1.SetActive(false);
+        step1Completed.SetActive(false);
+        manipulatorCheck.SetActive(false);
+        step2.SetActive(true);
+        menuT.SetActive(true);
     }
 
-    // 3 - if tried manipulator and worked -> in ManipulationCheck.cs
-    // 4 - after 3 a popup is open if continue -> go to step2
+    // 3 - if step1 && tried manipulator && worked -> go to step 1 completed
+    public void OnManipulationStarted()
+    {
+        hasMoved = true;
+    }
+
+    public void OnManipulationEnded()
+    {
+        if (hasMoved)
+        {
+            Step1Completed();
+        }
+    }
+
+    // 4 - tell the user step1 has been successfully completed
     public void Step1Completed()
     {
-        Step1.SetActive(false);
-        MenuT.SetActive(true);
-        Step2Overview.SetActive(true);
-
+        step1.SetActive(false);
+        step1Completed.SetActive(true);
     }
 
-    // 5 - if step2 overview continue -> row popup
+    // 5 - if step2 && user clicks 'continue' -> go to step2Row
     public void GoToRow()
     {
-        Step2Overview.SetActive(false);
-        Step2Row.SetActive(true);
+        step2.SetActive(false);
+        step2Row.SetActive(true);
 
     }
 
-    // 6 - if step2 row continue -> priority popup
+    // 6 - if step2Row && user clicks 'continue' -> go to step2Priority
     public void GoToPriority()
     {
-        Step2Row.SetActive(false);
-        Step2Priority.SetActive(true);
+        step2Row.SetActive(false);
+        step2Priority.SetActive(true);
 
     }
 
-    // 7 - if step2 priority continue -> pick popup
+    // 7 - if step2Priority && user clicks 'continue' -> go to step2Pick
     public void GoToPick()
     {
-        Step2Priority.SetActive(false);
-        Step2Pick.SetActive(true);
+        step2Priority.SetActive(false);
+        step2Pick.SetActive(true);
 
     }
 
-    // 8 - if step2 priority continue -> hide popup
+    // 8 - if step2Pick && user clicks 'continue' -> hide step2Pick
     public void HidePick()
     {
-        Step2Pick.SetActive(false);
+        step2Pick.SetActive(false);
 
     }
 
     // 9 - if correct pick -> correct pick pop up
     public void CorrectPick()
     {
-        CorrectP.SetActive(true);
+        correctPick.SetActive(true);
 
     }
 
     // 10 - if worng pick -> wrong pick pop up
     public void WrongPick()
     {
-        WrongP.SetActive(true);
+        wrongPick.SetActive(true);
 
     }
 
     // 11 - if worng pick && Try again -> hide wrong pick pop up
     public void HideWrongPick()
     {
-        WrongP.SetActive(false);
+        wrongPick.SetActive(false);
 
     }
 

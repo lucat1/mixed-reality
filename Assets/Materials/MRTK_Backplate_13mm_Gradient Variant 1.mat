@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: MRTK_Backplate_13mm_Gradient Variant 1
   m_Shader: {fileID: 4800000, guid: bf1548464ae044849a0ce555785ea4a2, type: 3}
-  m_Parent: {fileID: 2100000, guid: 67ea47c3251dc3644914201412ba632e, type: 2}
+  m_Parent: {fileID: 2100000, guid: d0d1b8f0d6440c84fa4102698b26f318, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _EDGE_ONLY_

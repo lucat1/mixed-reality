@@ -48,9 +48,9 @@ public class PopulateMenu : MonoBehaviour
         Transform manipulationContainer = transform.GetChild(0);
         Assert.AreNotEqual(manipulationContainer, null);
 
-        GameObject sec = Instantiate(listContainer, new Vector3(0, 0, 0), Quaternion.identity, manipulationContainer);
+        GameObject sec = Instantiate(listContainer, new Vector3(0, -168, 0), Quaternion.identity, manipulationContainer);
         // Force local transform to be relative to the parent
-        sec.transform.localPosition = new Vector3(0, 0, 0);
+        sec.transform.localPosition = new Vector3(0, -168, 0);
         // We assume that a listContainer GameObject always has a first child that is the title
         TextMeshProUGUI titleText = sec.GetComponentInChildren<TextMeshProUGUI>();
         Assert.AreNotEqual(titleText, null);

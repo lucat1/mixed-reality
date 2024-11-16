@@ -49,6 +49,8 @@ public class WelcomeScene : MonoBehaviour
     {
         loginPopUp.SetActive(true);
         errorPopup.SetActive(false);
+        usernameInput.text = "";
+        passwordInput.text = "";
     }
     
     // if WelcomePopUp %% user clicks 'Yes, go to the tutorial' -> load tutorial scene for menu tasks

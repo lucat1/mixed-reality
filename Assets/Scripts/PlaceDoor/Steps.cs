@@ -23,14 +23,15 @@ public class Steps : MonoBehaviour
 {
     // A JSON file containing all the steps required to perform the current maintenance.
     public TextAsset stepsFile;
-
     public DoorManager doorManager;
+    public PlaceDoor placeDoor;
 
     JSONSteps steps;
 
     int currentStepIndex;
 
     public void StartMaintenance() {
+        transform.gameObject.SetActive(true);
         transform.SetParent(transform);
         var cameraPosition = Camera.main.transform.position;
         transform.position = cameraPosition + new Vector3(0.2f,0,0.323f);
@@ -54,6 +55,7 @@ public class Steps : MonoBehaviour
     private const string donePath = "StepsContent/Done";
     private const string prevPath = "StepsContent/PreviousButton";
     private const string nextPath = "StepsContent/NextButton";
+    private const string changeDoorPositionPath = "StepsContent/ChangeDoorPosition";
     void DisplayStep() {
         var textTransform = transform.Find(textPath);
         var instructionText = textTransform.GetComponent<TMP_Text>();
@@ -86,8 +88,24 @@ public class Steps : MonoBehaviour
         SceneManager.LoadScene("Menu");
     }
 
+    public void ChangeDoorPosition(){
+        // deactivate door
+        doorManager.gameObject.SetActive(false);
+        // toggle place door menu
+        placeDoor.TogglePlaceDoorMenu();
+        // reset step
+        currentStepIndex = 0;
+        // deactivate step menu
+        gameObject.SetActive(false);
+
+    }
+
     // Start is called before the first frame update
     void Start()
+    {
+    }
+
+    void OnEnable()
     {
         steps = JsonUtility.FromJson<JSONSteps>(stepsFile.ToString());
     }

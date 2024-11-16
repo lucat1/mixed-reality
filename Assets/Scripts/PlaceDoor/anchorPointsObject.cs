@@ -14,10 +14,11 @@ public class anchorPointsObject : MonoBehaviour
     void AdjustPlane()
     {
 
-        // Get the positions of the spheres
+        // Get the positions of the anchor points
         Vector3 leftPosition = leftSphere.transform.position;
         Vector3 rightPosition = rightSphere.transform.position;
 
+        // Compute plane center 
         Vector3 midpoint = (leftPosition + rightPosition) / 2;
 
         // Set the plane's position to the midpoint

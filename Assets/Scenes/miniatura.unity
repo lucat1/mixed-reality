@@ -232,6 +232,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4751264494435837496, guid: 55efc1f96be621c44a5fac592b3aceda,
         type: 3}
+      propertyPath: doorCenter
+      value: 
+      objectReference: {fileID: 749699018}
+    - target: {fileID: 4751264494435837496, guid: 55efc1f96be621c44a5fac592b3aceda,
+        type: 3}
       propertyPath: nearObjectRadius
       value: 0.008
       objectReference: {fileID: 0}
@@ -245,6 +250,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55efc1f96be621c44a5fac592b3aceda, type: 3}
+--- !u!1 &749699018 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4260130412266924028, guid: 55efc1f96be621c44a5fac592b3aceda,
+    type: 3}
+  m_PrefabInstance: {fileID: 15261397}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1141579153
 PrefabInstance:
   m_ObjectHideFlags: 0

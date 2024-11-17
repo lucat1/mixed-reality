@@ -125,7 +125,7 @@ public class MenuTutorial : MonoBehaviour
     // 12 - if correct pick && continue -> start plae door scene tutorial
     public void GoToPlaceDoorT()
     {
-        SceneManager.LoadScene("PlaceDoorTutorial");
+        SceneManager.LoadScene("NewPlaceDoor");
     }
 
     // if exit tutorial -> start menu scene

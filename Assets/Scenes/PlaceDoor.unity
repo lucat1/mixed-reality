@@ -38,6 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -645,7 +646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Door: {fileID: 1085849289}
-  anchorPointsPrefab: {fileID: 4514921769817056588, guid: 066ee5702cd2c71419d63168238cefde,
+  anchorPointsPrefab: {fileID: 4514921769817056588, guid: e4593d9ccf33ca64b9c01219797e82ce,
     type: 3}
 --- !u!1 &787429997 stripped
 GameObject:
@@ -4257,6 +4258,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 519b09a7914189945afc88295f6054e2, type: 2}
+    - target: {fileID: 4751264494435837496, guid: 55efc1f96be621c44a5fac592b3aceda,
+        type: 3}
+      propertyPath: steps
+      value: 
+      objectReference: {fileID: 787429997}
     - target: {fileID: 4751264494435837496, guid: 55efc1f96be621c44a5fac592b3aceda,
         type: 3}
       propertyPath: nearObjectRadius
@@ -7890,12 +7896,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    m_Quality: 3
-    m_FrameInfluence: 0.1
-    m_JitterScale: 1
-    m_MipBias: 0
-    m_VarianceClampScale: 0.9
-    m_ContrastAdaptiveSharpening: 0
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!1001 &1828000717
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8018,7 +8024,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Door: {fileID: 0}
-  anchorPointsPrefab: {fileID: 0}
+  anchorPointsPrefab: {fileID: 4514921769817056588, guid: e4593d9ccf33ca64b9c01219797e82ce,
+    type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

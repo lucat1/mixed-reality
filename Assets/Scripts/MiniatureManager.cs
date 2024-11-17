@@ -8,6 +8,8 @@ public class MiniatureManager : MonoBehaviour
 
     // this parameter controll the max distance within a piece is considered to be near another one
     public GameObject door;
+    public GameObject steps;
+    public GameObject end;
     public GameObject doorCenter;
     public DoorManager doorManager;
     public float nearObjectRadius;
@@ -16,6 +18,8 @@ public class MiniatureManager : MonoBehaviour
 
     public void ActivateMiniature(){
         gameObject.SetActive(true);
+        steps.SetActive(false);
+        end.SetActive(false);
         var cameraPosition = Camera.main.transform.position;
         transform.position = cameraPosition + new Vector3(0.2f,0,0.323f);
         transform.LookAt(Camera.main.transform);

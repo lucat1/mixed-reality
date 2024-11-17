@@ -46,8 +46,9 @@ public class PopulateMenu : MonoBehaviour
         // We assume that the script is attached to a UIContainer, which always
         // has a ManipulatorContainer as a child
         Transform manipulationContainer = transform.GetChild(0);
+        Debug.Log("ciaoo");
+        print(manipulationContainer);
         Assert.AreNotEqual(manipulationContainer, null);
-
         GameObject sec = Instantiate(listContainer, new Vector3(0, -168, 0), Quaternion.identity, manipulationContainer);
         // Force local transform to be relative to the parent
         sec.transform.localPosition = new Vector3(0, -168, 0);

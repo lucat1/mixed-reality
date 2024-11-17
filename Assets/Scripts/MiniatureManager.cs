@@ -14,6 +14,16 @@ public class MiniatureManager : MonoBehaviour
     private List<string> compNames= new List<string> {"_25_310_0565_602","_25_802_1132_364","_25_375_0205_301"};
     private List<GameObject> displayedGroups = new ();
 
+    public void InitializeDisplayBlocks(){
+        // Create the groups to display
+        foreach(string c in compNames)
+            displayedGroups.Add(CreateDisplayGroup(doorManager.GetDoorComponents(go => go.name == c)[0]));
+        
+        countIndex = 0;
+        // display the first element
+        displayedGroups[0].SetActive(true);
+    }
+
     public void ActivateMiniature(){
         gameObject.SetActive(true);
         var cameraPosition = Camera.main.transform.position;
@@ -134,12 +144,7 @@ public class MiniatureManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         DeactivateAll();
-        // Create the groups to display
-        foreach(string c in compNames)
-            displayedGroups.Add(CreateDisplayGroup(doorManager.GetDoorComponents(go => go.name == c)[0]));
-        
         // display the first element
         displayedGroups[0].SetActive(true);
     }

@@ -514,7 +514,7 @@ PrefabInstance:
         type: 3}
       propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 765007477}
     - target: {fileID: 6922232475604193032, guid: 180d4d2203473be4fa3fef18d0bec80e,
         type: 3}
       propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -668,6 +668,8 @@ MonoBehaviour:
   stepsFile: {fileID: 4900000, guid: 9d9d33699a32bc44683d10c0e174999a, type: 3}
   doorManager: {fileID: 1085849291}
   placeDoor: {fileID: 765007477}
+  manager: {fileID: 1284911083}
+  miniatureManager: {fileID: 939437623}
 --- !u!1001 &815380161
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4302,6 +4304,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 519b09a7914189945afc88295f6054e2, type: 2}
+    - target: {fileID: 4843490354382304078, guid: 55efc1f96be621c44a5fac592b3aceda,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bcb93ab10ffa29c4b919e68f4382b48e, type: 2}
     - target: {fileID: 4844919399930073067, guid: 55efc1f96be621c44a5fac592b3aceda,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -6430,7 +6437,7 @@ PrefabInstance:
     - target: {fileID: 7997654464376385009, guid: 55efc1f96be621c44a5fac592b3aceda,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7999653135985250051, guid: 55efc1f96be621c44a5fac592b3aceda,
         type: 3}
@@ -7486,7 +7493,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1284911084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7719,6 +7726,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7965587554565802954, guid: 688e5f2f73efe7043b25057d9c0f3b90,
+        type: 3}
+      propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 787429998}
+    - target: {fileID: 7965587554565802954, guid: 688e5f2f73efe7043b25057d9c0f3b90,
+        type: 3}
+      propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Done
+      objectReference: {fileID: 0}
+    - target: {fileID: 7965587554565802954, guid: 688e5f2f73efe7043b25057d9c0f3b90,
+        type: 3}
+      propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Steps, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7967017583161282541, guid: 688e5f2f73efe7043b25057d9c0f3b90,
         type: 3}

@@ -72,18 +72,11 @@ public class DoorManager : MonoBehaviour
 
     private HashSet<GameObject> currentlyHighlighted = new();
 
+    // Mappings from small object to its relative ring being currently displayed
+    Dictionary<GameObject, GameObject> gameObjectsWithRing = new();
+
     public void HighlightComponents(HashSet<string> toHighlightNames, bool showRing = true) {
         var toHighlight = GetDoorComponents(go => toHighlightNames.Contains(go.name));
-
-        // de-highlight currently highlighted components
-        // foreach(var go in currentlyHighlighted) {
-        //     if (toHighlightNames.Contains(go.name))
-        //         // The component is already highlighted and should stay like that
-        //         continue;
-
-        //     SetMaterial(go, transparentMaterial);
-        //     currentlyHighlighted.Remove(go);
-        // }
 
         for (int i = 0; i < currentlyHighlighted.Count; i++) {
             var go = currentlyHighlighted.ElementAt(i);
@@ -92,6 +85,13 @@ public class DoorManager : MonoBehaviour
                 continue;
 
             SetMaterial(go, transparentMaterial);
+
+            // remove ring if object has one attached
+            if (gameObjectsWithRing.ContainsKey(go))
+            {
+                RemoveRing(go);
+            }
+
             currentlyHighlighted.Remove(go);
         }
 
@@ -111,15 +111,13 @@ public class DoorManager : MonoBehaviour
         }
     }
 
-    // Mappings from small object to its relative ring being currently displayed
-    Dictionary<GameObject, GameObject> gameObjectsWithRing;
-
     // Displays a ring on 
     void DisplayRing(GameObject go) {
         var ring = Instantiate(ringPrefab);
         ring.transform.SetParent(go.transform);
         ring.transform.position = go.transform.position;
         ring.transform.localScale = new Vector3(1f, 1f, 1f);
+        gameObjectsWithRing[go] = ring;
     }
 
     void RemoveRing(GameObject go) {

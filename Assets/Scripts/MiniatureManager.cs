@@ -18,6 +18,7 @@ public class MiniatureManager : MonoBehaviour
         gameObject.SetActive(true);
         var cameraPosition = Camera.main.transform.position;
         transform.position = cameraPosition + new Vector3(0.2f,0,0.323f);
+        transform.LookAt(Camera.main.transform);
     }
 
     public void DeactivateMiniature(){

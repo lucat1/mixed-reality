@@ -631,7 +631,7 @@ PrefabInstance:
     - target: {fileID: 4125495309553998321, guid: a57a3cef6911f9d48819be128077b16e,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4205010513405509735, guid: a57a3cef6911f9d48819be128077b16e,
         type: 3}
@@ -1743,6 +1743,11 @@ PrefabInstance:
       propertyPath: m_text
       value: "\uF2AB"
       objectReference: {fileID: 0}
+    - target: {fileID: 1658271941349316845, guid: c25d8f2d22117bd40ad824684551fbde,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d8290038b050ff84f852473e01144f22, type: 2}
     - target: {fileID: 3872825480149920711, guid: c25d8f2d22117bd40ad824684551fbde,
         type: 3}
       propertyPath: currentIconName
@@ -2727,6 +2732,11 @@ PrefabInstance:
       propertyPath: m_text
       value: "\uF295"
       objectReference: {fileID: 0}
+    - target: {fileID: 5375384631100028977, guid: 180d4d2203473be4fa3fef18d0bec80e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 50860ec0b402e8643810bc47155c3aee, type: 2}
     - target: {fileID: 6922232474701558454, guid: 180d4d2203473be4fa3fef18d0bec80e,
         type: 3}
       propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.size
@@ -3104,6 +3114,11 @@ PrefabInstance:
       propertyPath: m_text
       value: "\uF2B1"
       objectReference: {fileID: 0}
+    - target: {fileID: 1658271941349316845, guid: c25d8f2d22117bd40ad824684551fbde,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9795fac7b9379964d8281f62f32dfc6a, type: 2}
     - target: {fileID: 3872825480149920711, guid: c25d8f2d22117bd40ad824684551fbde,
         type: 3}
       propertyPath: currentIconName
@@ -3905,7 +3920,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f32fb793f8a4656469db1040ccf2cffb, type: 2}
+  - {fileID: 2100000, guid: f4a2d5f7db735004ca1d63e3ad821751, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

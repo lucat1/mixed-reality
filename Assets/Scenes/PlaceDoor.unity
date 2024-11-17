@@ -346,6 +346,26 @@ PrefabInstance:
       propertyPath: m_text
       value: "\uF295"
       objectReference: {fileID: 0}
+    - target: {fileID: 4199194157521573158, guid: 180d4d2203473be4fa3fef18d0bec80e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a86cbac4b5603e34c8b47e40689ea210, type: 2}
+    - target: {fileID: 4199194158148135479, guid: 180d4d2203473be4fa3fef18d0bec80e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0e5b23f6c9b8836419415d7a66b5435c, type: 2}
+    - target: {fileID: 4199194158758750360, guid: 180d4d2203473be4fa3fef18d0bec80e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9246f653064e9044b8f76c6c630bc206, type: 2}
+    - target: {fileID: 5375384631100028977, guid: 180d4d2203473be4fa3fef18d0bec80e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 89a2a9baeae79de4ead20ca86e35b1e0, type: 2}
     - target: {fileID: 6922232474701558454, guid: 180d4d2203473be4fa3fef18d0bec80e,
         type: 3}
       propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.size

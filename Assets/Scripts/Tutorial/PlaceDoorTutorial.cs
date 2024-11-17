@@ -3,34 +3,31 @@ using UnityEngine.SceneManagement;
 
 public class PlaceDoorTutorial : MonoBehaviour
 {
-    public GameObject StartPopUp;
-    public GameObject PlaceDoor;
-    public GameObject PlaceButtonPopUp;
+    public GameObject step3; // popup to explain what step3 is
+    public GameObject placeDoorMenu; // menu to help the user place the door
+    public GameObject step3Place; // first part of step3: click on the place door button
 
-    // 0 - start configuration
+    // 0 - start configuration -> manage what should be displayed when scene is opened
     public void Start()
     {
-        StartPopUp.SetActive(true);
-        PlaceDoor.SetActive(false);
-        PlaceButtonPopUp.SetActive(false);
+        step3.SetActive(true);
+        placeDoorMenu.SetActive(false);
+        step3Place.SetActive(false);
     }
 
-    // 1 - if continue -> load scene and place button popup
-    public void FistPopUp()
+    // 1 - if step3 && user clicks 'continue' -> load place door menu && step3 place popup
+    public void GoToPlace()
     {
-        StartPopUp.SetActive(false);
-        PlaceDoor.SetActive(true);
-        PlaceButtonPopUp.SetActive(true);
+        step3.SetActive(false);
+        placeDoorMenu.SetActive(true);
+        step3Place.SetActive(true);
     }
 
-    // 2 - if button 'place door' is clicked -> open door guide popup
-    public void DoorGuidePopUp()
+    // 2 - if step3Place && user clicks 'place door' -> load step3AnchorPoints
+    public void GoToAnchorPoints()
     {
-        PlaceButtonPopUp.SetActive(false);
+        step3Place.SetActive(false);
     }
-
-
-
 
     // if exit tutorial -> start menu scene
     public void ExitTutorial()

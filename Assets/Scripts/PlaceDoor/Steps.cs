@@ -25,6 +25,8 @@ public class Steps : MonoBehaviour
     public TextAsset stepsFile;
     public DoorManager doorManager;
     public PlaceDoor placeDoor;
+    public GameObject manager;
+    public MiniatureManager miniatureManager;
 
     JSONSteps steps;
 
@@ -32,12 +34,14 @@ public class Steps : MonoBehaviour
 
     public void StartMaintenance() {
         transform.gameObject.SetActive(true);
+        miniatureManager.InitializeDisplayBlocks();
         transform.SetParent(transform);
         var cameraPosition = Camera.main.transform.position;
         transform.position = cameraPosition + new Vector3(0.2f,0,0.323f);
 
         currentStepIndex = 0;
         DisplayStep();
+        manager.SetActive(true);
     }
 
     bool IsLastStep() {
@@ -89,15 +93,18 @@ public class Steps : MonoBehaviour
     }
 
     public void ChangeDoorPosition(){
-        // deactivate door
+        // deactivate door and miniature
         doorManager.gameObject.SetActive(false);
+        miniatureManager.gameObject.SetActive(false);
         // toggle place door menu
         placeDoor.TogglePlaceDoorMenu();
         // reset step
         currentStepIndex = 0;
         // deactivate step menu
         gameObject.SetActive(false);
-
+        // disable manager that switches between miniature and door
+        manager.SetActive(false);
+    
     }
 
     // Start is called before the first frame update

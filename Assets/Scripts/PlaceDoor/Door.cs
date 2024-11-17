@@ -122,6 +122,7 @@ public class DoorManager : MonoBehaviour
 
     void RemoveRing(GameObject go) {
         var ring = gameObjectsWithRing[go];
+        gameObjectsWithRing.Remove(go);
         Destroy(ring);
     }
 
@@ -141,6 +142,13 @@ public class DoorManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // make rings face player
+        foreach(var r in gameObjectsWithRing)
+        {
+            GameObject valueObject = r.Value;
+            valueObject.transform.LookAt(Camera.main.transform);
+        }
+
+
     }
 }

@@ -14,6 +14,20 @@ public class MiniatureManager : MonoBehaviour
     private List<string> compNames= new List<string> {"_25_310_0565_602","_25_802_1132_364","_25_375_0205_301"};
     private List<GameObject> displayedGroups = new ();
 
+    public void ActivateMiniature(){
+        gameObject.SetActive(true);
+        var cameraPosition = Camera.main.transform.position;
+        transform.position = cameraPosition + new Vector3(0.2f,0,0.323f);
+    }
+
+    public void DeactivateMiniature(){
+        gameObject.SetActive(false);
+    }
+
+    public bool CheckActive(){
+        return gameObject.activeSelf;
+    }
+
     List<GameObject> GetNearComponents(GameObject center){
         List<GameObject> pr =  doorManager.GetDoorComponents(ob => (ComputeComponentsDist(center, ob) <= nearObjectRadius && ob.transform.childCount == 0));
         return pr;

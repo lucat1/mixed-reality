@@ -689,7 +689,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 2284108000306911438}
-  miniaturePlate: {fileID: 4362295781664452963}
+  doorCenter: {fileID: 4260130412266924028}
   doorManager: {fileID: 9039865985154296996}
   nearObjectRadius: 0.01
 --- !u!1 &8237054921536114997

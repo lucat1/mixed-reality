@@ -7,15 +7,17 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+[ExecuteAlways]
 public class DoorManager : MonoBehaviour
 {
     // Threshold to decide if a component should be hidden. If the component's
     // volume is lower than the threshold, it gets hidden.
     public float volumeThreshold;
-
     public Material transparentMaterial;
 
     public Material glowingMaterial;
+
+    public GameObject miniature;
 
     // Threshold to decide if a component should . If the component's
     // volume is lower than the threshold, it gets hidden.
@@ -148,7 +150,6 @@ public class DoorManager : MonoBehaviour
             GameObject valueObject = r.Value;
             valueObject.transform.LookAt(Camera.main.transform);
         }
-
 
     }
 }

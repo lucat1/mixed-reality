@@ -6,7 +6,7 @@ public class Manager : MonoBehaviour
 {
     public GameObject door;
     public MiniatureManager miniature;
-    // Threshold decide when to switch to the miniature
+    // Threshold to decide when to switch to the miniature
     public float activateMiniatureThreshold;
 
     // Start is called before the first frame update
@@ -14,14 +14,13 @@ public class Manager : MonoBehaviour
     {
         
     }
-    float DistanceFromPlayer(){
-        
+    float DistanceFromPlayer() {
         return Vector3.Distance(Camera.main.transform.position, door.transform.position);
     }
     // Update is called once per frame
     void Update()
     {
-        if(door.activeSelf || miniature.CheckActive()){
+        if (door.activeSelf || miniature.CheckActive()) {
             if(DistanceFromPlayer() < activateMiniatureThreshold){
                 door.SetActive(false);
                 if(! miniature.CheckActive())
@@ -32,6 +31,5 @@ public class Manager : MonoBehaviour
                 miniature.DeactivateMiniature();
             }
         }
-        
     }
 }

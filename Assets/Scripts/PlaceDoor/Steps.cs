@@ -34,9 +34,9 @@ public class Steps : MonoBehaviour
     int currentStepIndex;
 
     public void StartMaintenance() {
-        transform.gameObject.SetActive(true);
+        gameObject.SetActive(true);
         miniatureManager.InitializeDisplayBlocks();
-        transform.SetParent(transform);
+        // transform.SetParent(transform);
         var cameraPosition = Camera.main.transform.position;
         transform.position = cameraPosition + new Vector3(0.2f,0,0.323f);
 
@@ -60,7 +60,7 @@ public class Steps : MonoBehaviour
     private const string donePath = "StepsContent/Done";
     private const string prevPath = "StepsContent/PreviousButton";
     private const string nextPath = "StepsContent/NextButton";
-    private const string changeDoorPositionPath = "StepsContent/ChangeDoorPosition";
+
     void DisplayStep() {
         var textTransform = transform.Find(textPath);
         var instructionText = textTransform.GetComponent<TMP_Text>();

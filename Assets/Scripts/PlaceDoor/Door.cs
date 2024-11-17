@@ -47,9 +47,6 @@ public class DoorManager : MonoBehaviour
     // 2. Its volume is below the threshold.
     bool ShouldRemoveComponent(GameObject t) {
         var mesh = t.transform.GetComponent<MeshRenderer>();
-        Debug.Log("mesh " + mesh);
-        if (mesh != null)
-            Debug.Log(mesh.bounds.Volume());
         return mesh != null && mesh.bounds.Volume() <= volumeThreshold;
     }
 
@@ -72,14 +69,11 @@ public class DoorManager : MonoBehaviour
 
     private HashSet<GameObject> currentlyHighlighted = new();
 
-    // Mappings from small object to its relative ring being currently displayed
-    Dictionary<GameObject, GameObject> gameObjectsWithRing = new();
-
     public void HighlightComponents(HashSet<string> toHighlightNames, bool showRing = true) {
         var toHighlight = GetDoorComponents(go => toHighlightNames.Contains(go.name));
+        Debug.Log("highlighting " + toHighlight.Count() + " components");
 
-        for (int i = 0; i < currentlyHighlighted.Count; i++) {
-            var go = currentlyHighlighted.ElementAt(i);
+        foreach (var go in currentlyHighlighted) {
             if (toHighlightNames.Contains(go.name))
                 // The component is already highlighted and should stay like that
                 continue;
@@ -88,28 +82,24 @@ public class DoorManager : MonoBehaviour
 
             // remove ring if object has one attached
             if (gameObjectsWithRing.ContainsKey(go))
-            {
                 RemoveRing(go);
-            }
-
-            currentlyHighlighted.Remove(go);
         }
 
-        // highlight new components
+        // Highlight new components
         foreach(var go in toHighlight) {
-            if (currentlyHighlighted.Contains(go))
-                // The component is already highlighted
-                continue;
-
             SetMaterial(go, glowingMaterial);
-            currentlyHighlighted.Add(go);
 
-            // check if render the circle
+            // Check if we should render the circle
             var mesh = go.transform.GetComponent<MeshRenderer>();
             if(mesh.bounds.Volume() <= showRingVolumeThreshold && showRing)
                 DisplayRing(go);
         }
+
+        currentlyHighlighted = Enumerable.ToHashSet(toHighlight);
     }
+
+    // Mappings from small object to its relative ring being currently displayed
+    Dictionary<GameObject, GameObject> gameObjectsWithRing = new ();
 
     // Displays a ring on 
     void DisplayRing(GameObject go) {
@@ -126,28 +116,25 @@ public class DoorManager : MonoBehaviour
         Destroy(ring);
     }
 
-    void RemoveRings() {
-        foreach(var go in gameObjectsWithRing)
-            RemoveRing(go.Key);
+    public void StartMaintenance() {
+        gameObject.SetActive(true);
     }
 
     // Start is called before the first frame update
     void Start()
     {
         RemoveSmallComponents();
-        foreach(var t in GetDoorComponents(_ => true))
+        foreach(var t in GetDoorComponents(go => !currentlyHighlighted.Contains(go)))
             SetMaterial(t, transparentMaterial);
+
+        gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        // make rings face player
-        foreach(var r in gameObjectsWithRing)
-        {
-            GameObject valueObject = r.Value;
-            valueObject.transform.LookAt(Camera.main.transform);
-        }
-
+        // Make the rings face the player
+        foreach(var go in gameObjectsWithRing.Values)
+            go.transform.LookAt(Camera.main.transform);
     }
 }

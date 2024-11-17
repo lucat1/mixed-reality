@@ -61,7 +61,7 @@ public class MiniatureManager : MonoBehaviour
     }
 
     List<GameObject> GetNearComponents(GameObject center){
-        List<GameObject> pr =  doorManager.GetDoorComponents(ob => (ComputeComponentsDist(center, ob) <= nearObjectRadius && ob.transform.childCount == 0));
+        List<GameObject> pr =  doorManager.GetDoorComponents(ob => ComputeComponentsDist(center, ob) <= nearObjectRadius && ob.transform.childCount == 0);
         return pr;
     }
 
@@ -71,7 +71,7 @@ public class MiniatureManager : MonoBehaviour
     }
 
     private GameObject CreateDisplayGroup(GameObject component){
-
+        // doorManager.HighlightComponents(new HashSet<string>(compNames), false);
         // display the near components as transparent
         foreach(GameObject ob in GetNearComponents(component))
         {

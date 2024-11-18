@@ -15,11 +15,18 @@ public class MiniatureManager : MonoBehaviour
     public float nearObjectRadius;
     private List<string> compNames= new List<string> {"_25_310_0565_602","_25_802_1132_364","_25_375_0205_301"};
     private List<GameObject> displayedGroups = new ();
+    private bool iniatialized = false;
 
     public void InitializeDisplayBlocks(){
-        // Create the groups to display
-        foreach(string c in compNames)
-            displayedGroups.Add(CreateDisplayGroup(doorManager.GetDoorComponents(go => go.name == c)[0]));
+        if(! iniatialized){
+
+            doorManager.HighlightComponents(new HashSet<string>(compNames), false);
+            // Create the groups to display
+            foreach(string c in compNames)
+                displayedGroups.Add(CreateDisplayGroup(doorManager.GetDoorComponents(go => go.name == c)[0]));
+            // Highlits object in the door
+            iniatialized = true;
+        }
         
         countIndex = 0;
         // display the first element
@@ -27,12 +34,14 @@ public class MiniatureManager : MonoBehaviour
     }
 
     public void ActivateMiniature(){
+        
         gameObject.SetActive(true);
-        steps.SetActive(false);
-        end.SetActive(false);
-        var cameraPosition = Camera.main.transform.position;
-        transform.position = cameraPosition + new Vector3(0.2f,0,0.323f);
+        Camera playerCamera = Camera.main;
+        Vector3 newPosition = playerCamera.transform.position + playerCamera.transform.forward * 0.30f;
+        transform.position = newPosition;
         transform.LookAt(Camera.main.transform);
+        transform.rotation = playerCamera.transform.rotation;
+
     }
 
     public void DeactivateMiniature(){
@@ -57,7 +66,6 @@ public class MiniatureManager : MonoBehaviour
 
     private GameObject CreateDisplayGroup(GameObject component){
 
-        doorManager.HighlightComponents(new HashSet<string>(compNames), false);
         // display the near components as transparent
         foreach(GameObject ob in GetNearComponents(component))
         {
@@ -72,16 +80,6 @@ public class MiniatureManager : MonoBehaviour
         SetObjectVolume(component, 0.0000005f);
 
         return component;
-    }
-
-    void ActivateParents(Transform child)
-    {
-        Transform currentParent = child.parent;
-        while (currentParent != null)
-        {
-            currentParent.gameObject.SetActive(true);
-            currentParent = currentParent.parent;
-        }
     }
 
     //DEBUG
@@ -105,6 +103,7 @@ public class MiniatureManager : MonoBehaviour
             displayedGroups[countIndex].SetActive(false);
             countIndex--;
             displayedGroups[countIndex].SetActive(true);
+
             
             Renderer renderer = displayedGroups[countIndex].GetComponent<Renderer>();
             Vector3 localSize = renderer.bounds.size;
@@ -149,8 +148,6 @@ public class MiniatureManager : MonoBehaviour
     void Start()
     {
         DeactivateAll();
-        // display the first element
-        displayedGroups[0].SetActive(true);
     }
 
     // Update is called once per frame

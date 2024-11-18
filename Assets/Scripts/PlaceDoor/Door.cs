@@ -17,8 +17,6 @@ public class DoorManager : MonoBehaviour
 
     public Material glowingMaterial;
 
-    public GameObject miniature;
-
     // Threshold to decide if a component should . If the component's
     // volume is lower than the threshold, it gets hidden.
     public float showRingVolumeThreshold;

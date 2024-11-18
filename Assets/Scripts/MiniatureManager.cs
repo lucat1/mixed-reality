@@ -24,10 +24,15 @@ public class MiniatureManager : MonoBehaviour
             // Create the groups to display
             foreach(string c in compNames)
                 displayedGroups.Add(CreateDisplayGroup(doorManager.GetDoorComponents(go => go.name == c)[0]));
+            
             // Highlits object in the door
             iniatialized = true;
+    
+            countIndex = 0;
+            displayedGroups[0].SetActive(true);
+
+
         }
-        
         countIndex = 0;
         // display the first element
         displayedGroups[0].SetActive(true);
@@ -35,7 +40,10 @@ public class MiniatureManager : MonoBehaviour
 
     public void ActivateMiniature(){
         
+        // activate miniature
         gameObject.SetActive(true);
+
+        // place the object in front of the player
         Camera playerCamera = Camera.main;
         Vector3 newPosition = playerCamera.transform.position + playerCamera.transform.forward * 0.30f;
         transform.position = newPosition;
@@ -61,8 +69,6 @@ public class MiniatureManager : MonoBehaviour
         double distanceSquared = Math.Pow(center.transform.position.x - other.transform.position.x, 2) + Math.Pow(center.transform.position.y - other.transform.position.y,2) + Math.Pow(center.transform.position.z - other.transform.position.z,2);
         return (float)Mathf.Sqrt((float)distanceSquared);
     }
-
-    private HashSet<GameObject> currentlyActive = new();
 
     private GameObject CreateDisplayGroup(GameObject component){
 
@@ -90,11 +96,6 @@ public class MiniatureManager : MonoBehaviour
             displayedGroups[countIndex].SetActive(false);
             countIndex++;
             displayedGroups[countIndex].SetActive(true);
-
-            Renderer renderer = displayedGroups[countIndex].GetComponent<Renderer>();
-            Vector3 localSize = renderer.bounds.size;
-            Debug.Log(localSize);
-
         }
     }
     public void Previous(){
@@ -103,11 +104,6 @@ public class MiniatureManager : MonoBehaviour
             displayedGroups[countIndex].SetActive(false);
             countIndex--;
             displayedGroups[countIndex].SetActive(true);
-
-            
-            Renderer renderer = displayedGroups[countIndex].GetComponent<Renderer>();
-            Vector3 localSize = renderer.bounds.size;
-            Debug.Log(localSize);
         }
     }
 

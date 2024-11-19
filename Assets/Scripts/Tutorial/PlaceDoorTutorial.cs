@@ -12,6 +12,8 @@ public class PlaceDoorTutorial : MonoBehaviour
     public GameObject step5; // popup to explain what step5 is (how miniature works)
     public GameObject move; // popup to make the user move closer to the scene
     public GameObject end; // end of tutorial pop up
+    public GameObject challenge; // start challenge 
+    public GameObject challengeEnd; // finish challenge
 
     // 0 - start configuration -> manage what should be displayed when scene is opened
     public void Start()
@@ -66,7 +68,30 @@ public class PlaceDoorTutorial : MonoBehaviour
         step5.SetActive(false);
         end.SetActive(true);
     }
+    // 7 - if step5 && user clicks 'continue' -> hide step5
+    public void GoToChallenge()
+    {
+        end.SetActive(false);
+        challenge.SetActive(true);
+    }
 
+    // 8 - if challengepopup && user clicks 'decline challenge' -> hide challenge pop up
+    public void Decline()
+    {
+        challenge.SetActive(false);
+    }
+    
+    // 9 - if challengepopup && user clicks 'accept challenge' -> hide challenge pop up & start timing
+    public void Accept()
+    {    
+        SceneManager.LoadScene("Menu");
+    }
+
+    // 10 - if challenge finished -> show finished challenge pop up
+    public void finishChallenge()
+    {    
+        challengeEnd.SetActive(true);
+    }
     // if exit tutorial -> start menu scene
     public void ExitTutorial()
     {

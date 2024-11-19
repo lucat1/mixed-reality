@@ -27,6 +27,7 @@ public class Steps : MonoBehaviour
     public PlaceDoor placeDoor;
     public GameObject manager;
     public MiniatureManager miniatureManager;
+    public GameObject challengeEnd; // finish challenge
 
     JSONSteps steps;
 
@@ -89,7 +90,8 @@ public class Steps : MonoBehaviour
     }
 
     public void Done() {
-        SceneManager.LoadScene("Menu");
+        challengeEnd.SetActive(true);
+        
     }
 
     public void ChangeDoorPosition(){

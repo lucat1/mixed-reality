@@ -1788,6 +1788,8 @@ MonoBehaviour:
   stepsFile: {fileID: 4900000, guid: 9d9d33699a32bc44683d10c0e174999a, type: 3}
   doorManager: {fileID: 1085849291}
   placeDoor: {fileID: 765007477}
+  manager: {fileID: 1284911083}
+  miniatureManager: {fileID: 939437623}
 --- !u!1 &810946790
 GameObject:
   m_ObjectHideFlags: 0
@@ -8479,7 +8481,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 939437622}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1764631520}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b54d7de5e7bce2441be9734c3e923689, type: 3}
@@ -8930,7 +8932,7 @@ MonoBehaviour:
   volumeThreshold: 0.00005
   transparentMaterial: {fileID: 2100000, guid: 519b09a7914189945afc88295f6054e2, type: 2}
   glowingMaterial: {fileID: 2100000, guid: a65bdc2b3c1319a4fa6b1623b98e084a, type: 2}
-  miniature: {fileID: 0}
+  miniature: {fileID: 1764631520}
   showRingVolumeThreshold: 0.000001
   ringPrefab: {fileID: -4320558180572046448, guid: 0a339d6c5a733184e9e0d852d2dac138,
     type: 3}
@@ -16633,6 +16635,12 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!1 &1764631520 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7997654464376385009, guid: 55efc1f96be621c44a5fac592b3aceda,
+    type: 3}
+  m_PrefabInstance: {fileID: 939437622}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1766336737
 GameObject:
   m_ObjectHideFlags: 0
@@ -17969,8 +17977,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bffb8b761ffb13145bbaa379bafca58f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Door: {fileID: 0}
-  anchorPointsPrefab: {fileID: 0}
+  Door: {fileID: 1085849289}
+  anchorPointsPrefab: {fileID: 4514921769817056588, guid: 066ee5702cd2c71419d63168238cefde,
+    type: 3}
 --- !u!1 &2098583607
 GameObject:
   m_ObjectHideFlags: 0

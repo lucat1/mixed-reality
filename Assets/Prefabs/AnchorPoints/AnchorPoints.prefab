@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 7942151409203931800}
   - component: {fileID: 6001013269558605636}
   m_Layer: 0
-  m_Name: AnchorTutorial
+  m_Name: AnchorPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

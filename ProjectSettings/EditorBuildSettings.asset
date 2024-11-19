@@ -23,6 +23,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PlaceDoor.unity
     guid: de1b3f36d18f3964c8f5c12160b0bbe5
+  - enabled: 1
+    path: Assets/Scenes/NewPlaceDoor.unity
+    guid: d7254db22d5c4a5499da7b815106621c
   m_configObjects:
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: e69ae59d70ac6774ca7e855b86448387,
       type: 2}

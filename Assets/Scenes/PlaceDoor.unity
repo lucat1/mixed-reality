@@ -4230,6 +4230,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MiniatureDoor
       objectReference: {fileID: 0}
+    - target: {fileID: 4260130412266924028, guid: 55efc1f96be621c44a5fac592b3aceda,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4264787380393177412, guid: 55efc1f96be621c44a5fac592b3aceda,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -4540,6 +4545,11 @@ PrefabInstance:
       propertyPath: end
       value: 
       objectReference: {fileID: 1284911083}
+    - target: {fileID: 4751264494435837496, guid: 55efc1f96be621c44a5fac592b3aceda,
+        type: 3}
+      propertyPath: door
+      value: 
+      objectReference: {fileID: 1414358661}
     - target: {fileID: 4751264494435837496, guid: 55efc1f96be621c44a5fac592b3aceda,
         type: 3}
       propertyPath: steps
@@ -5185,6 +5195,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 519b09a7914189945afc88295f6054e2, type: 2}
+    - target: {fileID: 5687592546869299122, guid: 55efc1f96be621c44a5fac592b3aceda,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5698637200075392782, guid: 55efc1f96be621c44a5fac592b3aceda,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -6723,7 +6738,7 @@ PrefabInstance:
     - target: {fileID: 7997654464376385009, guid: 55efc1f96be621c44a5fac592b3aceda,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7999653135985250051, guid: 55efc1f96be621c44a5fac592b3aceda,
         type: 3}
@@ -7809,6 +7824,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1414358661 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4260130412266924028, guid: 55efc1f96be621c44a5fac592b3aceda,
+    type: 3}
+  m_PrefabInstance: {fileID: 939437622}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1497412990
 PrefabInstance:
   m_ObjectHideFlags: 0

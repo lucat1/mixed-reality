@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.XR.CoreUtils;
 using UnityEngine;
 
 public class MiniatureManager : MonoBehaviour
@@ -8,22 +9,20 @@ public class MiniatureManager : MonoBehaviour
 
     // this parameter controll the max distance within a piece is considered to be near another one
     public GameObject door;
-    public GameObject steps;
-    public GameObject end;
-    public GameObject doorCenter;
-    public DoorManager doorManager;
     public float nearObjectRadius;
+
     private List<string> compNames= new List<string> {"_25_310_0565_602","_25_802_1132_364","_25_375_0205_301"};
     private List<GameObject> displayedGroups = new ();
     private bool iniatialized = false;
+    private DoorManager dm;
 
     public void InitializeDisplayBlocks(){
         if(! iniatialized){
 
-            doorManager.HighlightComponents(new HashSet<string>(compNames), false);
+            dm.HighlightComponents(new HashSet<string>(compNames), false);
             // Create the groups to display
             foreach(string c in compNames)
-                displayedGroups.Add(CreateDisplayGroup(doorManager.GetDoorComponents(go => go.name == c)[0]));
+                displayedGroups.Add(CreateDisplayGroup(dm.GetDoorComponents(go => go.name == c)[0]));
             
             // Highlits object in the door
             iniatialized = true;
@@ -38,10 +37,10 @@ public class MiniatureManager : MonoBehaviour
         displayedGroups[0].SetActive(true);
     }
 
-    public void ActivateMiniature(){
-        
+    public void Show() {
         // activate miniature
         gameObject.SetActive(true);
+        dm.Show();
 
         // place the object in front of the player
         Camera playerCamera = Camera.main;
@@ -52,16 +51,17 @@ public class MiniatureManager : MonoBehaviour
 
     }
 
-    public void DeactivateMiniature(){
+    public void Hide() {
         gameObject.SetActive(false);
+        dm.Hide();
     }
 
-    public bool CheckActive(){
+    public bool IsVisible() {
         return gameObject.activeSelf;
     }
 
     List<GameObject> GetNearComponents(GameObject center){
-        List<GameObject> pr =  doorManager.GetDoorComponents(ob => ComputeComponentsDist(center, ob) <= nearObjectRadius && ob.transform.childCount == 0);
+        List<GameObject> pr =  dm.GetDoorComponents(ob => ComputeComponentsDist(center, ob) <= nearObjectRadius && ob.transform.childCount == 0);
         return pr;
     }
 
@@ -79,7 +79,7 @@ public class MiniatureManager : MonoBehaviour
             ob.transform.SetParent(component.transform);
         }
 
-        component.transform.SetParent(doorCenter.transform);
+        component.transform.SetParent(door.transform);
         component.transform.localPosition  = new Vector3(0,0,0);
         component.SetActive(false);
 
@@ -107,15 +107,10 @@ public class MiniatureManager : MonoBehaviour
         }
     }
 
-    void DeactivateAll(){
-        foreach(GameObject go in doorManager.GetDoorComponents(_ => true))
-            go.SetActive(false);
-    }
-
-    void SetObjectVolume(GameObject gameObject, float targetVolume)
+    void SetObjectVolume(GameObject go, float targetVolume)
     {
         // Get the current volume using the MeshFilter
-        MeshFilter meshFilter = gameObject.GetComponent<MeshFilter>();
+        MeshFilter meshFilter = go.GetComponent<MeshFilter>();
         if (meshFilter == null || meshFilter.sharedMesh == null)
         {
             Debug.LogError("MeshFilter or Mesh not found!");
@@ -128,21 +123,28 @@ public class MiniatureManager : MonoBehaviour
 
         // Adjust for scaling to world space
         float worldVolume = currentVolume * 
-                            (gameObject.transform.lossyScale.x * 
-                            gameObject.transform.lossyScale.y * 
-                            gameObject.transform.lossyScale.z);
+                            (go.transform.lossyScale.x * 
+                            go.transform.lossyScale.y * 
+                            go.transform.lossyScale.z);
 
         // Calculate the scale factor needed to reach the target volume
         float scaleFactor = Mathf.Pow(targetVolume / worldVolume, 1f / 3f);
 
         // Apply the new scale to the object
-        gameObject.transform.localScale *= scaleFactor;
+        go.transform.localScale *= scaleFactor;
 
         Debug.Log("New scale applied to achieve target volume.");
     }
+    void DeactivateAll() {
+        foreach(GameObject go in dm.GetDoorComponents(_ => true))
+            go.SetActive(false);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        dm = door.GetComponent<DoorManager>();
         DeactivateAll();
+        Hide();
     }
 }

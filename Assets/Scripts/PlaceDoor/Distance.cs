@@ -20,15 +20,15 @@ public class Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (door.activeSelf || miniature.CheckActive()) {
+        if (door.activeSelf || miniature.IsVisible()) {
             if(DistanceFromPlayer() < activateMiniatureThreshold){
                 door.SetActive(false);
-                if(! miniature.CheckActive())
-                    miniature.ActivateMiniature();
+                if(! miniature.IsVisible())
+                    miniature.Show();
             }        
             else{
                 door.SetActive(true);
-                miniature.DeactivateMiniature();
+                miniature.Hide();
             }
         }
     }

@@ -11,33 +11,25 @@ public class MiniatureManager : MonoBehaviour
     public GameObject door;
     public float nearObjectRadius;
 
-    private List<string> compNames= new List<string> {"_25_310_0565_602","_25_802_1132_364","_25_375_0205_301"};
-    private List<GameObject> displayedGroups = new ();
-    private bool iniatialized = false;
+    private List<string> compNames = new List<string> { "_25_310_0565_602", "_25_802_1132_364", "_25_375_0205_301" };
+    private List<GameObject> displayedGroups = new();
     private DoorManager dm;
 
-    public void InitializeDisplayBlocks(){
-        if(! iniatialized){
+    private void InitializeDisplayBlocks()
+    {
+        Debug.Log("[MiniatureManager] Initialized display blocks");
+        displayedGroups.Clear();
+        dm.HighlightComponents(new HashSet<string>(compNames), false);
+        // Create the groups to display
+        foreach (string c in compNames)
+            displayedGroups.Add(CreateDisplayGroup(dm.GetDoorComponents(go => go.name == c)[0]));
 
-            dm.HighlightComponents(new HashSet<string>(compNames), false);
-            // Create the groups to display
-            foreach(string c in compNames)
-                displayedGroups.Add(CreateDisplayGroup(dm.GetDoorComponents(go => go.name == c)[0]));
-            
-            // Highlits object in the door
-            iniatialized = true;
-    
-            countIndex = 0;
-            displayedGroups[0].SetActive(true);
-
-
-        }
         countIndex = 0;
-        // display the first element
         displayedGroups[0].SetActive(true);
     }
 
-    public void Show() {
+    public void Show()
+    {
         // activate miniature
         gameObject.SetActive(true);
         dm.Show();
@@ -51,36 +43,41 @@ public class MiniatureManager : MonoBehaviour
 
     }
 
-    public void Hide() {
+    public void Hide()
+    {
         gameObject.SetActive(false);
         dm.Hide();
     }
 
-    public bool IsVisible() {
+    public bool IsVisible()
+    {
         return gameObject.activeSelf;
     }
 
-    List<GameObject> GetNearComponents(GameObject center){
-        List<GameObject> pr =  dm.GetDoorComponents(ob => ComputeComponentsDist(center, ob) <= nearObjectRadius && ob.transform.childCount == 0);
+    List<GameObject> GetNearComponents(GameObject center)
+    {
+        List<GameObject> pr = dm.GetDoorComponents(ob => ComputeComponentsDist(center, ob) <= nearObjectRadius && ob.transform.childCount == 0);
         return pr;
     }
 
-    float ComputeComponentsDist(GameObject center, GameObject other){
-        double distanceSquared = Math.Pow(center.transform.position.x - other.transform.position.x, 2) + Math.Pow(center.transform.position.y - other.transform.position.y,2) + Math.Pow(center.transform.position.z - other.transform.position.z,2);
+    float ComputeComponentsDist(GameObject center, GameObject other)
+    {
+        double distanceSquared = Math.Pow(center.transform.position.x - other.transform.position.x, 2) + Math.Pow(center.transform.position.y - other.transform.position.y, 2) + Math.Pow(center.transform.position.z - other.transform.position.z, 2);
         return (float)Mathf.Sqrt((float)distanceSquared);
     }
 
-    private GameObject CreateDisplayGroup(GameObject component){
+    private GameObject CreateDisplayGroup(GameObject component)
+    {
         // doorManager.HighlightComponents(new HashSet<string>(compNames), false);
         // display the near components as transparent
-        foreach(GameObject ob in GetNearComponents(component))
+        foreach (GameObject ob in GetNearComponents(component))
         {
             ob.SetActive(true);
             ob.transform.SetParent(component.transform);
         }
 
         component.transform.SetParent(door.transform);
-        component.transform.localPosition  = new Vector3(0,0,0);
+        component.transform.localPosition = new Vector3(0, 0, 0);
         component.SetActive(false);
 
         SetObjectVolume(component, 0.0000005f);
@@ -90,16 +87,18 @@ public class MiniatureManager : MonoBehaviour
 
     //DEBUG
     int countIndex = 0;
-    public void Next(){
-        if(countIndex < compNames.Count-1)
+    public void Next()
+    {
+        if (countIndex < compNames.Count - 1)
         {
             displayedGroups[countIndex].SetActive(false);
             countIndex++;
             displayedGroups[countIndex].SetActive(true);
         }
     }
-    public void Previous(){
-        if(countIndex > 0)
+    public void Previous()
+    {
+        if (countIndex > 0)
         {
             displayedGroups[countIndex].SetActive(false);
             countIndex--;
@@ -122,9 +121,9 @@ public class MiniatureManager : MonoBehaviour
         float currentVolume = localSize.x * localSize.y * localSize.z;
 
         // Adjust for scaling to world space
-        float worldVolume = currentVolume * 
-                            (go.transform.lossyScale.x * 
-                            go.transform.lossyScale.y * 
+        float worldVolume = currentVolume *
+                            (go.transform.lossyScale.x *
+                            go.transform.lossyScale.y *
                             go.transform.lossyScale.z);
 
         // Calculate the scale factor needed to reach the target volume
@@ -135,8 +134,9 @@ public class MiniatureManager : MonoBehaviour
 
         Debug.Log("New scale applied to achieve target volume.");
     }
-    void DeactivateAll() {
-        foreach(GameObject go in dm.GetDoorComponents(_ => true))
+    void DeactivateAll()
+    {
+        foreach (GameObject go in dm.GetDoorComponents(_ => true))
             go.SetActive(false);
     }
 
@@ -144,6 +144,7 @@ public class MiniatureManager : MonoBehaviour
     void Start()
     {
         dm = door.GetComponent<DoorManager>();
+        InitializeDisplayBlocks();
         DeactivateAll();
         Hide();
     }

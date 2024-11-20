@@ -678,7 +678,7 @@ PrefabInstance:
     - target: {fileID: 6922232475148799399, guid: 180d4d2203473be4fa3fef18d0bec80e,
         type: 3}
       propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6922232475148799399, guid: 180d4d2203473be4fa3fef18d0bec80e,
         type: 3}
@@ -728,7 +728,7 @@ PrefabInstance:
     - target: {fileID: 6922232475148799399, guid: 180d4d2203473be4fa3fef18d0bec80e,
         type: 3}
       propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Place
+      value: Forward
       objectReference: {fileID: 0}
     - target: {fileID: 6922232475148799399, guid: 180d4d2203473be4fa3fef18d0bec80e,
         type: 3}
@@ -743,7 +743,7 @@ PrefabInstance:
     - target: {fileID: 6922232475148799399, guid: 180d4d2203473be4fa3fef18d0bec80e,
         type: 3}
       propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PlaceDoor, Assembly-CSharp
+      value: PlacementManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6922232475148799399, guid: 180d4d2203473be4fa3fef18d0bec80e,
         type: 3}
@@ -917,6 +917,9 @@ MonoBehaviour:
   door: {fileID: 1085849289}
   anchorPointsPrefab: {fileID: 4514921769817056588, guid: e4593d9ccf33ca64b9c01219797e82ce,
     type: 3}
+  distance: {fileID: 1284911083}
+  steps: {fileID: 787429997}
+  miniature: {fileID: 1161267197}
 --- !u!1 &787429997 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2772387453427587857, guid: 688e5f2f73efe7043b25057d9c0f3b90,
@@ -938,7 +941,6 @@ MonoBehaviour:
   stepsFile: {fileID: 4900000, guid: 9d9d33699a32bc44683d10c0e174999a, type: 3}
   doorManager: {fileID: 1085849291}
   placeDoor: {fileID: 765007477}
-  manager: {fileID: 1284911083}
   miniatureManager: {fileID: 939437623}
   challengeEnd: {fileID: 196023283}
 --- !u!1001 &815380161
@@ -7596,7 +7598,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 939437622}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1161267197}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b54d7de5e7bce2441be9734c3e923689, type: 3}
@@ -7744,6 +7746,12 @@ MonoBehaviour:
   showRingVolumeThreshold: 0.00001
   ringPrefab: {fileID: -4320558180572046448, guid: 0a339d6c5a733184e9e0d852d2dac138,
     type: 3}
+--- !u!1 &1161267197 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7997654464376385009, guid: 55efc1f96be621c44a5fac592b3aceda,
+    type: 3}
+  m_PrefabInstance: {fileID: 939437622}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1241290405
 GameObject:
   m_ObjectHideFlags: 0
@@ -7788,12 +7796,12 @@ GameObject:
   - component: {fileID: 1284911085}
   - component: {fileID: 1284911084}
   m_Layer: 0
-  m_Name: Manager
+  m_Name: Distance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1284911084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7807,7 +7815,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 1085849289}
-  miniature: {fileID: 939437623}
+  miniature: {fileID: 1161267197}
   activateMiniatureThreshold: 0.15
 --- !u!4 &1284911085
 Transform:
@@ -7896,7 +7904,7 @@ PrefabInstance:
     - target: {fileID: 2772387453427587857, guid: 688e5f2f73efe7043b25057d9c0f3b90,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4225354413639979701, guid: 688e5f2f73efe7043b25057d9c0f3b90,
         type: 3}
@@ -8108,16 +8116,16 @@ PrefabInstance:
         type: 3}
       propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 787429998}
+      objectReference: {fileID: 765007477}
     - target: {fileID: 7967017583161282541, guid: 688e5f2f73efe7043b25057d9c0f3b90,
         type: 3}
       propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChangeDoorPosition
+      value: Back
       objectReference: {fileID: 0}
     - target: {fileID: 7967017583161282541, guid: 688e5f2f73efe7043b25057d9c0f3b90,
         type: 3}
       propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Steps, Assembly-CSharp
+      value: PlacementManager, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8127,6 +8135,34 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 787429998}
+    - targetCorrespondingSourceObject: {fileID: 3556191429275485216, guid: 688e5f2f73efe7043b25057d9c0f3b90,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 7986017988808985564, guid: 688e5f2f73efe7043b25057d9c0f3b90,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 278463262357438608, guid: 688e5f2f73efe7043b25057d9c0f3b90,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 6652771658762817388, guid: 688e5f2f73efe7043b25057d9c0f3b90,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 7307601081112746360, guid: 688e5f2f73efe7043b25057d9c0f3b90,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 4244634096315897476, guid: 688e5f2f73efe7043b25057d9c0f3b90,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 8327412689645766153, guid: 688e5f2f73efe7043b25057d9c0f3b90,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 688e5f2f73efe7043b25057d9c0f3b90, type: 3}
 --- !u!1 &1521016054
 GameObject:

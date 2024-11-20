@@ -20,32 +20,37 @@ class JSONStep {
     public bool ring;
 }
 
-public class Steps : MonoBehaviour
+public class StepsManager : MonoBehaviour
 {
     // A JSON file containing all the steps required to perform the current maintenance.
     public TextAsset stepsFile;
     public DoorManager doorManager;
-    public PlaceDoor placeDoor;
-    public GameObject manager;
+    public PlacementManager placeDoor;
     public MiniatureManager miniatureManager;
     public GameObject challengeEnd; // finish challenge
 
     JSONSteps steps;
 
     int currentStepIndex;
+    public void Reset(){
+        // reset step
+        currentStepIndex = 0;
+    }
 
-    public void StartMaintenance() {
+    public void Show() {
         // Show the steps menu
         gameObject.SetActive(true);
 
-        miniatureManager.InitializeDisplayBlocks();
-        // transform.SetParent(transform);
+        // Places the menu in front of the player
         var cameraPosition = Camera.main.transform.position;
         transform.position = cameraPosition + new Vector3(0.2f,0,0.323f);
 
-        currentStepIndex = 0;
+        Reset();
         DisplayStep();
-        manager.SetActive(true);
+    }
+
+    public void Hide() {
+        gameObject.SetActive(false);
     }
 
     bool IsLastStep() {
@@ -97,29 +102,11 @@ public class Steps : MonoBehaviour
         
     }
 
-    public void ChangeDoorPosition(){
-        // deactivate door and miniature
-        doorManager.gameObject.SetActive(false);
-        miniatureManager.gameObject.SetActive(false);
-        // toggle place door menu
-        placeDoor.TogglePlaceDoorMenu();
-        // reset step
-        currentStepIndex = 0;
-        // deactivate step menu
-        gameObject.SetActive(false);
-        // disable manager that switches between miniature and door
-        manager.SetActive(false);
-    
-    }
-
     // Start is called before the first frame update
     void Start()
     {
-    }
-
-    void OnEnable()
-    {
         steps = JsonUtility.FromJson<JSONSteps>(stepsFile.ToString());
+        Hide();
     }
 
     // Update is called once per frame

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using MixedReality.Toolkit;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -21,6 +22,10 @@ public class DoorManager : MonoBehaviour
     public float showRingVolumeThreshold;
 
     public GameObject ringPrefab;
+
+    private void Log(object message) {
+        Debug.Log("[Door " + gameObject.name + "] " + message);
+    }
 
     // Recursively get all door components, filtered by the given function.
     public List<GameObject> GetDoorComponents(Func<GameObject, bool> f) {
@@ -59,7 +64,7 @@ public class DoorManager : MonoBehaviour
     // Disable all components smaller than the provided threshold.
     void RemoveSmallComponents() {
         var toRemove = GetDoorComponents(ShouldRemoveComponent);
-        Debug.Log("[Door " + gameObject.name + "] Hiding " + toRemove.Count() + " components");
+        Log("Hiding " + toRemove.Count() + " components");
         foreach(var t in toRemove)
             t.SetActive(false);
     }
@@ -100,6 +105,9 @@ public class DoorManager : MonoBehaviour
 
     // Displays a ring on 
     void DisplayRing(GameObject go) {
+        var mesh = go.transform.GetComponent<MeshRenderer>();
+        Log("Showing ring on name=" + go.name + ", volume=" + mesh.bounds.Volume());
+
         var ring = Instantiate(ringPrefab);
         ring.transform.SetParent(go.transform);
         ring.transform.position = go.transform.position;
@@ -108,6 +116,8 @@ public class DoorManager : MonoBehaviour
     }
 
     void RemoveRing(GameObject go) {
+        Log("Hiding ring on " + go.name);
+
         var ring = gameObjectsWithRing[go];
         gameObjectsWithRing.Remove(go);
         Destroy(ring);
@@ -116,7 +126,7 @@ public class DoorManager : MonoBehaviour
     private bool visible = true;
 
     public void Show() {
-        Debug.Log("[Door " + gameObject.name + "] Showing door");
+        Log("Showing door");
         visible = true;
         gameObject.SetActive(visible);
     }
@@ -126,7 +136,7 @@ public class DoorManager : MonoBehaviour
     }
 
     public void Hide() {
-        Debug.Log("[Door " + gameObject.name + "] Hiding door");
+        Log("Hiding door");
         visible = false;
         gameObject.SetActive(visible);
     }

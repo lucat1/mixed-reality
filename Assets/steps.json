@@ -4,17 +4,20 @@
         {
             "stepN": 0,
             "step_description": "Close the door leaf.",
-            "component_code": "_25_350_0300_201"
+            "component_code": "_25_350_0300_201",
+            "ring": false
         },
         {
             "stepN": 1,
             "step_description": "On the inside of the left door leaf, remove 2 hexagonal socket screws from the cover of the door leaf distributor (SW 4).",
-            "component_code": "_25_802_1132_364"
+            "component_code": "_25_802_1132_364",
+            "ring": true
         },
         {
             "stepN": 2,
             "step_description": "Remove the cover of the distribution box.",
-            "component_code": "_25_375_0205_301"
+            "component_code": "_25_375_0205_301",
+            "ring": true
         }
     ]
 }

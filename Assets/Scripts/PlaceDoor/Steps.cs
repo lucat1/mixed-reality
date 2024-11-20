@@ -17,6 +17,7 @@ class JSONStep {
     public int stepN;
     public string step_description;
     public string component_code;
+    public bool ring;
 }
 
 public class Steps : MonoBehaviour
@@ -70,7 +71,7 @@ public class Steps : MonoBehaviour
         var step = CurrentStep();
         string composedText = "<size=90>Step " + (currentStepIndex+1).ToString() + "</size>" + "<br>" +  "<size=70><b>" + step.step_description + "</b></size>";
         instructionText.text = composedText;
-        doorManager.HighlightComponents(new () { step.component_code });
+        doorManager.HighlightComponents(new () { step.component_code }, step.ring);
 
         // Enable/Disable finish/next button
         transform.Find(donePath).gameObject.SetActive(IsLastStep());

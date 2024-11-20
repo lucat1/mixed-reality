@@ -4225,6 +4225,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 519b09a7914189945afc88295f6054e2, type: 2}
+    - target: {fileID: 4260130412266924028, guid: 55efc1f96be621c44a5fac592b3aceda,
+        type: 3}
+      propertyPath: m_Name
+      value: MiniatureDoor
+      objectReference: {fileID: 0}
     - target: {fileID: 4264787380393177412, guid: 55efc1f96be621c44a5fac592b3aceda,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

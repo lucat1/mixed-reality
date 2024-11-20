@@ -116,8 +116,16 @@ public class DoorManager : MonoBehaviour
         Destroy(ring);
     }
 
-    public void StartMaintenance() {
+    public void Show() {
         gameObject.SetActive(true);
+    }
+
+    public bool isVisible() {
+        return gameObject.activeSelf;
+    }
+
+    public void Hide() {
+        gameObject.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -127,7 +135,7 @@ public class DoorManager : MonoBehaviour
         foreach(var t in GetDoorComponents(go => !currentlyHighlighted.Contains(go)))
             SetMaterial(t, transparentMaterial);
 
-        gameObject.SetActive(false);
+        Hide();
     }
 
     // Update is called once per frame

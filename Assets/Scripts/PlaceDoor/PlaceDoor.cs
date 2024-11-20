@@ -9,7 +9,8 @@ public class PlaceDoor : MonoBehaviour
 {
 
     // Door object to activate in the scene
-    public GameObject Door;
+    public GameObject door;
+    private DoorManager dm;
     // Prefab for anchor points
     public GameObject anchorPointsPrefab;
     GameObject anchorPoints;
@@ -42,15 +43,15 @@ public class PlaceDoor : MonoBehaviour
             float planeWidth = anchorPoints.transform.Find("Plane").transform.localScale.x;
             
             // Postition door in the scene and activate it
-            Door.transform.position = doorPosition;
-            Door.SetActive(true);
+            door.transform.position = doorPosition;
+            door.SetActive(true);
 
             // Adjust door size
-            Transform DoorScaleTrasform = Door.transform.Find("DoorContainer/DoorScale");
+            Transform DoorScaleTrasform = door.transform.Find("DoorContainer/DoorScale");
             DoorScaleTrasform.localScale = new Vector3(planeWidth/0.16583f, planeWidth/0.16583f,planeWidth/0.16583f);
 
             // Adjust door position after scale change
-            Transform DoorResetPosition = Door.transform.Find("DoorContainer");
+            Transform DoorResetPosition = door.transform.Find("DoorContainer");
             DoorResetPosition.localPosition = Vector3.zero;
 
             TogglePlaceDoorMenu();
@@ -64,8 +65,12 @@ public class PlaceDoor : MonoBehaviour
     {
         // Toggle anchor points anchor points
         anchorPoints.SetActive(!anchorPoints.activeSelf);
-        // Toggle place door menu
-        gameObject.SetActive(!gameObject.activeSelf);
+
+        // Toggle the visibility of the door
+        if (dm.isVisible())
+            dm.Hide();
+        else
+            dm.Show();
     }
 
     public void Home()
@@ -73,15 +78,8 @@ public class PlaceDoor : MonoBehaviour
         SceneManager.LoadScene("Menu");
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        dm = door.GetComponent<DoorManager>();
     }
 }

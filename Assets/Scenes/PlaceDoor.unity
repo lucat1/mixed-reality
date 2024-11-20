@@ -728,7 +728,7 @@ PrefabInstance:
     - target: {fileID: 6922232475148799399, guid: 180d4d2203473be4fa3fef18d0bec80e,
         type: 3}
       propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: placeDoor
+      value: Place
       objectReference: {fileID: 0}
     - target: {fileID: 6922232475148799399, guid: 180d4d2203473be4fa3fef18d0bec80e,
         type: 3}
@@ -914,7 +914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bffb8b761ffb13145bbaa379bafca58f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Door: {fileID: 1085849289}
+  door: {fileID: 1085849289}
   anchorPointsPrefab: {fileID: 4514921769817056588, guid: e4593d9ccf33ca64b9c01219797e82ce,
     type: 3}
 --- !u!1 &787429997 stripped
@@ -6713,7 +6713,7 @@ PrefabInstance:
     - target: {fileID: 7997654464376385009, guid: 55efc1f96be621c44a5fac592b3aceda,
         type: 3}
       propertyPath: m_Name
-      value: miniature
+      value: Miniature
       objectReference: {fileID: 0}
     - target: {fileID: 7997654464376385009, guid: 55efc1f96be621c44a5fac592b3aceda,
         type: 3}
@@ -7718,10 +7718,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b03cd93d0fa536545b539d43910ea94f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeThreshold: 0.00005
+  volumeThreshold: 0.000005
   transparentMaterial: {fileID: 2100000, guid: 519b09a7914189945afc88295f6054e2, type: 2}
   glowingMaterial: {fileID: 2100000, guid: a65bdc2b3c1319a4fa6b1623b98e084a, type: 2}
-  showRingVolumeThreshold: 0.000001
+  showRingVolumeThreshold: 0.00001
   ringPrefab: {fileID: -4320558180572046448, guid: 0a339d6c5a733184e9e0d852d2dac138,
     type: 3}
 --- !u!1 &1241290405
@@ -11014,7 +11014,7 @@ PrefabInstance:
     - target: {fileID: 3799509228225841476, guid: 398171464b5f01044b8cb1358224d316,
         type: 3}
       propertyPath: m_Name
-      value: DoorCenter
+      value: BigDoor
       objectReference: {fileID: 0}
     - target: {fileID: 3799509228225841476, guid: 398171464b5f01044b8cb1358224d316,
         type: 3}
@@ -14796,7 +14796,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1714324822
 Transform:
   m_ObjectHideFlags: 0

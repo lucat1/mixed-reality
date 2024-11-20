@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using MixedReality.Toolkit.UX;
@@ -10,12 +8,14 @@ public class PlaceDoor : MonoBehaviour
 
     // Door object to activate in the scene
     public GameObject door;
-    private DoorManager dm;
     // Prefab for anchor points
     public GameObject anchorPointsPrefab;
-    GameObject anchorPoints;
+    private GameObject anchorPoints;
+
+    private DoorManager dm;
 
     private const string confirmPath = "UIContainer/ButtonGroup_32x32mm_H3/ButtonCollection/ConfirmButton";
+
     // Instantiate the anchor points to perform door placement
     public void CreateAnchorPoints()
     {
@@ -30,13 +30,13 @@ public class PlaceDoor : MonoBehaviour
         // Activate confirm button 
         var pb = transform.Find(confirmPath).gameObject.GetComponent<PressableButton>();
         pb.enabled = true;
-
     }
 
-    public void placeDoor()
+    public void Place()
     {
         if (anchorPoints != null)
         {
+            Debug.Log("Placing door");
             Vector3 doorOffset = new Vector3(-4.22f,-1.63f,1.4f);
             Vector3 doorPosition = anchorPoints.transform.Find("Plane").transform.position;
 
@@ -55,22 +55,21 @@ public class PlaceDoor : MonoBehaviour
             DoorResetPosition.localPosition = Vector3.zero;
 
             TogglePlaceDoorMenu();
-        }else
-        {
-            Debug.LogError("no anchor points created");
+        } else {
+            Debug.LogError("[PlaceDoor] No anchor points created");
         }
     }
 
     public void TogglePlaceDoorMenu()
     {
+        Debug.Log("[PlaceDoor] Toggling visibility");
+        // Toggle the palacing menu itself
+        gameObject.SetActive(!gameObject.activeSelf);
         // Toggle anchor points anchor points
         anchorPoints.SetActive(!anchorPoints.activeSelf);
 
         // Toggle the visibility of the door
-        if (dm.isVisible())
-            dm.Hide();
-        else
-            dm.Show();
+        dm.Toggle();
     }
 
     public void Home()

@@ -5,11 +5,9 @@ using UnityEngine;
 public class anchorPointsObject : MonoBehaviour
 {
 
-    public GameObject componentsParent;
     public GameObject leftSphere;
     public GameObject rightSphere;
     public GameObject plane;
-    public GameObject rotationController;
 
     void AdjustPlane()
     {

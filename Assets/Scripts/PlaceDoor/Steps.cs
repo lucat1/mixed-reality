@@ -34,7 +34,9 @@ public class Steps : MonoBehaviour
     int currentStepIndex;
 
     public void StartMaintenance() {
+        // Show the steps menu
         gameObject.SetActive(true);
+
         miniatureManager.InitializeDisplayBlocks();
         // transform.SetParent(transform);
         var cameraPosition = Camera.main.transform.position;

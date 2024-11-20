@@ -145,10 +145,4 @@ public class MiniatureManager : MonoBehaviour
     {
         DeactivateAll();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

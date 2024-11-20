@@ -7,7 +7,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-[ExecuteAlways]
 public class DoorManager : MonoBehaviour
 {
     // Threshold to decide if a component should be hidden. If the component's
@@ -54,15 +53,13 @@ public class DoorManager : MonoBehaviour
         var renderer = t.GetComponent<Renderer>();
         if (renderer == null)
             return;
-        if (!t.activeSelf)
-            t.SetActive(true);
         renderer.materials = new Material[]{mat};
     }
 
     // Disable all components smaller than the provided threshold.
     void RemoveSmallComponents() {
         var toRemove = GetDoorComponents(ShouldRemoveComponent);
-        Debug.Log("Hiding " + toRemove.Count() + " components");
+        Debug.Log("[Door " + gameObject.name + "] Hiding " + toRemove.Count() + " components");
         foreach(var t in toRemove)
             t.SetActive(false);
     }
@@ -71,7 +68,7 @@ public class DoorManager : MonoBehaviour
 
     public void HighlightComponents(HashSet<string> toHighlightNames, bool showRing = true) {
         var toHighlight = GetDoorComponents(go => toHighlightNames.Contains(go.name));
-        Debug.Log("highlighting " + toHighlight.Count() + " components");
+        Debug.Log("[Door " + gameObject.name + "] Highlighting " + toHighlight.Count() + " components");
 
         foreach (var go in currentlyHighlighted) {
             if (toHighlightNames.Contains(go.name))
@@ -116,16 +113,29 @@ public class DoorManager : MonoBehaviour
         Destroy(ring);
     }
 
+    private bool visible = true;
+
     public void Show() {
-        gameObject.SetActive(true);
+        Debug.Log("[Door " + gameObject.name + "] Showing door");
+        visible = true;
+        gameObject.SetActive(visible);
     }
 
-    public bool isVisible() {
-        return gameObject.activeSelf;
+    public bool IsVisible() {
+        return visible;
     }
 
     public void Hide() {
-        gameObject.SetActive(false);
+        Debug.Log("[Door " + gameObject.name + "] Hiding door");
+        visible = false;
+        gameObject.SetActive(visible);
+    }
+
+    public void Toggle() {
+        if (IsVisible())
+            Hide();
+        else
+            Show();
     }
 
     // Start is called before the first frame update

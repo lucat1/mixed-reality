@@ -32,6 +32,7 @@ public class MiniatureManager : MonoBehaviour
     // This function activate the Display block at the specified index
     private void ActivateDisplayBlock(int index)
     {
+        Debug.Log("[MiniatureManager] Activating display block: " + index);
         for (int i = 0; i < displayedGroups.Count; i++)
             if(i == index)
                 displayedGroups[i].SetActive(true);

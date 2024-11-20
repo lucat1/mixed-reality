@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f32fb793f8a4656469db1040ccf2cffb, type: 2}
+  - {fileID: 2100000, guid: 2bb1002c554754348a033056ae28d037, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -689,10 +689,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 2284108000306911438}
-  steps: {fileID: 0}
-  end: {fileID: 0}
-  doorCenter: {fileID: 4260130412266924028}
-  doorManager: {fileID: 9039865985154296996}
   nearObjectRadius: 0.01
 --- !u!1 &8237054921536114997
 GameObject:

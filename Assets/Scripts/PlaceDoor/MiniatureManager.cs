@@ -24,8 +24,19 @@ public class MiniatureManager : MonoBehaviour
         foreach (string c in compNames)
             displayedGroups.Add(CreateDisplayGroup(dm.GetDoorComponents(go => go.name == c)[0]));
 
-        countIndex = 0;
-        displayedGroups[0].SetActive(true);
+        currentStepIndex = 0;
+        ActivateDisplayBlock(currentStepIndex);
+        Debug.Log("[MiniatureManager] Display blocks created");
+    }
+
+    // This function activate the Display block at the specified index
+    private void ActivateDisplayBlock(int index)
+    {
+        for (int i = 0; i < displayedGroups.Count; i++)
+            if(i == index)
+                displayedGroups[i].SetActive(true);
+            else
+                displayedGroups[i].SetActive(false);
     }
 
     public void Show()
@@ -47,6 +58,11 @@ public class MiniatureManager : MonoBehaviour
     {
         gameObject.SetActive(false);
         dm.Hide();
+    }
+    public void Reset(){
+        Debug.Log("[MiniatureManager] reset indiex");
+        currentStepIndex = 0;
+        ActivateDisplayBlock(currentStepIndex);
     }
 
     public bool IsVisible()
@@ -86,23 +102,21 @@ public class MiniatureManager : MonoBehaviour
     }
 
     //DEBUG
-    int countIndex = 0;
+    int currentStepIndex = 0;
     public void Next()
     {
-        if (countIndex < compNames.Count - 1)
+        if (currentStepIndex < compNames.Count - 1)
         {
-            displayedGroups[countIndex].SetActive(false);
-            countIndex++;
-            displayedGroups[countIndex].SetActive(true);
+            currentStepIndex++;
+            ActivateDisplayBlock(currentStepIndex);
         }
     }
     public void Previous()
     {
-        if (countIndex > 0)
+        if (currentStepIndex > 0)
         {
-            displayedGroups[countIndex].SetActive(false);
-            countIndex--;
-            displayedGroups[countIndex].SetActive(true);
+            currentStepIndex--;
+            ActivateDisplayBlock(currentStepIndex);
         }
     }
 
@@ -144,8 +158,8 @@ public class MiniatureManager : MonoBehaviour
     void Start()
     {
         dm = door.GetComponent<DoorManager>();
-        InitializeDisplayBlocks();
         DeactivateAll();
+        InitializeDisplayBlocks();
         Hide();
     }
 }

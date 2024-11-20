@@ -379,7 +379,7 @@ PrefabInstance:
     - target: {fileID: 8418887443953482627, guid: 43a1876c54fbb004099f878186357493,
         type: 3}
       propertyPath: m_text
-      value: Start
+      value: Back to Start
       objectReference: {fileID: 0}
     - target: {fileID: 8418887443953482627, guid: 43a1876c54fbb004099f878186357493,
         type: 3}
@@ -4560,7 +4560,7 @@ PrefabInstance:
     - target: {fileID: 4751264494435837496, guid: 55efc1f96be621c44a5fac592b3aceda,
         type: 3}
       propertyPath: nearObjectRadius
-      value: 0.001
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 4754915041481158780, guid: 55efc1f96be621c44a5fac592b3aceda,
         type: 3}

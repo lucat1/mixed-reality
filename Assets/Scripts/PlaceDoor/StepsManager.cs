@@ -46,6 +46,7 @@ public class StepsManager : MonoBehaviour
         transform.position = cameraPosition + new Vector3(0.2f,0,0.323f);
 
         Reset();
+        miniatureManager.Reset();
         DisplayStep();
     }
 

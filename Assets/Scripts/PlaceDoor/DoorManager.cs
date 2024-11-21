@@ -73,6 +73,12 @@ public class DoorManager : MonoBehaviour
 
     public void HighlightComponents(HashSet<string> toHighlightNames, bool showRing = true) {
         var toHighlight = GetDoorComponents(go => toHighlightNames.Contains(go.name));
+        
+        // activate the component if not active (for small components that are hide) 
+        foreach(GameObject go in toHighlight)
+            if(!go.activeSelf)
+                go.SetActive(true);
+
         Debug.Log("[Door " + gameObject.name + "] Highlighting " + toHighlight.Count() + " components");
 
         foreach (var go in currentlyHighlighted) {

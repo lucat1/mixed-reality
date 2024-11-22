@@ -98,6 +98,9 @@ public class PopulateMenu : MonoBehaviour
             }
         }
 
+        // GET TIME
+        if(TimeTracker.Instance.challengeOn)
+            TimeTracker.Instance.StartAction("challenge|select task");
 
     }
 
@@ -107,6 +110,11 @@ public class PopulateMenu : MonoBehaviour
     }
 
     void LoadScene() {
+        
+        // GET TIME end selection task timer
+        if(TimeTracker.Instance.challengeOn)
+            TimeTracker.Instance.EndAction();
+
         SceneManager.LoadScene(sceneName);
     }
 

@@ -28,6 +28,9 @@ public class MenuTutorial : MonoBehaviour
         step2Row.SetActive(false);
         step2Pick.SetActive(false);
         step2Priority.SetActive(false);
+
+        // GET TIME
+        TimeTracker.Instance.StartAction("menu tasks tutorial|intro message");
     }
 
     // 1 - if start && user clicks 'continue' -> go to step 1
@@ -36,7 +39,9 @@ public class MenuTutorial : MonoBehaviour
         start.SetActive(false);
         step1.SetActive(true);
         manipulatorCheck.SetActive(true);
-
+        // GET TIME
+        TimeTracker.Instance.EndAction();
+        TimeTracker.Instance.StartAction("menu tasks tutorial|learn manipulation bar");
     }
 
     // 2 - if step1 (or step1 completed) && 'continue' -> go to step 2
@@ -47,6 +52,10 @@ public class MenuTutorial : MonoBehaviour
         manipulatorCheck.SetActive(false);
         step2.SetActive(true);
         menuT.SetActive(true);
+        
+        // GET TIME
+        TimeTracker.Instance.EndAction();
+        TimeTracker.Instance.StartAction("menu tasks tutorial|Chose a manteinance task");
     }
 
     // 3 - if step1 && tried manipulator && worked -> go to step 1 completed
@@ -125,6 +134,8 @@ public class MenuTutorial : MonoBehaviour
     // 12 - if correct pick && continue -> start plae door scene tutorial
     public void GoToPlaceDoorT()
     {
+        // GET TIME
+        TimeTracker.Instance.EndAction();
         SceneManager.LoadScene("NewPlaceDoor");
     }
 

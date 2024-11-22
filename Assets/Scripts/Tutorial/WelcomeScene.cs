@@ -4,6 +4,7 @@ using TMPro;
 
 public class WelcomeScene : MonoBehaviour
 {
+    
     public GameObject loginPopUp; // enable the user to log in
     public GameObject welcomePopUp; // once the user logs in welcome him to the app
     public GameObject errorPopup; // if the user inserted wrong username/password
@@ -19,6 +20,10 @@ public class WelcomeScene : MonoBehaviour
         loginPopUp.SetActive(true);
         errorPopup.SetActive(false);
         welcomePopUp.SetActive(false);
+
+        // GET TIME
+        TimeTracker.Instance.StartAction("login|login the user");
+
     }
 
     // 1 - check if correct credentials when login button is clicked
@@ -35,6 +40,9 @@ public class WelcomeScene : MonoBehaviour
             // if login successful -> welcome user to the app
             loginPopUp.SetActive(false);
             welcomePopUp.SetActive(true);
+
+            // GET TIME
+            TimeTracker.Instance.EndAction();
         }
         else
         {

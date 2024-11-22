@@ -21,6 +21,10 @@ public class PlaceDoorTutorial : MonoBehaviour
         step3.SetActive(true);
         placeDoorMenu.SetActive(false);
         step3Place.SetActive(false);
+
+        // GET TIME
+        TimeTracker.Instance.StartAction("place door tutorial|intro message");
+
     }
 
     // 1 - if step3 && user clicks 'continue' -> load place door menu && step3 place popup
@@ -29,6 +33,10 @@ public class PlaceDoorTutorial : MonoBehaviour
         step3.SetActive(false);
         placeDoorMenu.SetActive(true);
         step3Place.SetActive(true);
+
+        // GET TIME
+        TimeTracker.Instance.EndAction();
+        TimeTracker.Instance.StartAction("place door tutorial|place door");
     }
 
     // 2 - if step3Place && user clicks 'place door' -> load step3AnchorPoints
@@ -47,6 +55,10 @@ public class PlaceDoorTutorial : MonoBehaviour
     public void GoToStep4()
     {
         step4.SetActive(true);
+
+        // GET TIME
+        TimeTracker.Instance.EndAction();
+        TimeTracker.Instance.StartAction("place door tutorial|navigate steps");
     }
 
     // 5 - if step4 && user clicks 'continue' -> go to move popup
@@ -73,6 +85,9 @@ public class PlaceDoorTutorial : MonoBehaviour
     {
         end.SetActive(false);
         challenge.SetActive(true);
+
+        // GET TIME
+        TimeTracker.Instance.EndAction();
     }
 
     // 8 - if challengepopup && user clicks 'decline challenge' -> hide challenge pop up
@@ -90,7 +105,14 @@ public class PlaceDoorTutorial : MonoBehaviour
     // 10 - if challenge finished -> show finished challenge pop up
     public void finishChallenge()
     {    
-        challengeEnd.SetActive(true);
+
+        // GET TIME end navigate steps timer and set challenge to false
+        if(TimeTracker.Instance.challengeOn){
+            challengeEnd.SetActive(true);
+            Debug.Log("finished with logs");
+            TimeTracker.Instance.EndAction();
+            TimeTracker.Instance.challengeOn = false;
+        }
     }
     // if exit tutorial -> start menu scene
     public void ExitTutorial()

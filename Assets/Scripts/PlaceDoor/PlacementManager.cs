@@ -92,6 +92,12 @@ public class PlacementManager : MonoBehaviour
         d.Show();
         sm.Show();
         mm.Show();
+
+        // GET TIME end place door timer and start actial manteinance timer
+        if(TimeTracker.Instance.challengeOn){
+            TimeTracker.Instance.EndAction();
+            TimeTracker.Instance.StartAction("challenge|navigate steps");
+        }
     }
 
     public void Home()
@@ -105,5 +111,11 @@ public class PlacementManager : MonoBehaviour
         d = distance.GetComponent<Distance>();
         sm = steps.GetComponent<StepsManager>();
         mm = miniature.GetComponent<MiniatureManager>();
+
+        // GET TIME
+        if(TimeTracker.Instance.challengeOn){
+            Debug.Log("place the doooooooooooor ####################################W");
+            TimeTracker.Instance.StartAction("challenge|place the door");
+        }
     }
 }

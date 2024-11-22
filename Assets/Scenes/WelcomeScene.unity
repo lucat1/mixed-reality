@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -871,6 +870,51 @@ Transform:
   - {fileID: 1419622800}
   m_Father: {fileID: 428614171}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &195959430
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 195959432}
+  - component: {fileID: 195959431}
+  m_Layer: 0
+  m_Name: Timer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &195959431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195959430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 650fe6464fb7f2247ac1aa6f03721bd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  challengeOn: 1
+--- !u!4 &195959432
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195959430}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.15764932, y: 1.40964, z: 2.0161006}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &199796866
 GameObject:
   m_ObjectHideFlags: 0
@@ -1012,12 +1056,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!114 &237276812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8594,6 +8638,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1901750742}
     m_Modifications:
+    - target: {fileID: 268323954303141751, guid: 43a1876c54fbb004099f878186357493,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 560372049331763630, guid: 43a1876c54fbb004099f878186357493,
         type: 3}
       propertyPath: currentIconName
@@ -8724,6 +8773,11 @@ PrefabInstance:
     - target: {fileID: 4497669101605865397, guid: 43a1876c54fbb004099f878186357493,
         type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5828645001466447874, guid: 43a1876c54fbb004099f878186357493,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5934575342809480314, guid: 43a1876c54fbb004099f878186357493,
@@ -8929,6 +8983,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 6458866533980781341, guid: 43a1876c54fbb004099f878186357493, type: 3}
+    - {fileID: 5828645001466447874, guid: 43a1876c54fbb004099f878186357493, type: 3}
+    - {fileID: 268323954303141751, guid: 43a1876c54fbb004099f878186357493, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4205010513405509735, guid: 43a1876c54fbb004099f878186357493,
         type: 3}
@@ -13120,3 +13176,4 @@ SceneRoots:
   - {fileID: 1225446550}
   - {fileID: 1688826208}
   - {fileID: 419327706}
+  - {fileID: 195959432}

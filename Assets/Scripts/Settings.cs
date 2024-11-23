@@ -22,15 +22,4 @@ public class Settings
     // Settings
     public bool MenusFaceYou = true;
     public bool MenusFollowYou = false;
-    // void Awake()
-    // {
-    //     // Ensure only one instance exists
-    //     if (Instance == null)
-    //     {
-    //         Instance = this;
-    //         DontDestroyOnLoad(gameObject);
-    //     }
-    //     else
-    //         Destroy(gameObject); 
-    // }
 }

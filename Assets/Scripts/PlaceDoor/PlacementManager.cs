@@ -33,7 +33,7 @@ public class PlacementManager : MonoBehaviour
         if(anchorPoints != null)
             Destroy(anchorPoints);
         // Instantiate anchor points
-        anchorPoints = Instantiate(anchorPointsPrefab, cameraPosition + new Vector3(-0.057f, -0.03f, 0.323f), Quaternion.identity);
+        anchorPoints = Instantiate(anchorPointsPrefab, cameraPosition + new Vector3(-0.057f, -0.03f, 0.623f), Quaternion.identity);
         
         // Activate confirm button 
         var pb = transform.Find(confirmPath).gameObject.GetComponent<PressableButton>();

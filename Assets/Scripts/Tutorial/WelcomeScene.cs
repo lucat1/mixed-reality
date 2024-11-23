@@ -11,8 +11,8 @@ public class WelcomeScene : MonoBehaviour
     // NB: the only credentials that works are u:=sbbuser, pwd:=sbbpassword
     public TMP_InputField usernameInput; // username input field
     public TMP_InputField passwordInput; // password input field
-    private string correctUsername = "sbbuser"; // hardcoded test username
-    private string correctPassword = "sbbpassword"; // hardcoded test password
+    private string correctUsername = "Sbbuser"; // hardcoded test username
+    private string correctPassword = "Sbbpassword"; // hardcoded test password
     
     // 0 - start configuration -> manage what should be displayed when scene is opened
     public void Start()

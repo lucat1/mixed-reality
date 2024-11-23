@@ -31,6 +31,7 @@ public class TimeTracker : MonoBehaviour
 
     void Start()
     {
+        Instance = this;
         // initialize counter for the current scene
         sceneCount[SceneManager.GetActiveScene().name] = 1;
         currentSceneName = SceneName(SceneManager.GetActiveScene().name);

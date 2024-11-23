@@ -103,8 +103,10 @@ public class StepsManager : MonoBehaviour
     public void Done() {
         // if the challenge is not acative we go to main menu
         // otherwise the user can come back to main menu from challenge completed popoup
-        if(!TimeTracker.Instance.challengeOn)
-            SceneManager.LoadScene("Menu");
+        if(TimeTracker.Instance){
+            if(!TimeTracker.Instance.challengeOn)
+                SceneManager.LoadScene("Menu");
+        }
         
     }
 
@@ -122,7 +124,9 @@ public class StepsManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Settings.Instance.MenusFaceYou)
+        if(Settings.Instance.MenusFaceYou) {
             transform.LookAt(Camera.main.transform);
+            transform.eulerAngles += new Vector3(0, 180, 0);
+        }
     }
 }

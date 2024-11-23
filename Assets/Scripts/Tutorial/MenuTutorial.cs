@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
 
 public class MenuTutorial : MonoBehaviour
@@ -19,6 +20,18 @@ public class MenuTutorial : MonoBehaviour
     // 0 - start configuration -> manage what should be displayed when scene is opened
     public void Start()
     {
+        Assert.IsNotNull(start);
+        Assert.IsNotNull(step1);
+        Assert.IsNotNull(menuT);
+        Assert.IsNotNull(manipulatorCheck);
+        Assert.IsNotNull(step1Completed);
+        Assert.IsNotNull(step2);
+        Assert.IsNotNull(step2Row);
+        Assert.IsNotNull(step2Priority);
+        Assert.IsNotNull(step2Pick);
+        Assert.IsNotNull(correctPick);
+        Assert.IsNotNull(wrongPick);
+
         step1.SetActive(false);
         menuT.SetActive(false);
         manipulatorCheck.SetActive(false);
@@ -136,7 +149,7 @@ public class MenuTutorial : MonoBehaviour
     {
         // GET TIME
         TimeTracker.Instance.EndAction();
-        SceneManager.LoadScene("NewPlaceDoor");
+        SceneManager.LoadScene("PlaceDoorTutorial");
     }
 
     // if exit tutorial -> start menu scene
@@ -144,7 +157,4 @@ public class MenuTutorial : MonoBehaviour
     {
         SceneManager.LoadScene("Menu");
     }
-
-
-
 }

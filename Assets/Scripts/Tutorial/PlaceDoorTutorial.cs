@@ -6,8 +6,7 @@ public class PlaceDoorTutorial : MonoBehaviour
     public GameObject step3; // popup to explain what step3 is
     public GameObject placeDoorMenu; // menu to help the user place the door
     public GameObject step3Place; // first part of step3: click on the place door button
-    public GameObject step3AnchorPoints; // second part of step3: guide user to place door
-    public GameObject blueBall; // blue ball for the door rendering
+    public GameObject step3AnchorPoints; // first part of step3: click on the place door button
     public GameObject step4; // popup to explain what step4 is (how menu steps works)
     public GameObject step5; // popup to explain what step5 is (how miniature works)
     public GameObject move; // popup to make the user move closer to the scene
@@ -23,7 +22,8 @@ public class PlaceDoorTutorial : MonoBehaviour
         step3Place.SetActive(false);
 
         // GET TIME
-        TimeTracker.Instance.StartAction("place door tutorial|intro message");
+        if(TimeTracker.Instance)
+            TimeTracker.Instance.StartAction("place door tutorial|intro message");
 
     }
 
@@ -35,30 +35,30 @@ public class PlaceDoorTutorial : MonoBehaviour
         step3Place.SetActive(true);
 
         // GET TIME
-        TimeTracker.Instance.EndAction();
-        TimeTracker.Instance.StartAction("place door tutorial|place door");
+        if(TimeTracker.Instance){
+            TimeTracker.Instance.EndAction();
+            TimeTracker.Instance.StartAction("place door tutorial|place door");
+        }
     }
 
     // 2 - if step3Place && user clicks 'place door' -> load step3AnchorPoints
     public void GoToAnchorPoints()
     {
         step3Place.SetActive(false);
-    }
-
-    // 3 - if user starts to move the blue ball -> remove step3AnchorPoints
-    public void OnManipulationStarted()
-    {
-        step3AnchorPoints.SetActive(false);
+        step3AnchorPoints.SetActive(true);
     }
 
     // 4 - if door placed && user clicks 'confirm' -> go to step4
     public void GoToStep4()
     {
         step4.SetActive(true);
+        step3AnchorPoints.SetActive(false);
 
         // GET TIME
-        TimeTracker.Instance.EndAction();
-        TimeTracker.Instance.StartAction("place door tutorial|navigate steps");
+        if(TimeTracker.Instance){
+            TimeTracker.Instance.EndAction();
+            TimeTracker.Instance.StartAction("place door tutorial|navigate steps");
+        }
     }
 
     // 5 - if step4 && user clicks 'continue' -> go to move popup
@@ -87,7 +87,8 @@ public class PlaceDoorTutorial : MonoBehaviour
         challenge.SetActive(true);
 
         // GET TIME
-        TimeTracker.Instance.EndAction();
+        if(TimeTracker.Instance)
+            TimeTracker.Instance.EndAction();
     }
 
     // 8 - if challengepopup && user clicks 'decline challenge' -> hide challenge pop up
@@ -110,8 +111,10 @@ public class PlaceDoorTutorial : MonoBehaviour
         if(TimeTracker.Instance.challengeOn){
             challengeEnd.SetActive(true);
             Debug.Log("finished with logs");
-            TimeTracker.Instance.EndAction();
-            TimeTracker.Instance.challengeOn = false;
+            if(TimeTracker.Instance){
+                TimeTracker.Instance.EndAction();
+                TimeTracker.Instance.challengeOn = false;
+            }
         }
     }
     // if exit tutorial -> start menu scene

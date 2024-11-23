@@ -49,9 +49,9 @@ public class PopulateMenu : MonoBehaviour
         Debug.Log("ciaoo");
         print(manipulationContainer);
         Assert.AreNotEqual(manipulationContainer, null);
-        GameObject sec = Instantiate(listContainer, new Vector3(0, -168, 0), Quaternion.identity, manipulationContainer);
+        GameObject sec = Instantiate(listContainer, new Vector3(0, 0, 0), Quaternion.identity, manipulationContainer);
         // Force local transform to be relative to the parent
-        sec.transform.localPosition = new Vector3(0, -168, 0);
+        sec.transform.localPosition = new Vector3(0, 0, 0);
         // We assume that a listContainer GameObject always has a first child that is the title
         TextMeshProUGUI titleText = sec.GetComponentInChildren<TextMeshProUGUI>();
         Assert.AreNotEqual(titleText, null);
@@ -99,8 +99,9 @@ public class PopulateMenu : MonoBehaviour
         }
 
         // GET TIME
-        if(TimeTracker.Instance.challengeOn)
-            TimeTracker.Instance.StartAction("challenge|select task");
+        if(TimeTracker.Instance)
+            if(TimeTracker.Instance.challengeOn)
+                TimeTracker.Instance.StartAction("challenge|select task");
 
     }
 
@@ -112,8 +113,9 @@ public class PopulateMenu : MonoBehaviour
     void LoadScene() {
         
         // GET TIME end selection task timer
-        if(TimeTracker.Instance.challengeOn)
-            TimeTracker.Instance.EndAction();
+        if(TimeTracker.Instance)
+            if(TimeTracker.Instance.challengeOn)
+                TimeTracker.Instance.EndAction();
 
         SceneManager.LoadScene(sceneName);
     }
@@ -121,6 +123,14 @@ public class PopulateMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Settings.Instance.MenusFaceYou){
+            transform.LookAt(Camera.main.transform);
+            transform.eulerAngles += new Vector3(0, 180, 0);
+        }
+        
+        // if(Settings.Instance.MenusFollowYou)
+            
+
 
     }
 }

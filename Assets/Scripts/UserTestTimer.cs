@@ -10,7 +10,6 @@ public class TimeTracker : MonoBehaviour
     private Dictionary<string, int> sceneCount = new();
     private string currentSceneName;
     private float sceneStartTime;
-
     public static TimeTracker Instance { get; private set; }
     void Awake()
     {

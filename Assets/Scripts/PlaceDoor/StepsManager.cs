@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
+using MixedReality.Toolkit.SpatialManipulation;
 
 [Serializable]
 class JSONSteps {
@@ -28,6 +29,7 @@ public class StepsManager : MonoBehaviour
     public PlacementManager placeDoor;
     public MiniatureManager miniatureManager;
     public GameObject challengeEnd; // finish challenge
+    Follow follow;
 
     JSONSteps steps;
 
@@ -109,6 +111,10 @@ public class StepsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        Follow follow = GetComponent<Follow>();
+        follow.enabled = Settings.Instance.MenusFollowYou;
+
         steps = JsonUtility.FromJson<JSONSteps>(stepsFile.ToString());
         Hide();
     }
@@ -116,6 +122,7 @@ public class StepsManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Settings.Instance.MenusFaceYou)
+            transform.LookAt(Camera.main.transform);
     }
 }

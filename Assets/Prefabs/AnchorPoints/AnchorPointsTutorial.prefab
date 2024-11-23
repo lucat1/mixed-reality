@@ -430,6 +430,12 @@ MonoBehaviour:
   step3Place: {fileID: 440288500749080661}
   step3AnchorPoints: {fileID: 5471515571818957687}
   blueBall: {fileID: 8723932566018795610}
+  step4: {fileID: 0}
+  step5: {fileID: 0}
+  move: {fileID: 0}
+  end: {fileID: 0}
+  challenge: {fileID: 0}
+  challengeEnd: {fileID: 0}
 --- !u!1 &571913082353411295
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,8 +526,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bffb8b761ffb13145bbaa379bafca58f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Door: {fileID: 0}
+  door: {fileID: 0}
   anchorPointsPrefab: {fileID: 0}
+  distance: {fileID: 0}
+  steps: {fileID: 0}
+  miniature: {fileID: 0}
 --- !u!1 &1055798348994596216
 GameObject:
   m_ObjectHideFlags: 0
@@ -3974,11 +3983,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4742195248f6e2144a8e6f6fe0a78010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  componentsParent: {fileID: 0}
-  leftSphere: {fileID: 7416245076584933326}
   rightSphere: {fileID: 8723932566018795610}
+  leftSphere: {fileID: 7416245076584933326}
   plane: {fileID: 7731684727347219215}
-  rotationController: {fileID: 0}
 --- !u!1 &4821416803391908513
 GameObject:
   m_ObjectHideFlags: 0
@@ -7064,7 +7071,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0.0068, y: -0.0021, z: -0.0008}
-  m_LocalScale: {x: 0.008600001, y: 0.009999997, z: 0.0059999954}
+  m_LocalScale: {x: 0.008600001, y: 0.001, z: 0.0059999954}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7942151409203931800}

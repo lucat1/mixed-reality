@@ -99,7 +99,10 @@ public class StepsManager : MonoBehaviour
     }
 
     public void Done() {
-        challengeEnd.SetActive(true);
+        // if the challenge is not acative we go to main menu
+        // otherwise the user can come back to main menu from challenge completed popoup
+        if(!TimeTracker.Instance.challengeOn)
+            SceneManager.LoadScene("Menu");
         
     }
 

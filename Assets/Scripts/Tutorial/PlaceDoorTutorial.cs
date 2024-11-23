@@ -105,7 +105,7 @@ public class PlaceDoorTutorial : MonoBehaviour
     // 10 - if challenge finished -> show finished challenge pop up
     public void finishChallenge()
     {    
-
+        
         // GET TIME end navigate steps timer and set challenge to false
         if(TimeTracker.Instance.challengeOn){
             challengeEnd.SetActive(true);

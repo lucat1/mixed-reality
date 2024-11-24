@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1a574ff2ba42cc4d84bb2d1b7e2a641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: 0.15
   spawnInfront: 1
   canFollowYou: 1
   invertedX: 0
@@ -95,11 +94,11 @@ MonoBehaviour:
   faceUserDefinedTargetTransform: 0
   targetToFace: {fileID: 0}
   pivotAxis: 7
-  minDistance: 0.15
-  maxDistance: 0.7
-  defaultDistance: 0.3
-  maxViewHorizontalDegrees: 30
-  maxViewVerticalDegrees: 20
+  minDistance: 0.4
+  maxDistance: 1
+  defaultDistance: 0.6
+  maxViewHorizontalDegrees: 360
+  maxViewVerticalDegrees: 100
   reorientWhenOutsideParameters: 0
   orientToControllerDeadZoneDegrees: 60
   ignoreAngleClamp: 0

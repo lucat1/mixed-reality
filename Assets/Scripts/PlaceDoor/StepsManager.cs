@@ -29,12 +29,10 @@ public class StepsManager : MonoBehaviour
     public PlacementManager placeDoor;
     public MiniatureManager miniatureManager;
     public GameObject challengeEnd; // finish challenge
-    Follow follow;
-
     JSONSteps steps;
 
     int currentStepIndex;
-    public void Reset(){
+    public void Reset() {
         // reset step
         currentStepIndex = 0;
     }
@@ -42,10 +40,6 @@ public class StepsManager : MonoBehaviour
     public void Show() {
         // Show the steps menu
         gameObject.SetActive(true);
-
-        // Places the menu in front of the player
-        var cameraPosition = Camera.main.transform.position;
-        transform.position = cameraPosition + new Vector3(0.2f,0,0.323f);
 
         Reset();
         miniatureManager.Reset();
@@ -107,26 +101,12 @@ public class StepsManager : MonoBehaviour
             if(!TimeTracker.Instance.challengeOn)
                 SceneManager.LoadScene("Menu");
         }
-        
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
-        Follow follow = GetComponent<Follow>();
-        follow.enabled = Settings.Instance.MenusFollowYou;
-
         steps = JsonUtility.FromJson<JSONSteps>(stepsFile.ToString());
         Hide();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(Settings.Instance.MenusFaceYou) {
-            transform.LookAt(Camera.main.transform);
-            transform.eulerAngles += new Vector3(0, 180, 0);
-        }
     }
 }

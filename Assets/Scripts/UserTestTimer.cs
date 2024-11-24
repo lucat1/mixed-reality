@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 public class TimeTracker : MonoBehaviour
 {
@@ -77,20 +78,23 @@ public class TimeTracker : MonoBehaviour
 
     private void SaveIntervalsTimeToCSV(Dictionary<string, float> data, string filePath)
     {
-        using (StreamWriter writer = new StreamWriter(filePath))
+        var result = "";
+        if (filePath.Contains("action"))
         {
-            if(filePath.Contains("action")){
-                writer.WriteLine("Scene, Action ,Time");
-                foreach(KeyValuePair<string, float> kvp in data){
-                    string[] key = kvp.Key.Split('|');
-                    writer.WriteLine($"{key[0]},{key[1]},{kvp.Value}");
-                }
-            }else{
-                writer.WriteLine("Sene,Time");
-            foreach(KeyValuePair<string, float> kvp in data)
-                writer.WriteLine($"{kvp.Key},{kvp.Value}");
+            result += "Scene, Action ,Time\n";
+            foreach (KeyValuePair<string, float> kvp in data)
+            {
+                string[] key = kvp.Key.Split('|');
+                result += $"{key[0]},{key[1]},{kvp.Value}";
             }
         }
+        else
+        {
+            result += "Sene,Time";
+            foreach (KeyValuePair<string, float> kvp in data)
+                result += $"{kvp.Key},{kvp.Value}";
+        }
+        UnityEngine.Windows.File.WriteAllBytes(filePath, Encoding.ASCII.GetBytes(result));
     }
 
     // variables for monitoring individual actions time

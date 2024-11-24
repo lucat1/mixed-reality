@@ -39,6 +39,10 @@ public class DoorManager : MonoBehaviour
         return Scale().x;
     }
 
+    public float VolumeFactor() {
+        return Mathf.Pow(ScaleFactor(), 3);
+    }
+
     // Recursively get all door components, filtered by the given function.
     public List<GameObject> GetDoorComponents(Func<GameObject, bool> f) {
         List<GameObject> list = new ();
@@ -63,7 +67,7 @@ public class DoorManager : MonoBehaviour
     // 2. Its volume is below the threshold.
     bool ShouldRemoveComponent(GameObject t) {
         var mesh = t.transform.GetComponent<MeshRenderer>();
-        return mesh != null && (mesh.bounds.Volume() * ScaleFactor()) <= volumeThreshold;
+        return mesh != null && (mesh.bounds.Volume() * VolumeFactor()) <= volumeThreshold;
     }
 
     void SetMaterial(GameObject t, Material mat) {
@@ -111,7 +115,7 @@ public class DoorManager : MonoBehaviour
 
             // Check if we should render the circle
             var mesh = go.transform.GetComponent<MeshRenderer>();
-            if((mesh.bounds.Volume() * ScaleFactor()) <= showRingVolumeThreshold && showRing)
+            if((mesh.bounds.Volume() * VolumeFactor()) <= showRingVolumeThreshold && showRing)
                 DisplayRing(go);
         }
 
@@ -124,7 +128,7 @@ public class DoorManager : MonoBehaviour
     // Displays a ring on 
     void DisplayRing(GameObject go) {
         var mesh = go.transform.GetComponent<MeshRenderer>();
-        Log("Showing ring on name=" + go.name + ", volume=" + (mesh.bounds.Volume() * ScaleFactor()));
+        Log("Showing ring on name=" + go.name + ", volume=" + (mesh.bounds.Volume() * VolumeFactor()));
 
         var ring = Instantiate(ringPrefab);
         ring.transform.SetParent(go.transform);

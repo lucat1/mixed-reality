@@ -11,6 +11,8 @@ public class AnchorPlane : MonoBehaviour
     public GameObject leftSphere;
     public GameObject plane;
 
+    // set the distance from the player when the object spawns
+    public static float offset = 0.5f;
     private Vector3 pos(GameObject go) {
         return go.transform.position;
     }
@@ -25,7 +27,6 @@ public class AnchorPlane : MonoBehaviour
 
         // Compute plane center 
         Vector3 midpoint = (A + D) / 2;
-
 
         // Set the plane's position to the midpoint
         plane.transform.position = midpoint;
@@ -42,6 +43,11 @@ public class AnchorPlane : MonoBehaviour
         var y = C - D + A - B;
         var z = Vector3.Cross(x, y);
         plane.transform.rotation = Quaternion.LookRotation(z, y) * Quaternion.Euler(90, 0, 0);
+    }
+
+    void Start() {
+        Vector3 positionInFront = Camera.main.transform.position + Camera.main.transform.forward * offset;
+        transform.position = positionInFront;
     }
 
     void Update()

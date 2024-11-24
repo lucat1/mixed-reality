@@ -84,7 +84,7 @@ public class PlacementManager : MonoBehaviour
     }
 
     public void Back() {
-        Debug.Log("[PlaceDoor] Going back to door placement");
+        Debug.Log("[PlacementManager] Going back to door placement");
 
         // Toggle the palacing menu itself
         gameObject.SetActive(true);
@@ -101,7 +101,7 @@ public class PlacementManager : MonoBehaviour
 
     public void Forward()
     {
-        Debug.Log("[PlaceDoor] Moving to steps");
+        Debug.Log("[PlacementManager] Moving to steps");
         MoveDoor();
 
         // Toggle the palacing menu itself
@@ -134,10 +134,9 @@ public class PlacementManager : MonoBehaviour
         sm = steps.GetComponent<StepsManager>();
         mm = miniature.GetComponent<MiniatureManager>();
 
-        // GET TIME
         if(TimeTracker.Instance){
             if(TimeTracker.Instance.challengeOn){
-                Debug.Log("place the doooooooooooor ####################################W");
+                Debug.Log("[PlacementManager] Started challenge: place door");
                 TimeTracker.Instance.StartAction("challenge|place the door");
             }
         }

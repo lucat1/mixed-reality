@@ -111,26 +111,11 @@ public class PopulateMenu : MonoBehaviour
     }
 
     void LoadScene() {
-        
         // GET TIME end selection task timer
         if(TimeTracker.Instance)
             if(TimeTracker.Instance.challengeOn)
                 TimeTracker.Instance.EndAction();
 
         SceneManager.LoadScene(sceneName);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(Settings.Instance.MenusFaceYou){
-            transform.LookAt(Camera.main.transform);
-            transform.eulerAngles += new Vector3(0, 180, 0);
-        }
-        
-        // if(Settings.Instance.MenusFollowYou)
-            
-
-
     }
 }

@@ -6,7 +6,6 @@ using UnityEngine.Assertions;
 
 public class PlacementManager : MonoBehaviour
 {
-
     // Door object to activate in the scene
     public GameObject door;
     // Prefab for anchor points
@@ -23,6 +22,12 @@ public class PlacementManager : MonoBehaviour
     private MiniatureManager mm;
 
     private const string confirmPath = "UIContainer/ButtonGroup_32x32mm_H3/ButtonCollection/ConfirmButton";
+
+    private Vector3 scale = Vector3.one;
+
+    public Vector3 Scale() {
+        return scale;
+    }
 
     // Instantiate the anchor points to perform door placement
     public void CreateAnchorPoints()
@@ -45,16 +50,17 @@ public class PlacementManager : MonoBehaviour
         Assert.IsNotNull(anchorPoints);
         Debug.Log("Moving the door to the appropriate position");
 
-        Vector3 doorPosition = anchorPoints.transform.Find("Plane").transform.position;
-
-        float planeWidth = anchorPoints.transform.Find("Plane").transform.localScale.x;
+        var plane = anchorPoints.transform.Find("Plane");
         
         // Postition door in the scene and activate it
-        door.transform.position = doorPosition;
+        door.transform.position = plane.position;
+        door.transform.rotation = plane.rotation * Quaternion.Euler(90, 0, 90);
+        float planeWidth = plane.localScale.x;
 
         // Adjust door size
         Transform DoorScaleTrasform = door.transform.Find("DoorContainer/DoorScale");
-        DoorScaleTrasform.localScale = new Vector3(planeWidth/0.16583f, planeWidth/0.16583f,planeWidth/0.16583f);
+        scale = new (planeWidth/0.16583f, planeWidth/0.16583f,planeWidth/0.16583f);
+        DoorScaleTrasform.localScale = scale;
 
         // Adjust door position after scale change
         Transform DoorResetPosition = door.transform.Find("DoorContainer");

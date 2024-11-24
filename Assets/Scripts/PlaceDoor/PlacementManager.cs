@@ -45,12 +45,23 @@ public class PlacementManager : MonoBehaviour
         pb.enabled = true;
     }
 
+    private Bounds DoorBounds(GameObject g) {
+        // From: https://gamedev.stackexchange.com/a/86999
+        var b = new Bounds(g.transform.position, Vector3.zero);
+        foreach (Renderer r in g.GetComponentsInChildren<Renderer>())
+        {
+            b.Encapsulate(r.bounds);
+        }
+        return b;
+    }
+
     public void MoveDoor()
     {
         Assert.IsNotNull(anchorPoints);
         Debug.Log("Moving the door to the appropriate position");
 
         var plane = anchorPoints.transform.Find("Plane");
+        var planeScale = plane.GetComponent<Renderer>().bounds.size;
         
         // Postition door in the scene and activate it
         door.transform.position = plane.position;
@@ -58,9 +69,14 @@ public class PlacementManager : MonoBehaviour
         float planeWidth = plane.localScale.x;
 
         // Adjust door size
-        Transform DoorScaleTrasform = door.transform.Find("DoorContainer/DoorScale");
-        scale = new (planeWidth/0.16583f, planeWidth/0.16583f,planeWidth/0.16583f);
-        DoorScaleTrasform.localScale = scale;
+        Transform doorScaleContainer = door.transform.Find("DoorContainer/DoorScale");
+        doorScaleContainer.localScale = Vector3.one;
+        var doorScale = DoorBounds(doorScaleContainer.gameObject).size;
+        var sc = Mathf.Max(planeScale.x / doorScale.x, planeScale.y / doorScale.y, planeScale.z / doorScale.z);
+        scale = new Vector3(sc, sc, sc);
+
+        doorScaleContainer.localScale = scale;
+        doorScaleContainer.gameObject.SetActive(true);
 
         // Adjust door position after scale change
         Transform DoorResetPosition = door.transform.Find("DoorContainer");

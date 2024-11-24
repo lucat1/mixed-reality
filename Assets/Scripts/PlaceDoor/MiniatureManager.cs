@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using MixedReality.Toolkit;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 
@@ -52,7 +53,6 @@ public class MiniatureManager : MonoBehaviour
         transform.position = newPosition;
         transform.LookAt(Camera.main.transform);
         transform.rotation = playerCamera.transform.rotation;
-
     }
 
     public void Hide()
@@ -80,12 +80,11 @@ public class MiniatureManager : MonoBehaviour
     float ComputeComponentsDist(GameObject center, GameObject other)
     {
         double distanceSquared = Math.Pow(center.transform.position.x - other.transform.position.x, 2) + Math.Pow(center.transform.position.y - other.transform.position.y, 2) + Math.Pow(center.transform.position.z - other.transform.position.z, 2);
-        return (float)Mathf.Sqrt((float)distanceSquared);
+        return (float)Mathf.Sqrt((float)distanceSquared) * dm.ScaleFactor();
     }
 
     private GameObject CreateDisplayGroup(GameObject component)
     {
-        // doorManager.HighlightComponents(new HashSet<string>(compNames), false);
         // display the near components as transparent
         foreach (GameObject ob in GetNearComponents(component))
         {
@@ -127,13 +126,12 @@ public class MiniatureManager : MonoBehaviour
         MeshFilter meshFilter = go.GetComponent<MeshFilter>();
         if (meshFilter == null || meshFilter.sharedMesh == null)
         {
-            Debug.LogError("MeshFilter or Mesh not found!");
+            Debug.LogError("[MiniatureManager] MeshFilter or Mesh not found!");
             return;
         }
 
         // Calculate the local volume of the object
-        Vector3 localSize = meshFilter.sharedMesh.bounds.size;
-        float currentVolume = localSize.x * localSize.y * localSize.z;
+        float currentVolume = meshFilter.sharedMesh.bounds.Volume();
 
         // Adjust for scaling to world space
         float worldVolume = currentVolume *
@@ -147,7 +145,7 @@ public class MiniatureManager : MonoBehaviour
         // Apply the new scale to the object
         go.transform.localScale *= scaleFactor;
 
-        Debug.Log("New scale applied to achieve target volume.");
+        Debug.Log("[MiniatureManager] New scale applied to achieve target volume.");
     }
     void DeactivateAll()
     {

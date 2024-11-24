@@ -6,10 +6,15 @@ using System.Security.Cryptography;
 using MixedReality.Toolkit;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.UIElements;
 
 public class DoorManager : MonoBehaviour
 {
+    // Reference to the PlacementManager on the placement menu.
+    // Used to obtain the scale of the door so that volume computations
+    // are scale-agnostic.
+    public PlacementManager placementManager;
     // Threshold to decide if a component should be hidden. If the component's
     // volume is lower than the threshold, it gets hidden.
     public float volumeThreshold;
@@ -25,6 +30,13 @@ public class DoorManager : MonoBehaviour
 
     private void Log(object message) {
         Debug.Log("[Door " + gameObject.name + "] " + message);
+    }
+
+    public Vector3 Scale() {
+        return placementManager.Scale();
+    }
+    public float ScaleFactor() {
+        return Scale().x;
     }
 
     // Recursively get all door components, filtered by the given function.
@@ -51,7 +63,7 @@ public class DoorManager : MonoBehaviour
     // 2. Its volume is below the threshold.
     bool ShouldRemoveComponent(GameObject t) {
         var mesh = t.transform.GetComponent<MeshRenderer>();
-        return mesh != null && mesh.bounds.Volume() <= volumeThreshold;
+        return mesh != null && (mesh.bounds.Volume() * ScaleFactor()) <= volumeThreshold;
     }
 
     void SetMaterial(GameObject t, Material mat) {
@@ -99,7 +111,7 @@ public class DoorManager : MonoBehaviour
 
             // Check if we should render the circle
             var mesh = go.transform.GetComponent<MeshRenderer>();
-            if(mesh.bounds.Volume() <= showRingVolumeThreshold && showRing)
+            if((mesh.bounds.Volume() * ScaleFactor()) <= showRingVolumeThreshold && showRing)
                 DisplayRing(go);
         }
 
@@ -112,7 +124,7 @@ public class DoorManager : MonoBehaviour
     // Displays a ring on 
     void DisplayRing(GameObject go) {
         var mesh = go.transform.GetComponent<MeshRenderer>();
-        Log("Showing ring on name=" + go.name + ", volume=" + mesh.bounds.Volume());
+        Log("Showing ring on name=" + go.name + ", volume=" + (mesh.bounds.Volume() * ScaleFactor()));
 
         var ring = Instantiate(ringPrefab);
         ring.transform.SetParent(go.transform);
@@ -157,6 +169,7 @@ public class DoorManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Assert.IsNotNull(placementManager);
         RemoveSmallComponents();
         foreach(var t in GetDoorComponents(go => !currentlyHighlighted.Contains(go)))
             SetMaterial(t, transparentMaterial);

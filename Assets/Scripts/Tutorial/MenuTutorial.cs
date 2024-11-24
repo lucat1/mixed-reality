@@ -16,6 +16,8 @@ public class MenuTutorial : MonoBehaviour
     public GameObject correctPick; // if user clicks correct row 
     public GameObject wrongPick; // if user clicks wrong row
     private bool hasMoved = false; // check if user has moved the handler
+    public PopUpManager PUManager; // manager for popup
+    
 
     // 0 - start configuration -> manage what should be displayed when scene is opened
     public void Start()
@@ -35,7 +37,7 @@ public class MenuTutorial : MonoBehaviour
         step1.SetActive(false);
         menuT.SetActive(false);
         manipulatorCheck.SetActive(false);
-        start.SetActive(true);
+        PUManager.ShowPopup(start);
         step1Completed.SetActive(false);
         step2.SetActive(false);
         step2Row.SetActive(false);
@@ -150,7 +152,7 @@ public class MenuTutorial : MonoBehaviour
     }
 
     // 12 - if correct pick && continue -> start plae door scene tutorial
-    public void GoToPlaceDoorT()
+    public void GoToPlaceDoorTutorial()
     {
         // GET TIME
         if(TimeTracker.Instance){

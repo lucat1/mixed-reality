@@ -38,6 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2973,7 +2974,7 @@ PrefabInstance:
     - target: {fileID: 9163907934541131028, guid: 43a1876c54fbb004099f878186357493,
         type: 3}
       propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GoToPlaceDoorT
+      value: GoToPlaceDoorTutorial
       objectReference: {fileID: 0}
     - target: {fileID: 9163907934541131028, guid: 43a1876c54fbb004099f878186357493,
         type: 3}
@@ -3117,10 +3118,10 @@ RectTransform:
   - {fileID: 1053712856}
   m_Father: {fileID: 109173506}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -168}
-  m_SizeDelta: {x: 308, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &365278594
 MonoBehaviour:
@@ -13231,14 +13232,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75fab96c2c05db44b81cfd0b52e9e103, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listContainer: {fileID: 2249404274976875057, guid: a05bbe36f7535b04596d5a23457ad48d,
-    type: 3}
-  listGrid: {fileID: 4510472077354213960, guid: b449af244ff512043a39143943a943c1,
-    type: 3}
-  listEntry: {fileID: 4392119019578410244, guid: 1d8afa6d1207b2549b71416584cd4484,
-    type: 3}
-  sceneName: PlaceDoor
-  jsonFile: {fileID: 4900000, guid: 36f1ec715664dbc4aaa734cd45a12a9b, type: 3}
+  listContainer: {fileID: 0}
+  listGrid: {fileID: 0}
+  listEntry: {fileID: 0}
+  sceneName: 
+  jsonFile: {fileID: 0}
 --- !u!4 &1363800007 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2045587447981033104, guid: a984b40f44325d44b935fc9a1c071630,
@@ -16809,12 +16807,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    m_Quality: 3
-    m_FrameInfluence: 0.1
-    m_JitterScale: 1
-    m_MipBias: 0
-    m_VarianceClampScale: 0.9
-    m_ContrastAdaptiveSharpening: 0
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!1 &1767961622
 GameObject:
   m_ObjectHideFlags: 0

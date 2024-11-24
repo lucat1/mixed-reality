@@ -2,9 +2,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
+// this script regulates the login of the user in the SBB HoloGuide app
 public class WelcomeScene : MonoBehaviour
 {
-    
     public GameObject loginPopUp; // enable the user to log in
     public GameObject welcomePopUp; // once the user logs in welcome him to the app
     public GameObject errorPopup; // if the user inserted wrong username/password
@@ -13,20 +13,31 @@ public class WelcomeScene : MonoBehaviour
     public TMP_InputField passwordInput; // password input field
     private string correctUsername = "Sbbuser"; // hardcoded test username
     private string correctPassword = "Sbbpassword"; // hardcoded test password
+    public PopUpManager PUManager; // manager for popup
     
-    // 0 - start configuration -> manage what should be displayed when scene is opened
+    // Start configuration - manage start configuration (only login popup is active and default credentials are inserted)
     public void Start()
     {
-        loginPopUp.SetActive(true);
+        // hide all popups
         errorPopup.SetActive(false);
         welcomePopUp.SetActive(false);
 
-        // GET TIME
+        // show loginPopUp
+        PUManager.ShowPopup(loginPopUp);
+
+        // start timer
         TimeTracker.Instance.StartAction("login|login the user");
 
+        // set default values
+        if (usernameInput != null){
+            usernameInput.text = "Sbbuser";
+        };
+        if (passwordInput != null){
+            passwordInput.text = "Sbbpassword";
+        };
     }
 
-    // 1 - check if correct credentials when login button is clicked
+    // check if correct credentials when login button is clicked
     public void LoginCheck()
     {
         // get the input values
@@ -39,7 +50,7 @@ public class WelcomeScene : MonoBehaviour
             Debug.Log("Login successful!");
             // if login successful -> welcome user to the app
             loginPopUp.SetActive(false);
-            welcomePopUp.SetActive(true);
+            PUManager.ShowPopup(welcomePopUp);
 
             // GET TIME
             TimeTracker.Instance.EndAction();
@@ -72,4 +83,5 @@ public class WelcomeScene : MonoBehaviour
     {
         SceneManager.LoadScene("Menu");
     }
+
 }

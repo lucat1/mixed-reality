@@ -38,6 +38,9 @@ public class TimeTracker : MonoBehaviour
         currentSceneName = SceneName(SceneManager.GetActiveScene().name);
         sceneStartTime = Time.time;
 
+        // TODO: remove
+        SaveTimesToCSV(sceneTimes, Application.persistentDataPath, $"diocane");
+
         // Listen for scene changes
         SceneManager.sceneLoaded += OnSceneLoaded; 
     }

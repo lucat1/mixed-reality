@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using MixedReality.Toolkit;
 using Unity.XR.CoreUtils;
 using UnityEngine;
@@ -15,6 +16,9 @@ public class MiniatureManager : MonoBehaviour
     private List<string> compNames = new List<string> { "_25_310_0565_602", "_25_802_1132_364", "_25_375_0205_301" };
     private List<GameObject> displayedGroups = new();
     private DoorManager dm;
+    public GameObject bigDoor;
+
+    private new Renderer renderer;
 
     private void InitializeDisplayBlocks()
     {
@@ -44,23 +48,26 @@ public class MiniatureManager : MonoBehaviour
     public void Show()
     {
         // activate miniature
-        gameObject.SetActive(true);
+        Debug.Log("[MiniatureManager] Showing");
+        renderer.enabled = true;
         dm.Show();
 
         // place the object in front of the player
-        Camera playerCamera = Camera.main;
-        Vector3 newPosition = playerCamera.transform.position + playerCamera.transform.forward * 0.30f;
-        transform.position = newPosition;
         transform.LookAt(Camera.main.transform);
-        transform.rotation = playerCamera.transform.rotation;
+        var midpoint = (Camera.main.transform.position + bigDoor.GetComponent<DoorManager>().Position())/2;
+        transform.position = midpoint;
+        transform.rotation = Camera.main.transform.rotation;
+        Debug.Log("[MiniatureManager] setting position to " + midpoint);
     }
 
     public void Hide()
     {
-        gameObject.SetActive(false);
+        Debug.Log("[MiniatureManager] Hiding");
+        renderer.enabled = false;
         dm.Hide();
     }
-    public void Reset(){
+
+    public void Reset() {
         Debug.Log("[MiniatureManager] reset indiex");
         currentStepIndex = 0;
         ActivateDisplayBlock(currentStepIndex);
@@ -68,19 +75,18 @@ public class MiniatureManager : MonoBehaviour
 
     public bool IsVisible()
     {
-        return gameObject.activeSelf;
-    }
-
-    List<GameObject> GetNearComponents(GameObject center)
-    {
-        List<GameObject> pr = dm.GetDoorComponents(ob => ComputeComponentsDist(center, ob) <= nearObjectRadius && ob.transform.childCount == 0);
-        return pr;
+        return renderer.enabled;
     }
 
     float ComputeComponentsDist(GameObject center, GameObject other)
     {
         double distanceSquared = Math.Pow(center.transform.position.x - other.transform.position.x, 2) + Math.Pow(center.transform.position.y - other.transform.position.y, 2) + Math.Pow(center.transform.position.z - other.transform.position.z, 2);
         return (float)Mathf.Sqrt((float)distanceSquared) * dm.ScaleFactor();
+    }
+
+    List<GameObject> GetNearComponents(GameObject center)
+    {
+        return dm.GetDoorComponents(ob => ComputeComponentsDist(center, ob) <= nearObjectRadius && ob.transform.childCount == 0);
     }
 
     private GameObject CreateDisplayGroup(GameObject component)
@@ -147,18 +153,14 @@ public class MiniatureManager : MonoBehaviour
 
         Debug.Log("[MiniatureManager] New scale applied to achieve target volume.");
     }
-    void DeactivateAll()
-    {
-        foreach (GameObject go in dm.GetDoorComponents(_ => true))
-            go.SetActive(false);
-    }
 
     // Start is called before the first frame update
     void Start()
     {
         dm = door.GetComponent<DoorManager>();
-        DeactivateAll();
+        renderer = GetComponent<Renderer>();
         InitializeDisplayBlocks();
-        Hide();
+        // Doing Hide() here would call Hide on DM before it is initialized.
+        renderer.enabled = false;
     }
 }

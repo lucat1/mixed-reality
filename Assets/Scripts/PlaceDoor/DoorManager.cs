@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using MixedReality.Toolkit;
 using Unity.VisualScripting;
@@ -37,6 +38,10 @@ public class DoorManager : MonoBehaviour
     }
     public float ScaleFactor() {
         return Scale().x;
+    }
+
+    public Vector3 Position() {
+        return gameObject.transform.position;
     }
 
     public float VolumeFactor() {
@@ -134,6 +139,7 @@ public class DoorManager : MonoBehaviour
         ring.transform.SetParent(go.transform);
         ring.transform.position = go.transform.position;
         ring.transform.localScale = new Vector3(1f, 1f, 1f);
+        ring.GetComponent<Renderer>().enabled = IsVisible();
         gameObjectsWithRing[go] = ring;
     }
 
@@ -144,23 +150,27 @@ public class DoorManager : MonoBehaviour
         gameObjectsWithRing.Remove(go);
         Destroy(ring);
     }
-
-    private bool visible = true;
+    private new Renderer renderer;
 
     public void Show() {
         Log("Showing door");
-        visible = true;
-        gameObject.SetActive(visible);
+        applyVisibility(true);
     }
 
     public bool IsVisible() {
-        return visible;
+        return renderer.enabled;
     }
 
     public void Hide() {
         Log("Hiding door");
-        visible = false;
-        gameObject.SetActive(visible);
+        applyVisibility(false);
+    }
+
+    private void applyVisibility(bool visible) {
+        renderer.enabled = visible;
+        foreach (var go in gameObjectsWithRing.Values) {
+            go.GetComponent<Renderer>().enabled = visible;
+        }
     }
 
     public void Toggle() {
@@ -174,6 +184,8 @@ public class DoorManager : MonoBehaviour
     void Start()
     {
         Assert.IsNotNull(placementManager);
+        renderer = GetComponent<Renderer>();
+        Assert.IsNotNull(renderer);
         RemoveSmallComponents();
         foreach(var t in GetDoorComponents(go => !currentlyHighlighted.Contains(go)))
             SetMaterial(t, transparentMaterial);

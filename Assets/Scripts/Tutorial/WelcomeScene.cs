@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-// this script regulates the login of the user in the SBB HoloGuide app
+// this script manages the login of the user in the SBB HoloGuide app
 public class WelcomeScene : MonoBehaviour
 {
     public GameObject loginPopUp; // enable the user to log in

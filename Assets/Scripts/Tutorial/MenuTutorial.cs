@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
 
+// this script manages the Menu tutorial scene
 public class MenuTutorial : MonoBehaviour
 {
     public GameObject start; // welcome user to menu tutorial
@@ -19,7 +20,7 @@ public class MenuTutorial : MonoBehaviour
     public PopUpManager PUManager; // manager for popup
     
 
-    // 0 - start configuration -> manage what should be displayed when scene is opened
+    // start configuration - manage what should be displayed when scene is opened
     public void Start()
     {
         Assert.IsNotNull(start);
@@ -36,10 +37,8 @@ public class MenuTutorial : MonoBehaviour
 
         step1.SetActive(false);
         menuT.SetActive(false);
-        manipulatorCheck.SetActive(false);
         PUManager.ShowPopup(start);
         step1Completed.SetActive(false);
-        step2.SetActive(false);
         step2Row.SetActive(false);
         step2Pick.SetActive(false);
         step2Priority.SetActive(false);
@@ -49,12 +48,11 @@ public class MenuTutorial : MonoBehaviour
             TimeTracker.Instance.StartAction("menu tasks tutorial|intro message");
     }
 
-    // 1 - if start && user clicks 'continue' -> go to step 1
+    // if start && user clicks 'continue' -> go to step 1
     public void LoadStep1()
     {
         start.SetActive(false);
-        step1.SetActive(true);
-        manipulatorCheck.SetActive(true);
+        PUManager.ShowPopup(step1);
         // GET TIME
         if(TimeTracker.Instance){
             TimeTracker.Instance.EndAction();
@@ -68,8 +66,7 @@ public class MenuTutorial : MonoBehaviour
         step1.SetActive(false);
         step1Completed.SetActive(false);
         manipulatorCheck.SetActive(false);
-        step2.SetActive(true);
-        menuT.SetActive(true);
+        PUManager.ShowPopup(menuT);
         
         // GET TIME
         if(TimeTracker.Instance){
@@ -96,7 +93,7 @@ public class MenuTutorial : MonoBehaviour
     public void Step1Completed()
     {
         step1.SetActive(false);
-        step1Completed.SetActive(true);
+        PUManager.ShowPopup(step1Completed);
     }
 
     // 5 - if step2 && user clicks 'continue' -> go to step2Row
@@ -119,7 +116,7 @@ public class MenuTutorial : MonoBehaviour
     public void GoToPick()
     {
         step2Priority.SetActive(false);
-        step2Pick.SetActive(true);
+        PUManager.ShowPopup(step2Pick);
 
     }
 
@@ -133,14 +130,14 @@ public class MenuTutorial : MonoBehaviour
     // 9 - if correct pick -> correct pick pop up
     public void CorrectPick()
     {
-        correctPick.SetActive(true);
+        PUManager.ShowPopup(correctPick);
 
     }
 
     // 10 - if worng pick -> wrong pick pop up
     public void WrongPick()
     {
-        wrongPick.SetActive(true);
+        PUManager.ShowPopup(wrongPick);
 
     }
 

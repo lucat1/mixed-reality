@@ -49,7 +49,7 @@ public class MiniatureManager : MonoBehaviour
 
         // place the object in front of the player
         Camera playerCamera = Camera.main;
-        Vector3 newPosition = playerCamera.transform.position + playerCamera.transform.forward * 0.30f;
+        Vector3 newPosition = playerCamera.transform.position + playerCamera.transform.forward * 0.50f;
         transform.position = newPosition;
         transform.LookAt(Camera.main.transform);
         transform.rotation = playerCamera.transform.rotation;

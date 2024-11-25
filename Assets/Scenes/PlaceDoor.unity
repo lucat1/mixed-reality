@@ -7787,7 +7787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   door: {fileID: 1085849289}
   miniature: {fileID: 1161267197}
-  activateMiniatureThreshold: 0.9
+  activateMiniatureThreshold: 1.3
 --- !u!4 &1284911085
 Transform:
   m_ObjectHideFlags: 0

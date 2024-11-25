@@ -89,14 +89,14 @@ public class TimeTracker : MonoBehaviour
             foreach (KeyValuePair<string, float> kvp in data)
             {
                 string[] key = kvp.Key.Split('|');
-                result += $"{key[0]},{key[1]},{kvp.Value}";
+                result += $"{key[0]},{key[1]},{kvp.Value}\n";
             }
         }
         else
         {
             result += "Sene,Time";
             foreach (KeyValuePair<string, float> kvp in data)
-                result += $"{kvp.Key},{kvp.Value}";
+                result += $"{kvp.Key},{kvp.Value}\n";
         }
         UnityEngine.Windows.File.WriteAllBytes(filePath, Encoding.ASCII.GetBytes(result));
     }

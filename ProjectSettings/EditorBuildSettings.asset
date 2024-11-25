@@ -15,8 +15,8 @@ EditorBuildSettings:
     path: Assets/Scenes/MenuTutorial.unity
     guid: 9f4ad6007b450644580b66391ec9b9f6
   - enabled: 1
-    path: Assets/Scenes/PlaceDoorTutorial.unity
-    guid: fa788ccebcda15141af742bae3051009
+    path: Assets/Scenes/PlaceDoorT.unity
+    guid: a6df622fcdec10a42a64bc7a17265a0a
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: a8fa6fd35245bbb46944a7d578d89625
@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/diocane.unity
     guid: d7254db22d5c4a5499da7b815106621c
+  - enabled: 0
+    path: Assets/Scenes/PlaceDoorTutorial.unity
+    guid: bb2738666c2942b4b97538e119b8daba
   m_configObjects:
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: e69ae59d70ac6774ca7e855b86448387,
       type: 2}

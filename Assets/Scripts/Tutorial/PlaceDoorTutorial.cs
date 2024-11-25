@@ -70,6 +70,11 @@ public class PlaceDoorTutorial : MonoBehaviour
         step3AnchorPoints.SetActive(false);
     }
 
+    public void HideComplete()
+    {
+        completed.SetActive(false);
+    }
+
     // 5 - if step4 && user clicks 'continue' -> go to move popup
     public void HideStep4()
     {

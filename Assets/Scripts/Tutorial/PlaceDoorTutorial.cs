@@ -105,20 +105,22 @@ public class PlaceDoorTutorial : MonoBehaviour
         challenge.SetActive(true);
 
         // GET TIME
-        if(TimeTracker.Instance)
+        if(TimeTracker.Instance){
             TimeTracker.Instance.EndAction();
+        }
     }
 
     // 8 - if challengepopup && user clicks 'decline challenge' -> hide challenge pop up
     public void Decline()
     {
-        challenge.SetActive(false);
+        SceneManager.LoadScene("Menu");
     }
     
     // 9 - if challengepopup && user clicks 'accept challenge' -> hide challenge pop up & start timing
     public void Accept()
-    {    
+    {   TimeTracker.Instance.StartAction("challenge start");
         SceneManager.LoadScene("Menu");
+
     }
 
     // 10 - if challenge finished -> show finished challenge pop up

@@ -13,6 +13,8 @@ public class PlaceDoorTutorial : MonoBehaviour
     public GameObject end; // end of tutorial pop up
     public GameObject challenge; // start challenge 
     public GameObject challengeEnd; // finish challenge
+    //public GameObject steps; //steps
+    public GameObject completed; // step2 completed
 
     // 0 - start configuration -> manage what should be displayed when scene is opened
     public void Start()
@@ -52,7 +54,8 @@ public class PlaceDoorTutorial : MonoBehaviour
     public void GoToStep4()
     {
         step4.SetActive(true);
-        step3AnchorPoints.SetActive(false);
+        completed.SetActive(false);
+        //steps.SetActive(true);
 
         // GET TIME
         if(TimeTracker.Instance){
@@ -61,10 +64,20 @@ public class PlaceDoorTutorial : MonoBehaviour
         }
     }
 
+    public void Complete()
+    {
+        completed.SetActive(true);
+        step3AnchorPoints.SetActive(false);
+    }
+
     // 5 - if step4 && user clicks 'continue' -> go to move popup
     public void HideStep4()
     {
         step4.SetActive(false);
+    }
+
+    public void ShowMove()
+    {
         move.SetActive(true);
     }
 

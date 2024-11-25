@@ -23,7 +23,6 @@ public class MenuTutorial : MonoBehaviour
     // start configuration - manage what should be displayed when scene is opened
     public void Start()
     {
-        Assert.IsNotNull(start);
         Assert.IsNotNull(step1);
         Assert.IsNotNull(menuT);
         Assert.IsNotNull(manipulatorCheck);
@@ -35,18 +34,14 @@ public class MenuTutorial : MonoBehaviour
         Assert.IsNotNull(correctPick);
         Assert.IsNotNull(wrongPick);
 
-        step1.SetActive(false);
-        menuT.SetActive(false);
-        PUManager.ShowPopup(start);
-        step1Completed.SetActive(false);
+        menuT.SetActive(true);
         step2Row.SetActive(false);
         step2Pick.SetActive(false);
         step2Priority.SetActive(false);
 
         // GET TIME
-        if(TimeTracker.Instance)
-            TimeTracker.Instance.StartAction("menu tasks tutorial|intro message");
-    }
+        TimeTracker.Instance.StartAction("menu tasks tutorial|intro message");
+        Debug.Log("INIZIO TIMWR");}
 
     // if start && user clicks 'continue' -> go to step 1
     public void LoadStep1()
@@ -99,8 +94,12 @@ public class MenuTutorial : MonoBehaviour
     // 5 - if step2 && user clicks 'continue' -> go to step2Row
     public void GoToRow()
     {
-        step2.SetActive(false);
-        step2Row.SetActive(true);
+        if(TimeTracker.Instance){
+            TimeTracker.Instance.EndAction();
+            TimeTracker.Instance.StartAction("menu tasks tutorial|Chose a manteinance task");
+            step2.SetActive(false);
+            step2Row.SetActive(true);
+        }
 
     }
 
@@ -154,7 +153,10 @@ public class MenuTutorial : MonoBehaviour
         // GET TIME
         if(TimeTracker.Instance){
             TimeTracker.Instance.EndAction();
-            SceneManager.LoadScene("PlaceDoorTutorial");
+            SceneManager.LoadScene("PlaceDoorT");
+        }
+        else{
+            Debug.Log("miao");
         }
     }
 

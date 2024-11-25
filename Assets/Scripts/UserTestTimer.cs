@@ -40,6 +40,8 @@ public class TimeTracker : MonoBehaviour
 
         // Listen for scene changes
         SceneManager.sceneLoaded += OnSceneLoaded; 
+
+        SaveTimesToCSV(actionDurations, Application.persistentDataPath, $"diocane");
     }
 
     void Update()
@@ -50,6 +52,7 @@ public class TimeTracker : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        Debug.Log($"[UseTestTimer] OnSceneLoaded({scene})");
         if (!string.IsNullOrEmpty(currentSceneName))
             sceneTimes[currentSceneName] = Time.time - sceneStartTime;
 
@@ -73,11 +76,12 @@ public class TimeTracker : MonoBehaviour
         string filePath = Path.Combine(folderPathRoot, $"{FileName}.csv");
         SaveIntervalsTimeToCSV(data, filePath);
 
-        Debug.Log($"Scene times saved to {folderPathRoot}/{FileName}.csv");
+        Debug.Log($"[UserTestTimer] Scene times saved to {filePath}");
     }
 
     private void SaveIntervalsTimeToCSV(Dictionary<string, float> data, string filePath)
     {
+        Debug.Log("[UserTestTimer] saving intervals to CSV: " + filePath);
         var result = "";
         if (filePath.Contains("action"))
         {
@@ -106,7 +110,7 @@ public class TimeTracker : MonoBehaviour
 
     public void StartAction(string actionName)
     {
-        Debug.Log($"starting time for scene: {actionName}");
+        Debug.Log($"[UserTestTimer] Starting time for scene: {actionName}");
         if (!string.IsNullOrEmpty(currentAction))
             EndAction(); // End previous action if any
 
@@ -117,7 +121,7 @@ public class TimeTracker : MonoBehaviour
     // end the action and save it to the dictionary
     public void EndAction()
     {
-        Debug.Log($"completed action: {currentAction}");
+        Debug.Log($"[UserTestTimer] Finished action: {currentAction}");
         if (!string.IsNullOrEmpty(currentAction))
         {
             float duration = Time.time - actionStartTime;
@@ -125,13 +129,13 @@ public class TimeTracker : MonoBehaviour
 
             currentAction = null;
         }
-        Debug.Log("---current dictionary--------------------------");
+        Debug.Log("[UserTestTimer] Current Dictionary:");
         foreach(string k in actionDurations.Keys)
-            Debug.Log($"{k} : {actionDurations[k]}");
+            Debug.Log($"[UserTestTimer] {k} : {actionDurations[k]}");
     }
 
     // save everyting when we quit the app
-    void OnApplicationQuit()
+    public void SaveTimings()
     {
         string timestamp = System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
         SaveTimesToCSV( sceneTimes, Application.persistentDataPath, $"scene_times_{timestamp}");

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
 
 public class PlaceDoorTutorial : MonoBehaviour
@@ -19,9 +20,12 @@ public class PlaceDoorTutorial : MonoBehaviour
     // 0 - start configuration -> manage what should be displayed when scene is opened
     public void Start()
     {
-        step3.SetActive(true);
-        placeDoorMenu.SetActive(false);
-        step3Place.SetActive(false);
+        if(step3 != null)
+            step3.SetActive(true);
+        if(placeDoorMenu != null)
+            placeDoorMenu.SetActive(false);
+        if(step3Place != null)
+            step3Place.SetActive(false);
 
         // GET TIME
         if(TimeTracker.Instance)
@@ -118,9 +122,14 @@ public class PlaceDoorTutorial : MonoBehaviour
     
     // 9 - if challengepopup && user clicks 'accept challenge' -> hide challenge pop up & start timing
     public void Accept()
-    {   TimeTracker.Instance.StartAction("challenge start");
+    {   
+        if(TimeTracker.Instance) {
+            TimeTracker.Instance.StartAction("challenge start");
+        }
         SceneManager.LoadScene("Menu");
 
+        if(TimeTracker.Instance)
+            SaveData();
     }
 
     // 10 - if challenge finished -> show finished challenge pop up
@@ -128,18 +137,26 @@ public class PlaceDoorTutorial : MonoBehaviour
     {    
         
         // GET TIME end navigate steps timer and set challenge to false
-        if(TimeTracker.Instance.challengeOn){
-            challengeEnd.SetActive(true);
-            Debug.Log("finished with logs");
-            if(TimeTracker.Instance){
+        if(TimeTracker.Instance) {
+            if(TimeTracker.Instance.challengeOn){
+                challengeEnd.SetActive(true);
+                Debug.Log("finished with logs");
                 TimeTracker.Instance.EndAction();
                 TimeTracker.Instance.challengeOn = false;
             }
         }
+
+        if(TimeTracker.Instance)
+            SaveData();
     }
     // if exit tutorial -> start menu scene
     public void ExitTutorial()
     {
         SceneManager.LoadScene("Menu");
+    }
+
+    public void SaveData() {
+        Assert.IsNotNull(TimeTracker.Instance);
+        TimeTracker.Instance.SaveTimings();
     }
 }

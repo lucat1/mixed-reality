@@ -90,9 +90,9 @@ target/
 
 # CUSTOM HERE
 .venv/
-data_processing/data/*
+data_processing/data/interim
+data_processing/data/raw
 .vscode/
-data/*
 
 # Unity gitignore
 /[Ll]ibrary/

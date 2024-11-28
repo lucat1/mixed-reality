@@ -1,0 +1,11 @@
+Scene,Action,Time
+Login,login the user,41.07432
+Welcome,welcome the user,58.79115
+Tasks Menu Intro Tutorial,intro message,12.22049
+Tasks Menu Tutorial,choose a manteinance task,205.3682
+Place Door Intro Tutorial,intro message,17.94333
+Place Door Tutorial,place door,378.4448
+Steps Menu Tutorial,navigate steps,117.6988
+Tasks Menu Challenge,choose a manteinance task,24.24536
+Place Door Challenge,place the door,151.8672
+Steps Menu Challenge,navigate steps,7.084808

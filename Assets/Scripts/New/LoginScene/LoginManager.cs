@@ -26,6 +26,8 @@ public class LoginManager : MonoBehaviour
     private void Start()
     {
         print("SI INIZIA START LOGIN");
+
+        // fill user inputs (for semplicity)
         GameObject usernameInputObject = NewSceneManager.Instance.Search(gameObject, "UsernameInput");
         GameObject passwordInputObject = NewSceneManager.Instance.Search(gameObject, "PasswordInput");
 
@@ -49,24 +51,15 @@ public class LoginManager : MonoBehaviour
             Debug.LogError("PasswordInput not found in hierarchy!");
         }
 
-        // HELP: target viene null ma dovrebbe esere l'oggetto a cui e legato lo script
-        LoginManager loginManager = this;
-        print(loginManager);
-
+        // map login button
         loginButton = NewSceneManager.Instance.Search(gameObject,"LoginButton").GetComponent<PressableButton>();
-
-        // Map the LoginCheck method to the login button's click event
         if (loginButton != null)
         {
-            loginButton.OnClicked.AddListener(LoginCheck);
-            Debug.Log($"Number of listeners on OnClicked: {loginButton.OnClicked.GetPersistentEventCount()}");
-            for (int i = 0; i < loginButton.OnClicked.GetPersistentEventCount(); i++)
+            loginButton.OnClicked.RemoveAllListeners();
+            loginButton.OnClicked.AddListener(() =>
                 {
-                    var target = loginButton.OnClicked.GetPersistentTarget(i);
-                    var method = loginButton.OnClicked.GetPersistentMethodName(i);
-
-                    Debug.Log($"Listener {i}: Target = {target}, Method = {method}");
-                }
+                    LoginCheck();
+                });
 
         }
         else
@@ -75,19 +68,32 @@ public class LoginManager : MonoBehaviour
         }
     }
 
-    /// Checks the credentials -> transitions to the tutorial popup if correct
+    // checks the credentials -> transitions to the tutorial popup if correct
     public void LoginCheck()
     {
-        // Get input values (already filled)
+        // get input values (already filled)
         string enteredUsername = usernameInput.text;
         string enteredPassword = passwordInput.text;
 
-        // Check credentials
+        // check credentials
         if (enteredUsername == correctUsername && enteredPassword == correctPassword)
         {
             Debug.Log("Login successful");
             NewSceneManager.Instance.HideObject("LoginPanel");
-            NewSceneManager.Instance.ShowObject("StartTutorialPopUp");
+            NewPopUpManager.Instance.ShowPopup(
+            "Start Tutorial",
+            "Do you want to start the tutorial?",
+            "No", 
+            "Yessssssss", 
+            () =>
+            {
+                Debug.Log("Tutorial started");
+            },
+            () =>
+            {
+                Debug.Log("Go to Menu");
+            }
+        );
         }
         else
         {

@@ -14,13 +14,13 @@ using UnityEngine;
 
 public class NewSceneManager : MonoBehaviour
 {
-    // Singleton instance of SceneManager for global access
+    // singleton instance of SceneManager for global access
     public static NewSceneManager Instance;
 
-    // Boolean to track if the tutorial is active (read-only from outside SceneManager)
+    // boolean to track if the tutorial is active (read-only from outside SceneManager)
     public bool TutorialActive { get; private set; } = false;
 
-    // Sets up the singleton instance and ensures the SceneManager persists across scenes
+    // sets up the singleton instance and ensures the SceneManager persists across scenes
     private void Awake()
     {
         if (Instance == null)
@@ -28,10 +28,10 @@ public class NewSceneManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
-            // Ensure all objects are hidden at the start
+            // all objects are hidden at the start
             HideAllObjects();
 
-            // Activate the specific object in the first scene
+            // activate the specific object in the first scene
             print("SHOWW");
             ShowObject("LoginSceneCanvas");
             ShowObject("LoginPanel");  
@@ -42,7 +42,7 @@ public class NewSceneManager : MonoBehaviour
         }
     }
 
-    /* Loads a scene by name, hides all objects in the scene, and activates a specified list of object names
+    /* Loads a scene by name, hides all objects in the scene and activates a specified list of object names
        Parameters: 
         - sceneName: The name of the scene to load
         - objectNamesToActivate: The list of object names to activate after the scene is loaded 
@@ -64,7 +64,7 @@ public class NewSceneManager : MonoBehaviour
         Debug.Log($"{sceneName} loading completed");
     }
 
-    // Hides all objects in the loaded scene
+    // hide all objects in the loaded scene
     private void HideAllObjects()
     {
         foreach (GameObject obj in UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects())
@@ -86,7 +86,7 @@ public class NewSceneManager : MonoBehaviour
         Debug.Log("All objects in the scene are hidden");
     }
 
-    // Activates a specific GameObject by its name
+    // activate a specific GameObject by its name
     public void ShowObject(string objectName)
     {
         if (!string.IsNullOrEmpty(objectName))
@@ -106,7 +106,7 @@ public class NewSceneManager : MonoBehaviour
         }
     }
 
-    // Deactivates a specific GameObject by its name
+    // deactivates a specific GameObject by its name
     public void HideObject(string objectName)
     {
         if (!string.IsNullOrEmpty(objectName))

@@ -39,6 +39,7 @@ public class MenuManager : MonoBehaviour
         if (NewSceneManager.Instance.TutorialActive)
         {
             BuildStartPopUp();
+
         }
         else
         {
@@ -115,9 +116,9 @@ public class MenuManager : MonoBehaviour
     private void BuildStartPopUp(){
             NewSceneManager.Instance.HideObject("ManipulationBar");
             NewSceneManager.Instance.HideObject("SettingsButton");
-            NewPopUpManager.Instance.ShowSinglePopup(
-            "Start Tutorial",
-            "Do you want to start the tutorial?",
+            NewPopUpManager.Instance.ShowBigPopUp(
+            "Step 1: Choose a Maintenance Task",
+            "Each row represents a maintenance task that has to be done. Each task is identified by: \nThe train and coach where it must be performed \nThe specific door to target \nA brief description of the problem \nTry to choose one maintenance task to continue with the tutorial",
             "Continue", 
             () =>
             {
@@ -128,6 +129,22 @@ public class MenuManager : MonoBehaviour
             }
             );
     }
+
+    private void BuildFinishStep1(){
+        NewSceneManager.Instance.HideObject("MenuPanel");
+        NewPopUpManager.Instance.ShowSinglePopup(
+            "Step 1 successfully completed!",
+            "Click \"Continue\" to proceed with the tutorial.",
+             "Continue", 
+            () =>
+            {
+             Debug.Log("opt1");
+             NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel" });
+
+            }
+            );
+
+    }
     private void addItemAction(GameObject item) {
         PressableButton pb = item.GetComponent<PressableButton>();
         pb.OnClicked.AddListener(LoadScene);
@@ -135,6 +152,16 @@ public class MenuManager : MonoBehaviour
 
     void LoadScene() {
 
-        SceneManager.LoadScene(sceneName);
+        if (NewSceneManager.Instance.TutorialActive)
+        {
+            BuildFinishStep1();
+
+        }
+        else
+        {
+        Debug.Log("opt2");
+        NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel" });
+
+        }
     }
 }

@@ -220,6 +220,90 @@ public class NewPopUpManager : MonoBehaviour
 
     }
 
+    public void ShowBigPopUp(
+        string headerText,
+        string mainText,
+        string buttonText,
+        Action buttonCallback)
+    {
+        // ensure only one is active
+        if (currentPopup != null)
+        {
+            Destroy(currentPopup);
+        }
+
+        // instantiate the popup prefab
+        currentPopup = Instantiate(singleButtonBrefab, transform);
+
+        // fill title
+        var header = currentPopup.transform.Find("Canvas/Header").GetComponent<TextMeshProUGUI>();
+        if (header != null)
+        {
+            header.text = headerText;
+        }
+        else
+        {
+            Debug.LogError("Header not found");
+        }
+
+        // fill body
+        var mainTextComponent = currentPopup.transform.Find("Canvas/Main Text").GetComponent<TextMeshProUGUI>();
+        if (mainTextComponent != null)
+        {
+            mainTextComponent.text = mainText;
+        }
+        else
+        {
+            Debug.LogError("Main Text not foun");
+        }
+
+        // fill button
+        var button = currentPopup.transform.Find("Canvas/Horizontal/Positive/Frontplate/AnimatedContent/Text")
+            .GetComponent<TextMeshProUGUI>();
+        if (button != null)
+        {
+            button.text = buttonText;
+
+            // action
+            var buttonobject = currentPopup.transform.Find("Canvas/Horizontal/Positive").gameObject;
+            var buttonComponent = buttonobject.GetComponent<PressableButton>();
+            if (buttonComponent != null)
+            {
+                buttonComponent.OnClicked.RemoveAllListeners(); 
+                buttonComponent.OnClicked.AddListener(() =>
+                {
+                    buttonCallback?.Invoke();
+                    ClosePopup();
+                });
+            }
+            else
+            {
+                Debug.LogError("button component not found!");
+            }
+
+        Transform backplateTransform = currentPopup.transform.Find("Canvas/UX.Slate.ContentBackplate");
+
+        if (backplateTransform != null)
+        {
+            // Adjust the scale of Y to 150
+            Vector3 newScale = backplateTransform.localScale;
+            newScale.y = 150f;
+            backplateTransform.localScale = newScale;
+
+            Debug.Log("Adjusted UX.Slate.ContentBackplate scale to: " + backplateTransform.localScale);
+        }
+        else
+        {
+            Debug.LogError("UX.Slate.ContentBackplate not found in popup prefab!");
+        }
+        }
+        else
+        {
+            Debug.LogError("Button not found");
+        }
+
+    }
+
     // Enures no popup stays active after the user interaction is complete
     public void ClosePopup()
     {

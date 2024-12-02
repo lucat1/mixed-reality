@@ -165,7 +165,7 @@ public class NewPopUpManager : MonoBehaviour
         }
 
         // instantiate the popup prefab
-        currentPopup = Instantiate(doubleButtonPrefab, transform);
+        currentPopup = Instantiate(singleButtonBrefab, transform);
 
         // fill title
         var header = currentPopup.transform.Find("Canvas/Header").GetComponent<TextMeshProUGUI>();
@@ -190,14 +190,14 @@ public class NewPopUpManager : MonoBehaviour
         }
 
         // fill button
-        var button = currentPopup.transform.Find("Canvas/Horizontal/Left/Frontplate/AnimatedContent/Text")
+        var button = currentPopup.transform.Find("Canvas/Horizontal/Positive/Frontplate/AnimatedContent/Text")
             .GetComponent<TextMeshProUGUI>();
         if (button != null)
         {
             button.text = buttonText;
 
             // action
-            var buttonobject = currentPopup.transform.Find("Canvas/Horizontal/Left").gameObject;
+            var buttonobject = currentPopup.transform.Find("Canvas/Horizontal/Positive").gameObject;
             var buttonComponent = buttonobject.GetComponent<PressableButton>();
             if (buttonComponent != null)
             {

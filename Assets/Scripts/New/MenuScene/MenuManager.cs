@@ -38,28 +38,16 @@ public class MenuManager : MonoBehaviour
         
         if (NewSceneManager.Instance.TutorialActive)
         {
-            NewSceneManager.Instance.HideObject("ManipulatorBar");
-            NewSceneManager.Instance.HideObject("SettingsButton");
-            NewPopUpManager.Instance.ShowSinglePopup(
-            "Start Tutorial",
-            "Do you want to start the tutorial?",
-            "Continue", 
-            () =>
-            {
-                Debug.Log("Yass");
-                NewSceneManager.Instance.ShowObject("ManipulatorBar");
-                NewSceneManager.Instance.ShowObject("SettingsButton");
-                BuildMenu();
-            }
-            );
+            BuildStartPopUp();
         }
-        else{
-            BuildMenu();
+        else
+        {
+        BuildMenu();
         }
-
     }
 
     private void BuildMenu(){
+
         Console.WriteLine(jsonFile.ToString());
         NTasks tasks = JsonUtility.FromJson<NTasks>(jsonFile.ToString());
         foreach (var entry in tasks.tasks)
@@ -124,6 +112,22 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    private void BuildStartPopUp(){
+            NewSceneManager.Instance.HideObject("ManipulationBar");
+            NewSceneManager.Instance.HideObject("SettingsButton");
+            NewPopUpManager.Instance.ShowSinglePopup(
+            "Start Tutorial",
+            "Do you want to start the tutorial?",
+            "Continue", 
+            () =>
+            {
+                Debug.Log("Yass");
+                NewSceneManager.Instance.ShowObject("ManipulationBar");
+                NewSceneManager.Instance.ShowObject("SettingsButton");
+                BuildMenu();
+            }
+            );
+    }
     private void addItemAction(GameObject item) {
         PressableButton pb = item.GetComponent<PressableButton>();
         pb.OnClicked.AddListener(LoadScene);

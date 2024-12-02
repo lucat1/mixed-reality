@@ -32,7 +32,6 @@ public class NewSceneManager : MonoBehaviour
             HideAllObjects();
 
             // activate the specific object in the first scene
-            print("SHOWW");
             ShowObject("LoginSceneCanvas");
             ShowObject("LoginPanel");  
         }
@@ -157,5 +156,22 @@ public class NewSceneManager : MonoBehaviour
         return null;
     }
 
+    public void GoTo(List<string> objsToShow){
+        HideAllObjects();
+        foreach (string obj in objsToShow){
+            ShowObject(obj);  
+        }
+    }
+
+    public void StartTutorial(){
+        TutorialActive = true;
+    }
+
+    public void EndTutorial(){
+        TutorialActive = false;
+    }
+
 
 }
+
+

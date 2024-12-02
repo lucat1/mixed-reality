@@ -3,26 +3,30 @@
         {
             "priority": 1,
             "train_number": "015-5",
+            "coach_number": "4",
             "door_number": "3",
-            "problem": "Replace primary latch    "
+            "problem": "Door leaf distributor not functioning"
         },
         {
             "priority": 2,
             "train_number": "001-5",
+            "coach_number": "8",
             "door_number": "1",
-            "problem": "Drive motor malfunction  "
+            "problem": "Sensor not deteting door closure"
         },
         {
             "priority": 3,
             "train_number": "047-8",
+            "coach_number": "5",
             "door_number": "3",
-            "problem": "Computer error           "
+            "problem": "Board computer error"
         },
         {
             "priority": 2,
             "train_number": "023-9",
+            "coach_number": "6",
             "door_number": "2",
-            "problem": "Computer does not work   "
+            "problem": "Object blocking door track"
         }
     ]
 }

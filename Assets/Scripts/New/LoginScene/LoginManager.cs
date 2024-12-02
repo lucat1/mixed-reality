@@ -11,6 +11,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using MixedReality.Toolkit.UX;
 using UnityEngine.Events;
+using System.Collections.Generic;
+
 
 
 public class LoginManager : MonoBehaviour
@@ -80,20 +82,25 @@ public class LoginManager : MonoBehaviour
         {
             Debug.Log("Login successful");
             NewSceneManager.Instance.HideObject("LoginPanel");
-            NewPopUpManager.Instance.ShowPopup(
+            NewPopUpManager.Instance.ShowDoublePopup(
             "Start Tutorial",
             "Do you want to start the tutorial?",
             "No", 
-            "Yessssssss", 
+            "Yes", 
             () =>
             {
-                Debug.Log("Tutorial started");
+                Debug.Log(NewSceneManager.Instance.TutorialActive);
+                Debug.Log("Go to menu");
+                NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel" });
             },
             () =>
             {
-                Debug.Log("Go to Menu");
+                NewSceneManager.Instance.StartTutorial();
+                Debug.Log(NewSceneManager.Instance.TutorialActive);
+                Debug.Log("Tutorial Started");
+                NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel" });
             }
-        );
+            );
         }
         else
         {

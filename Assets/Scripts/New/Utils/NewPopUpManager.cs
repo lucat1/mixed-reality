@@ -18,7 +18,8 @@ public class NewPopUpManager : MonoBehaviour
     // Singleton instance of NewPopUpManager for global access
     public static NewPopUpManager Instance;
 
-    [SerializeField] private GameObject popupPrefab; // popup prefab
+    [SerializeField] private GameObject singleButtonBrefab; // popup prefab with one button
+    [SerializeField] private GameObject doubleButtonPrefab; // popup prefab with 2 buttons
     private GameObject currentPopup; // current active popup
 
     // singleton instance and makes sue the PopUpManager persists across scenes
@@ -44,7 +45,7 @@ public class NewPopUpManager : MonoBehaviour
        - leftButtonCallback: action to execute when the left button is clicked
        - rightButtonCallback: action to execute when the right button is clicked
     */
-    public void ShowPopup(
+    public void ShowDoublePopup(
         string headerText,
         string mainText,
         string leftButtonText,
@@ -59,7 +60,7 @@ public class NewPopUpManager : MonoBehaviour
         }
 
         // instantiate the popup prefab
-        currentPopup = Instantiate(popupPrefab, transform);
+        currentPopup = Instantiate(doubleButtonPrefab, transform);
 
         // fill title
         var header = currentPopup.transform.Find("Canvas/Header").GetComponent<TextMeshProUGUI>();
@@ -140,6 +141,83 @@ public class NewPopUpManager : MonoBehaviour
         {
             Debug.LogError("Right Button not found");
         }
+    }
+
+    /* Creates and displays the pop up
+       Parameters:
+       - headerText: title of the popup
+       - mainText: body content of the popup
+       - leftButtonText: label for the left button
+       - rightButtonText: label for the right button
+       - leftButtonCallback: action to execute when the left button is clicked
+       - rightButtonCallback: action to execute when the right button is clicked
+    */
+    public void ShowSinglePopup(
+        string headerText,
+        string mainText,
+        string buttonText,
+        Action buttonCallback)
+    {
+        // ensure only one is active
+        if (currentPopup != null)
+        {
+            Destroy(currentPopup);
+        }
+
+        // instantiate the popup prefab
+        currentPopup = Instantiate(doubleButtonPrefab, transform);
+
+        // fill title
+        var header = currentPopup.transform.Find("Canvas/Header").GetComponent<TextMeshProUGUI>();
+        if (header != null)
+        {
+            header.text = headerText;
+        }
+        else
+        {
+            Debug.LogError("Header not found");
+        }
+
+        // fill body
+        var mainTextComponent = currentPopup.transform.Find("Canvas/Main Text").GetComponent<TextMeshProUGUI>();
+        if (mainTextComponent != null)
+        {
+            mainTextComponent.text = mainText;
+        }
+        else
+        {
+            Debug.LogError("Main Text not foun");
+        }
+
+        // fill button
+        var button = currentPopup.transform.Find("Canvas/Horizontal/Left/Frontplate/AnimatedContent/Text")
+            .GetComponent<TextMeshProUGUI>();
+        if (button != null)
+        {
+            button.text = buttonText;
+
+            // action
+            var buttonobject = currentPopup.transform.Find("Canvas/Horizontal/Left").gameObject;
+            var buttonComponent = buttonobject.GetComponent<PressableButton>();
+            if (buttonComponent != null)
+            {
+                buttonComponent.OnClicked.RemoveAllListeners(); 
+                buttonComponent.OnClicked.AddListener(() =>
+                {
+                    buttonCallback?.Invoke();
+                    ClosePopup();
+                });
+            }
+            else
+            {
+                Debug.LogError("button component not found!");
+            }
+        }
+        else
+        {
+            Debug.LogError("Button not found");
+        }
+
     }
 
     // Enures no popup stays active after the user interaction is complete

@@ -1,26 +1,21 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using MixedReality.Toolkit;
-using Unity.VisualScripting;
+using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.UIElements;
 
 public class DoorManager : MonoBehaviour
 {
-    // Reference to the PlacementManager on the placement menu.
-    // Used to obtain the scale of the door so that volume computations
-    // are scale-agnostic.
-    public PlacementManager placementManager;
     // Threshold to decide if a component should be hidden. If the component's
     // volume is lower than the threshold, it gets hidden.
     public float volumeThreshold;
     public Material transparentMaterial;
 
     public Material glowingMaterial;
+    // Distance between the door and the plyer below which the door gets hidden.
+    public float hideDoorThreshold;
 
     // Threshold to decide if a component should . If the component's
     // volume is lower than the threshold, it gets hidden.
@@ -28,15 +23,42 @@ public class DoorManager : MonoBehaviour
 
     public GameObject ringPrefab;
 
+    public static DoorManager Instance;
+    // sets up the singleton instance and ensures the SceneManager persists across scenes
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void Log(object message) {
         Debug.Log("[Door " + gameObject.name + "] " + message);
     }
 
-    public Vector3 Scale() {
-        return placementManager.Scale();
+    private Vector3 planeScale;
+    private Vector3 scale;
+    private Vector3 position;
+    private Quaternion rotation;
+
+    public void SetPlaneScale(Vector3 ps) {
+        planeScale = ps;
+    }
+    public void SetPosition(Vector3 p) {
+        position = p;
+    }
+    public void SetRotation(Quaternion r) {
+        rotation = r;
     }
     public float ScaleFactor() {
-        return Scale().x;
+        Assert.IsFalse(scale.x == 0);
+        return scale.x;
     }
 
     public float VolumeFactor() {
@@ -47,7 +69,8 @@ public class DoorManager : MonoBehaviour
     public List<GameObject> GetDoorComponents(Func<GameObject, bool> f) {
         List<GameObject> list = new ();
         Queue<Transform> q = new ();
-        foreach(Transform c in transform)
+        Transform t = transform.Find("DoorContainer/DoorScale/_/Door 1");
+        foreach(Transform c in t)
             q.Enqueue(c);
 
         while(q.Count > 0) {
@@ -144,41 +167,36 @@ public class DoorManager : MonoBehaviour
         gameObjectsWithRing.Remove(go);
         Destroy(ring);
     }
-
-    private bool visible = true;
-
-    public void Show() {
-        Log("Showing door");
-        visible = true;
-        gameObject.SetActive(visible);
-    }
-
-    public bool IsVisible() {
-        return visible;
-    }
-
-    public void Hide() {
-        Log("Hiding door");
-        visible = false;
-        gameObject.SetActive(visible);
-    }
-
-    public void Toggle() {
-        if (IsVisible())
-            Hide();
-        else
-            Show();
+    private Bounds DoorBounds(GameObject g) {
+        // From: https://gamedev.stackexchange.com/a/86999
+        var b = new Bounds(g.transform.position, Vector3.zero);
+        foreach (Renderer r in g.GetComponentsInChildren<Renderer>())
+        {
+            b.Encapsulate(r.bounds);
+        }
+        return b;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        Assert.IsNotNull(placementManager);
+        // Set the door position
+        transform.position = position;
+        transform.rotation = rotation;
+
+        Transform doorScaleContainer = transform.Find("DoorContainer/DoorScale");
+        doorScaleContainer.localScale = Vector3.one;
+        var doorScale = DoorBounds(doorScaleContainer.gameObject).size;
+        var sc = Mathf.Max(planeScale.x / doorScale.x, planeScale.y / doorScale.y, planeScale.z / doorScale.z);
+        scale = new Vector3(sc, sc, sc);
+        doorScaleContainer.localScale = scale;
+        doorScaleContainer.gameObject.SetActive(true);
+
+        transform.Find("DoorContainer").localPosition = Vector3.zero;
+
         RemoveSmallComponents();
         foreach(var t in GetDoorComponents(go => !currentlyHighlighted.Contains(go)))
             SetMaterial(t, transparentMaterial);
-
-        Hide();
     }
 
     // Update is called once per frame
@@ -187,5 +205,19 @@ public class DoorManager : MonoBehaviour
         // Make the rings face the player
         foreach(var go in gameObjectsWithRing.Values)
             go.transform.LookAt(Camera.main.transform);
+
+        // Hide the door when it's too close to the player
+        var distance = Vector3.Distance(Camera.main.transform.position, transform.position);
+        // TODO: hide instead of doing SetActive(false) so this logic doesn't stop working.
+        if (distance < hideDoorThreshold)
+        {
+            if(gameObject.activeSelf)
+                gameObject.SetActive(false);
+        }
+        else
+        {
+            if (!gameObject.activeSelf)
+                gameObject.SetActive(true);
+        }
     }
 }

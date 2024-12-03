@@ -18,12 +18,14 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [Serializable]
-class NTasks {
+class NTasks
+{
     public List<NEntry> tasks;
 }
 
 [Serializable]
-class NEntry {
+class NEntry
+{
     public int id;
     public int priority;
     public string train_number;
@@ -54,7 +56,7 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    
+
     //Builds the menu dynamically from the JSON file.
     private void BuildMenu()
     {
@@ -157,7 +159,7 @@ public class MenuManager : MonoBehaviour
             "Continue",
             () =>
             {
-                NewSceneManager.Instance.GoTo(new List<string> { "DoorSceneCanvas", "DoorPanel" });
+                NewSceneManager.Instance.GoTo(new List<string> { "PlacementSceneCanvas", "PlacementPanel" });
             }
         );
     }
@@ -181,7 +183,7 @@ public class MenuManager : MonoBehaviour
         else
         {
             NewSceneManager.Instance.HideObject("MenuSceneCanvas");
-            NewSceneManager.Instance.GoTo(new List<string> { "DoorSceneCanvas", "DoorPanel" });
+            NewSceneManager.Instance.GoTo(new List<string> { "PlacementSceneCanvas", "PlacementPanel" });
         }
     }
 }

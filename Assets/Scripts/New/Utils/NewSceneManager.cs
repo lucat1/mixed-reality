@@ -28,41 +28,14 @@ public class NewSceneManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
-            Debug.Log("--------------> start: LOGIN");
-
-            // all objects are hidden at the start
-            HideAllObjects();
-
-            // activate the specific object in the first scene
-            ShowObject("LoginSceneCanvas");
-            ShowObject("LoginPanel");  
+            // Hide all objects and show the initial scene
+            // GoTo(new List<string> {"LoginSceneCanvas", "LoginPanel"});
+            GoTo(new List<string> { "PlacementSceneCanvas", "PlacementPanel" });
         }
         else
         {
             Destroy(gameObject);
         }
-    }
-
-    /* Loads a scene by name, hides all objects in the scene and activates a specified list of object names
-       Parameters: 
-        - sceneName: The name of the scene to load
-        - objectNamesToActivate: The list of object names to activate after the scene is loaded 
-    */
-    public void NewLoadScene(string sceneName, List<string> objectNamesToActivate)
-    {
-        //Debug.Log($"Loading scene: {sceneName}");
-        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
-        HideAllObjects(); 
-
-        if (objectNamesToActivate != null)
-        {
-            foreach (var objectName in objectNamesToActivate)
-            {
-                ShowObject(objectName);
-            }
-        }
-
-        Debug.Log($"{sceneName} loading completed");
     }
 
     // hide all objects in the loaded scene
@@ -71,11 +44,8 @@ public class NewSceneManager : MonoBehaviour
         foreach (GameObject obj in UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects())
         {
             // Skip essential objects
-            if (!obj.name.Contains("Scene"))
+            if (obj.name.Contains("Scene"))
             {
-                //Debug.Log($"Skipping: {obj.name}");
-            }
-            else{
                 obj.SetActive(false);
                 foreach (Transform child in obj.transform)
                 {
@@ -84,7 +54,7 @@ public class NewSceneManager : MonoBehaviour
             }
         }
 
-        Debug.Log("All objects in the scene are hidden");
+        Debug.Log("[SceneManager] All objects in the scene are hidden");
     }
 
     // activate a specific GameObject by its name
@@ -92,17 +62,15 @@ public class NewSceneManager : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(objectName))
         {
-            print("stringa ce");
             GameObject obj = FindInScene(objectName);
-            print(obj);
             if (obj != null)
             {
+                Debug.Log($"[SceneManager] Showing '{objectName}'");
                 obj.SetActive(true);
-                //Debug.Log($"Object '{objectName}' is active");
             }
             else
             {
-                Debug.LogWarning($"Object '{objectName}' not found in the scene");
+                Debug.LogWarning($"[SceneManager] Object '{objectName}' not found in the scene");
             }
         }
     }
@@ -120,7 +88,7 @@ public class NewSceneManager : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning($"Object '{objectName}' not found in the scene");
+                Debug.LogWarning($"[SceneManager] Object '{objectName}' not found in the scene");
             }
         }
     }
@@ -159,24 +127,24 @@ public class NewSceneManager : MonoBehaviour
     }
 
     // this is the same as loadScene except it does not change scene - it deactivates everything except from what is in objsToShow list
-    public void GoTo(List<string> objsToShow){
+    public void GoTo(List<string> objsToShow)
+    {
         HideAllObjects();
-        foreach (string obj in objsToShow){
-            ShowObject(obj);  
+        foreach (string obj in objsToShow)
+        {
+            ShowObject(obj);
         }
     }
 
     // update TutorialActive flag (to True)
-    public void StartTutorial(){
+    public void StartTutorial()
+    {
         TutorialActive = true;
     }
 
     // update TutorialActive flag (to False)
-    public void EndTutorial(){
+    public void EndTutorial()
+    {
         TutorialActive = false;
     }
-
-
 }
-
-

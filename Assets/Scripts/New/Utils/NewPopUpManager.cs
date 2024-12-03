@@ -70,7 +70,7 @@ public class NewPopUpManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Header not found");
+            Debug.LogError("[PopUpManager] Header not found");
         }
 
         // fill body
@@ -81,7 +81,7 @@ public class NewPopUpManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Main Text not foun");
+            Debug.LogError("[PopUpManager] Main Text not foun");
         }
 
         // fill left button
@@ -105,12 +105,12 @@ public class NewPopUpManager : MonoBehaviour
             }
             else
             {
-                Debug.LogError("Left button component not found!");
+                Debug.LogError("[PopUpManager] Left button component not found!");
             }
         }
         else
         {
-            Debug.LogError("Left Button not found");
+            Debug.LogError("[PopUpManager] Left Button not found");
         }
 
         // fill right button
@@ -134,12 +134,12 @@ public class NewPopUpManager : MonoBehaviour
             }
             else
             {
-                Debug.LogError("Right button component not found");
+                Debug.LogError("[PopUpManager] Right button component not found");
             }
         }
         else
         {
-            Debug.LogError("Right Button not found");
+            Debug.LogError("[PopUpManager] Right Button not found");
         }
     }
 
@@ -175,7 +175,7 @@ public class NewPopUpManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Header not found");
+            Debug.LogError("[PopUpManager] Header not found");
         }
 
         // fill body
@@ -186,7 +186,7 @@ public class NewPopUpManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Main Text not foun");
+            Debug.LogError("[PopUpManager] Main Text not foun");
         }
 
         // fill button
@@ -210,12 +210,12 @@ public class NewPopUpManager : MonoBehaviour
             }
             else
             {
-                Debug.LogError("button component not found!");
+                Debug.LogError("[PopUpManager] button component not found!");
             }
         }
         else
         {
-            Debug.LogError("Button not found");
+            Debug.LogError("[PopUpManager] Button not found");
         }
 
     }
@@ -252,7 +252,7 @@ public class NewPopUpManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Header not found");
+            Debug.LogError("[PopUpManager] Header not found");
         }
 
         // fill body
@@ -263,7 +263,7 @@ public class NewPopUpManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Main Text not foun");
+            Debug.LogError("[PopUpManager] Main Text not foun");
         }
 
         // fill button
@@ -287,7 +287,7 @@ public class NewPopUpManager : MonoBehaviour
             }
             else
             {
-                Debug.LogError("button component not found!");
+                Debug.LogError("[PopUpManager] Button component not found!");
             }
 
         // scale the backplate
@@ -300,16 +300,16 @@ public class NewPopUpManager : MonoBehaviour
             newScale.y = 150f;
             backplateTransform.localScale = newScale;
 
-            Debug.Log("Adjusted UX.Slate.ContentBackplate scale to: " + backplateTransform.localScale);
+            Debug.Log("[PopUpManager] Adjusted UX.Slate.ContentBackplate scale to: " + backplateTransform.localScale);
         }
         else
         {
-            Debug.LogError("UX.Slate.ContentBackplate not found in popup prefab!");
+            Debug.LogError("[PopUpManager] UX.Slate.ContentBackplate not found in popup prefab!");
         }
         }
         else
         {
-            Debug.LogError("Button not found");
+            Debug.LogError("[PopUpManager] Button not found");
         }
 
     }

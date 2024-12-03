@@ -5,7 +5,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
-using MixedReality.Toolkit.SpatialManipulation;
 
 [Serializable]
 class JSONSteps {
@@ -25,29 +24,15 @@ public class StepsManager : MonoBehaviour
 {
     // A JSON file containing all the steps required to perform the current maintenance.
     public TextAsset stepsFile;
-    public DoorManager doorManager;
     public PlacementManager placeDoor;
-    public MiniatureManager miniatureManager;
-    public GameObject challengeEnd; // finish challenge
-    JSONSteps steps;
+    private JSONSteps steps;
+    private DoorManager dm;
 
     int currentStepIndex;
     public void Reset() {
         // reset step
+        Debug.Log("[StepsManager] Resetting to first step");
         currentStepIndex = 0;
-    }
-
-    public void Show() {
-        // Show the steps menu
-        gameObject.SetActive(true);
-
-        Reset();
-        miniatureManager.Reset();
-        DisplayStep();
-    }
-
-    public void Hide() {
-        gameObject.SetActive(false);
     }
 
     bool IsLastStep() {
@@ -73,7 +58,7 @@ public class StepsManager : MonoBehaviour
         var step = CurrentStep();
         string composedText = "<size=90>Step " + (currentStepIndex+1).ToString() + "</size>" + "<br>" +  "<size=70><b>" + step.step_description + "</b></size>";
         instructionText.text = composedText;
-        doorManager.HighlightComponents(new () { step.component_code }, step.ring);
+        dm.HighlightComponents(new () { step.component_code }, step.ring);
 
         // Enable/Disable finish/next button
         transform.Find(donePath).gameObject.SetActive(IsLastStep());
@@ -95,11 +80,14 @@ public class StepsManager : MonoBehaviour
     }
 
     public void Done() {
+        NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel" });
+
         // if the challenge is not acative we go to main menu
         // otherwise the user can come back to main menu from challenge completed popoup
+        // TODO: log!!
         if(TimeTracker.Instance){
             if(!TimeTracker.Instance.challengeOn)
-                SceneManager.LoadScene("Menu");
+                Debug.LogError("DO LOGGING!!");
         }
     }
 
@@ -107,6 +95,14 @@ public class StepsManager : MonoBehaviour
     void Start()
     {
         steps = JsonUtility.FromJson<JSONSteps>(stepsFile.ToString());
-        Hide();
+        dm = transform.parent.GetComponentInChildren<DoorManager>();
+        Assert.IsNotNull(dm);
+    }
+    
+    void OnEnable() {
+        Reset();
+        // Prevent DisplayStep from being called when the elemet has not been initialized by Start() yet
+        if (steps != null)
+            DisplayStep();
     }
 }

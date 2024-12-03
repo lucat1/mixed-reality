@@ -45,7 +45,7 @@ public class MiniatureManager : MonoBehaviour
     {
         // activate miniature
         gameObject.SetActive(true);
-        dm.Show();
+        // dm.Show();
 
         // place the object in front of the player
         Camera playerCamera = Camera.main;
@@ -58,7 +58,7 @@ public class MiniatureManager : MonoBehaviour
     public void Hide()
     {
         gameObject.SetActive(false);
-        dm.Hide();
+        // dm.Hide();
     }
     public void Reset(){
         Debug.Log("[MiniatureManager] reset indiex");

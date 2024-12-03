@@ -36,7 +36,7 @@ public class NewPopUpManager : MonoBehaviour
         }
     }
 
-    /* Creates and displays the pop up
+    /* Creates and displays the double pop up (aka popup with two buttons)
        Parameters:
        - headerText: title of the popup
        - mainText: body content of the popup
@@ -53,7 +53,7 @@ public class NewPopUpManager : MonoBehaviour
         Action leftButtonCallback,
         Action rightButtonCallback)
     {
-        // ensure only one is active
+        // only one is active
         if (currentPopup != null)
         {
             Destroy(currentPopup);
@@ -143,7 +143,7 @@ public class NewPopUpManager : MonoBehaviour
         }
     }
 
-    /* Creates and displays the pop up
+    /* Creates and displays the single pop up (aka single button)
        Parameters:
        - headerText: title of the popup
        - mainText: body content of the popup
@@ -158,7 +158,7 @@ public class NewPopUpManager : MonoBehaviour
         string buttonText,
         Action buttonCallback)
     {
-        // ensure only one is active
+        // only one is active
         if (currentPopup != null)
         {
             Destroy(currentPopup);
@@ -220,13 +220,22 @@ public class NewPopUpManager : MonoBehaviour
 
     }
 
+    /* Creates and displays the big single pop up (aka single button but bigger size to fit text)
+       Parameters:
+       - headerText: title of the popup
+       - mainText: body content of the popup
+       - leftButtonText: label for the left button
+       - rightButtonText: label for the right button
+       - leftButtonCallback: action to execute when the left button is clicked
+       - rightButtonCallback: action to execute when the right button is clicked
+    */
     public void ShowBigPopUp(
         string headerText,
         string mainText,
         string buttonText,
         Action buttonCallback)
     {
-        // ensure only one is active
+        // only one is active
         if (currentPopup != null)
         {
             Destroy(currentPopup);
@@ -281,11 +290,12 @@ public class NewPopUpManager : MonoBehaviour
                 Debug.LogError("button component not found!");
             }
 
+        // scale the backplate
         Transform backplateTransform = currentPopup.transform.Find("Canvas/UX.Slate.ContentBackplate");
 
         if (backplateTransform != null)
         {
-            // Adjust the scale of Y to 150
+            // scale of Y to 150
             Vector3 newScale = backplateTransform.localScale;
             newScale.y = 150f;
             backplateTransform.localScale = newScale;
@@ -304,7 +314,7 @@ public class NewPopUpManager : MonoBehaviour
 
     }
 
-    // Enures no popup stays active after the user interaction is complete
+    // no popup stays active after the user interaction is complete
     public void ClosePopup()
     {
         if (currentPopup != null)

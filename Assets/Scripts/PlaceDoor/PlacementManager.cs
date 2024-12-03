@@ -129,6 +129,11 @@ public class PlacementManager : MonoBehaviour
 
     void Start()
     {
+        if (NewSceneManager.Instance.TutorialActive)
+        {
+            BuildStep2PopUp();
+
+        }
         dm = door.GetComponent<DoorManager>();
         d = distance.GetComponent<Distance>();
         sm = steps.GetComponent<StepsManager>();
@@ -140,5 +145,19 @@ public class PlacementManager : MonoBehaviour
                 TimeTracker.Instance.StartAction("challenge|place the door");
             }
         }
+    }
+
+    private void BuildStep2PopUp(){
+        NewPopUpManager.Instance.ShowBigPopUp(
+            "Step 2: Place Door",
+            "In this step, you will need to align the holographic door with the real train door. \n First move the blue ball to match the bottom-right corner of the door. \nThen move the Red Ball to match the top left-corner of the door. \n When the door is correctly placed click \"Confirm\".",
+             "Continue", 
+            () =>
+            {
+             Debug.Log("top girl");
+
+            }
+            );
+
     }
 }

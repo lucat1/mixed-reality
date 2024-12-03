@@ -27,7 +27,6 @@ public class LoginManager : MonoBehaviour
 
     private void Start()
     {
-        print("SI INIZIA START LOGIN");
 
         // fill user inputs (for semplicity)
         GameObject usernameInputObject = NewSceneManager.Instance.Search(gameObject, "UsernameInput");
@@ -90,7 +89,6 @@ public class LoginManager : MonoBehaviour
             () =>
             {
                 Debug.Log(NewSceneManager.Instance.TutorialActive);
-                Debug.Log("Go to menu");
                 NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel" });
             },
             () =>

@@ -28,6 +28,8 @@ public class NewSceneManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
+            Debug.Log("--------------> start: LOGIN");
+
             // all objects are hidden at the start
             HideAllObjects();
 
@@ -48,7 +50,7 @@ public class NewSceneManager : MonoBehaviour
     */
     public void NewLoadScene(string sceneName, List<string> objectNamesToActivate)
     {
-        Debug.Log($"Loading scene: {sceneName}");
+        //Debug.Log($"Loading scene: {sceneName}");
         UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
         HideAllObjects(); 
 
@@ -71,7 +73,7 @@ public class NewSceneManager : MonoBehaviour
             // Skip essential objects
             if (!obj.name.Contains("Scene"))
             {
-                Debug.Log($"Skipping: {obj.name}");
+                //Debug.Log($"Skipping: {obj.name}");
             }
             else{
                 obj.SetActive(false);
@@ -96,7 +98,7 @@ public class NewSceneManager : MonoBehaviour
             if (obj != null)
             {
                 obj.SetActive(true);
-                Debug.Log($"Object '{objectName}' is active");
+                //Debug.Log($"Object '{objectName}' is active");
             }
             else
             {
@@ -114,7 +116,7 @@ public class NewSceneManager : MonoBehaviour
             if (obj != null)
             {
                 obj.SetActive(false);
-                Debug.Log($"Object '{objectName}' is inactive");
+                //Debug.Log($"Object '{objectName}' is inactive");
             }
             else
             {
@@ -156,6 +158,7 @@ public class NewSceneManager : MonoBehaviour
         return null;
     }
 
+    // this is the same as loadScene except it does not change scene - it deactivates everything except from what is in objsToShow list
     public void GoTo(List<string> objsToShow){
         HideAllObjects();
         foreach (string obj in objsToShow){
@@ -163,10 +166,12 @@ public class NewSceneManager : MonoBehaviour
         }
     }
 
+    // update TutorialActive flag (to True)
     public void StartTutorial(){
         TutorialActive = true;
     }
 
+    // update TutorialActive flag (to False)
     public void EndTutorial(){
         TutorialActive = false;
     }

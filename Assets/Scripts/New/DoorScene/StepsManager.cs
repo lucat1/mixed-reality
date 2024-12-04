@@ -97,6 +97,8 @@ public class StepsManager : MonoBehaviour
         steps = JsonUtility.FromJson<JSONSteps>(stepsFile.ToString());
         dm = transform.parent.GetComponentInChildren<DoorManager>();
         Assert.IsNotNull(dm);
+        Reset();
+        DisplayStep();
     }
     
     void OnEnable() {

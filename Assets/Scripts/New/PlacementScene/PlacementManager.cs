@@ -53,6 +53,18 @@ public class PlacementManager : MonoBehaviour
     // Action for when the "Confirm" button is pressed
     public void ConfirmAction()
     {
+        // Check if tutorial
+        if (NewSceneManager.Instance.TutorialActive)
+        {
+            BuildFinishPopUp2();
+        }
+        else
+        {
+            MoveToSteps();
+        }
+    }
+
+    private void MoveToSteps(){
         Debug.Log("[PlacementManager] Moving to steps");
         MoveDoor();
 
@@ -98,6 +110,7 @@ public class PlacementManager : MonoBehaviour
 
     private void BuildStep2PopUp(){
         NewSceneManager.Instance.HideObject("PlaceDoor");
+        NewSceneManager.Instance.HideObject("AnchorPoints(Clone)");
         NewPopUpManager.Instance.ShowBigPopUp(
             "Step 2: Place Door",
             "In this step, you will need to align the holographic door with the real train door. \n First move the blue ball to match the bottom-right corner of the door. \nThen move the Red Ball to match the top left-corner of the door. \n When the door is correctly placed click \"Confirm\".",
@@ -105,6 +118,20 @@ public class PlacementManager : MonoBehaviour
             () =>
             {
              NewSceneManager.Instance.ShowObject("PlaceDoor");
+
+            }
+            );
+    }
+
+    private void BuildFinishPopUp2(){
+        NewSceneManager.Instance.HideObject("PlaceDoor");
+        NewPopUpManager.Instance.ShowSinglePopup(
+            "Step 2 Successfully Completed!",
+            "Click \"Continue\" to proceed with the tutorial.",
+             "Continue", 
+            () =>
+            {
+             MoveToSteps();
 
             }
             );

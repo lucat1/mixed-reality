@@ -72,7 +72,7 @@ public class PlacementManager : MonoBehaviour
         anchorPoints.SetActive(false);
 
         // Move to the door scene and show the door
-        NewSceneManager.Instance.GoTo(new List<string> { "DoorSceneCanvas", "BigDoor", "Steps" });
+        NewSceneManager.Instance.GoTo(new List<string> { "DoorSceneCanvas", "BigDoor", "Steps", "PalmMiniature" });
 
         // GET TIME end place door timer and start actial manteinance timer
         if(TimeTracker.Instance){

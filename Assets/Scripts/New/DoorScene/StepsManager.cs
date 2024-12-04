@@ -27,6 +27,8 @@ public class StepsManager : MonoBehaviour
     public PlacementManager placeDoor;
     private JSONSteps steps;
     private DoorManager dm;
+    private MiniatureManager mm;
+
 
     int currentStepIndex;
     public void Reset() {
@@ -52,13 +54,18 @@ public class StepsManager : MonoBehaviour
     private const string nextPath = "StepsContent/NextButton";
 
     void DisplayStep() {
+
+        // change text on the Steps panel
         var textTransform = transform.Find(textPath);
         var instructionText = textTransform.GetComponent<TMP_Text>();
 
         var step = CurrentStep();
         string composedText = "<size=90>Step " + (currentStepIndex+1).ToString() + "</size>" + "<br>" +  "<size=70><b>" + step.step_description + "</b></size>";
         instructionText.text = composedText;
+
+        // higlite element in hte Big door and select display block in the miniature
         dm.HighlightComponents(new () { step.component_code }, step.ring);
+        mm.ActivateDisplayBlock(currentStepIndex);
 
         // Enable/Disable finish/next button
         transform.Find(donePath).gameObject.SetActive(IsLastStep());
@@ -80,7 +87,7 @@ public class StepsManager : MonoBehaviour
     }
 
     public void Done() {
-        NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel" });
+        NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel", "PalmMiniature" });
 
         // if the challenge is not acative we go to main menu
         // otherwise the user can come back to main menu from challenge completed popoup
@@ -134,9 +141,26 @@ public class StepsManager : MonoBehaviour
 
     private void BuildSteps(){
         steps = JsonUtility.FromJson<JSONSteps>(stepsFile.ToString());
+        
+
+
         dm = transform.parent.GetComponentInChildren<DoorManager>();
         Assert.IsNotNull(dm);
+        mm = transform.parent.GetComponentInChildren<MiniatureManager>();
+        Assert.IsNotNull(mm);
         Reset();
+        mm.InitializeDisplayBlocks(getComponentsList());
         DisplayStep();
+    }
+
+    private List<string> getComponentsList(){
+        List<string> components = new ();
+
+        if (steps != null && steps.steps != null)
+            foreach (JSONStep step in steps.steps)
+                if (!string.IsNullOrEmpty(step.component_code))
+                    components.Add(step.component_code);
+
+        return components;
     }
 }

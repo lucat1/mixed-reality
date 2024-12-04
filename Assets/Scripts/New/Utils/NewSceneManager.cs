@@ -29,8 +29,8 @@ public class NewSceneManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             // Hide all objects and show the initial scene
-            // GoTo(new List<string> {"LoginSceneCanvas", "LoginPanel"});
-            GoTo(new List<string> { "PlacementSceneCanvas", "PlacementPanel" });
+            GoTo(new List<string> {"LoginSceneCanvas", "LoginPanel"});
+            //GoTo(new List<string> { "PlacementSceneCanvas", "PlacementPanel" });
         }
         else
         {

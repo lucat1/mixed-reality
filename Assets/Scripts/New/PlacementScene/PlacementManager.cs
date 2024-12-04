@@ -72,7 +72,7 @@ public class PlacementManager : MonoBehaviour
     // Action for when the "Cancel" button is pressed
     public void CancelAction()
     {
-        SceneManager.LoadScene("Menu");
+        NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel" });
     }
 
     void Start()
@@ -97,13 +97,14 @@ public class PlacementManager : MonoBehaviour
     }
 
     private void BuildStep2PopUp(){
+        NewSceneManager.Instance.HideObject("PlaceDoor");
         NewPopUpManager.Instance.ShowBigPopUp(
             "Step 2: Place Door",
             "In this step, you will need to align the holographic door with the real train door. \n First move the blue ball to match the bottom-right corner of the door. \nThen move the Red Ball to match the top left-corner of the door. \n When the door is correctly placed click \"Confirm\".",
              "Continue", 
             () =>
             {
-             Debug.Log("top girl");
+             NewSceneManager.Instance.ShowObject("PlaceDoor");
 
             }
             );

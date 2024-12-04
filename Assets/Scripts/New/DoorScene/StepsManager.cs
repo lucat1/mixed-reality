@@ -94,17 +94,49 @@ public class StepsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        steps = JsonUtility.FromJson<JSONSteps>(stepsFile.ToString());
-        dm = transform.parent.GetComponentInChildren<DoorManager>();
-        Assert.IsNotNull(dm);
-        Reset();
-        DisplayStep();
+        // Check if tutorial
+        if (NewSceneManager.Instance.TutorialActive)
+        {
+            BuildStep3PopUp();
+        }
+        else
+        {
+            BuildSteps();
+        }
+        
     }
-    
+
     void OnEnable() {
         Reset();
         // Prevent DisplayStep from being called when the elemet has not been initialized by Start() yet
         if (steps != null)
             DisplayStep();
+    }
+
+    private void BuildStep3PopUp(){
+        NewSceneManager.Instance.HideObject("BigDoor");
+        NewSceneManager.Instance.HideObject("StepsContent");
+        NewSceneManager.Instance.HideObject("StepsManipulationContainer");
+        NewPopUpManager.Instance.ShowBigPopUp(
+            "Step 3: Navigate Steps",
+            "In this step, you will need to align the holographic door with the real train door. \n First move the blue ball to match the bottom-right corner of the door. \nThen move the Red Ball to match the top left-corner of the door. \n When the door is correctly placed click \"Confirm\".",
+             "Continue", 
+            () =>
+            {
+            NewSceneManager.Instance.ShowObject("BigDoor");
+            NewSceneManager.Instance.ShowObject("StepsContent");
+            NewSceneManager.Instance.ShowObject("StepsManipulationContainer");
+            BuildSteps();
+
+            }
+            );
+    }
+
+    private void BuildSteps(){
+        steps = JsonUtility.FromJson<JSONSteps>(stepsFile.ToString());
+        dm = transform.parent.GetComponentInChildren<DoorManager>();
+        Assert.IsNotNull(dm);
+        Reset();
+        DisplayStep();
     }
 }

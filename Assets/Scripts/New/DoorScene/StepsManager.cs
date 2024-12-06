@@ -78,7 +78,15 @@ public class StepsManager : MonoBehaviour
 
     public void NextStep() {
         currentStepIndex++;
-        DisplayStep();
+        if (NewSceneManager.Instance.TutorialActive && currentStepIndex==1)
+        {
+            BuildStep4PopUp();
+        }
+        else
+        {
+            DisplayStep();
+        }
+
     }
 
     public void PrevStep() {
@@ -125,8 +133,8 @@ public class StepsManager : MonoBehaviour
         NewSceneManager.Instance.HideObject("StepsContent");
         NewSceneManager.Instance.HideObject("StepsManipulationContainer");
         NewPopUpManager.Instance.ShowBigPopUp(
-            "Step 3: Navigate Steps",
-            "In this step, you will need to align the holographic door with the real train door. \n First move the blue ball to match the bottom-right corner of the door. \nThen move the Red Ball to match the top left-corner of the door. \n When the door is correctly placed click \"Confirm\".",
+            "Step 3: Navigate Maintenance Steps",
+            "The next step is about navigating through the steps of the maintenance process. \n Fo each step, you will see: \n- the instruction displayed in the menu \n - the involved component is highlighted on the door hologram  \n Use the buttons to explore the process and navigate to step 2 for more details about the tutorial. \n Click \"Confirm\".",
              "Continue", 
             () =>
             {
@@ -134,6 +142,19 @@ public class StepsManager : MonoBehaviour
             NewSceneManager.Instance.ShowObject("StepsContent");
             NewSceneManager.Instance.ShowObject("StepsManipulationContainer");
             BuildSteps();
+
+            }
+            );
+    }
+
+    private void BuildStep4PopUp(){
+        NewPopUpManager.Instance.ShowSinglePopup(
+            "Step 4: NANANA",
+            "In this step, you will need to align the holographic door with the real train door. \n First move the blue ball to match the bottom-right corner of the door. \nThen move the Red Ball to match the top left-corner of the door. \n When the door is correctly placed click \"Continue\" to proceed.",
+             "Continue", 
+            () =>
+            {
+            DisplayStep();
 
             }
             );

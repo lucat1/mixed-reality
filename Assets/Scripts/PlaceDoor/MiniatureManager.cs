@@ -195,8 +195,8 @@ public class MiniatureManager : MonoBehaviour
             foreach(Transform cc in child.transform)
                 q.Enqueue(cc);
         }
-        foreach(GameObject go in list)
-            Debug.Log(go.name);
+        //foreach(GameObject go in list)
+            //Debug.Log(go.name);
 
         return list;
     }

@@ -133,6 +133,94 @@ public class MiniatureManager : MonoBehaviour
         // Hide();
     }
 
+    private void BuildFinishTutorialPopUp(){
+        bool active = true;
+        NewPopUpManager.Instance.ShowSinglePopup(
+            "Congratulations!",
+            "You finished the tutorial. You are now ready to explore the SBB HoloGuide on your own! \nClick \"Continue\" to proceed.",
+             "Continue", 
+            () =>
+            {
+             Debug.Log("isisisisis");
+             active = false;
+             print(active);
+
+            }
+            );
+        NewSceneManager.Instance.EndTutorial();
+        print("fuori");
+        print(active);
+    }
+
+    private void BuildStartChallengePopUp(){
+        print("ento");
+        NewPopUpManager.Instance.ShowDoublePopup(
+            "We have a challenge for you!",
+            "Accept this challenge to put your knowledge of the SBBHoloGuide app to the test.",
+            "Decline Challenge", 
+            "Accept Challenge", 
+            () =>
+            {
+                Debug.Log(NewSceneManager.Instance.ChallengeActive);
+                NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel" });
+            },
+            () =>
+            {
+                NewSceneManager.Instance.StartChallenge();
+                Debug.Log(NewSceneManager.Instance.ChallengeActive);
+                Debug.Log("Challenge Started");
+                NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel" });
+            }
+            );
+    }
+
+    private IEnumerator ShowPopupSequence()
+    {
+        bool firstPopupDone = false;
+
+        // First Popup
+        NewPopUpManager.Instance.ShowSinglePopup(
+            "Congratulations!",
+            "You finished the tutorial. You are now ready to explore the SBB HoloGuide on your own! \nClick \"Continue\" to proceed.",
+             "Continue", 
+            () =>
+            {
+                firstPopupDone = true;
+            }
+            );
+        NewSceneManager.Instance.EndTutorial();
+        Debug.Log("tutorial finished");
+
+        // Wait until the first popup is closed
+        yield return new WaitUntil(() => firstPopupDone);
+
+        // Second Popup
+         NewPopUpManager.Instance.ShowDoublePopup(
+            "We have a challenge for you!",
+            "Accept this challenge to put your knowledge of the SBBHoloGuide app to the test.",
+            "Decline Challenge", 
+            "Accept Challenge", 
+            () =>
+            {
+                Debug.Log(NewSceneManager.Instance.ChallengeActive);
+                NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel" });
+            },
+            () =>
+            {
+                NewSceneManager.Instance.StartChallenge();
+                Debug.Log(NewSceneManager.Instance.ChallengeActive);
+                Debug.Log("Challenge Started");
+                NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel" });
+            }
+            );
+        }
+    void Update(){
+        if (IsVisible() && NewSceneManager.Instance.TutorialActive)
+        {
+            StartCoroutine(ShowPopupSequence());
+        }
+    }
+
     //DOOR FUNCTIONS ########################################################################################
     private HashSet<GameObject> currentlyHighlighted = new();
     Dictionary<GameObject, GameObject> gameObjectsWithRing = new ();

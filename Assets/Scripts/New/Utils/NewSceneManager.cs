@@ -19,6 +19,8 @@ public class NewSceneManager : MonoBehaviour
 
     // boolean to track if the tutorial is active (read-only from outside SceneManager)
     public bool TutorialActive { get; private set; } = false;
+    // boolean to track if the challenge is active (read-only from outside SceneManager)
+    public bool ChallengeActive { get; private set; } = false;
 
     // sets up the singleton instance and ensures the SceneManager persists across scenes
     private void Awake()
@@ -146,5 +148,18 @@ public class NewSceneManager : MonoBehaviour
     public void EndTutorial()
     {
         TutorialActive = false;
+    }
+
+
+    // update TutorialActive flag (to True)
+    public void StartChallenge()
+    {
+        ChallengeActive = true;
+    }
+
+    // update ChallengeActive flag (to False)
+    public void EndChallenge()
+    {
+        ChallengeActive = false;
     }
 }

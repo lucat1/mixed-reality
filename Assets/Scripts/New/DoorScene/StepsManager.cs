@@ -28,6 +28,7 @@ public class StepsManager : MonoBehaviour
     private JSONSteps steps;
     private DoorManager dm;
     private MiniatureManager mm;
+    public bool Step4PopupShown { get; private set; } = false;
 
 
     int currentStepIndex;
@@ -78,7 +79,7 @@ public class StepsManager : MonoBehaviour
 
     public void NextStep() {
         currentStepIndex++;
-        if (NewSceneManager.Instance.TutorialActive && currentStepIndex==1)
+        if (NewSceneManager.Instance.TutorialActive && currentStepIndex==1 && Step4PopupShown==false)
         {
             BuildStep4PopUp();
         }
@@ -145,6 +146,7 @@ public class StepsManager : MonoBehaviour
 
             }
             );
+            
     }
 
     private void BuildStep4PopUp(){
@@ -158,6 +160,7 @@ public class StepsManager : MonoBehaviour
 
             }
             );
+        Step4PopupShown=true;
     }
 
     private void BuildSteps(){

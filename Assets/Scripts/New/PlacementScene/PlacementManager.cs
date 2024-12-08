@@ -11,7 +11,7 @@ public class PlacementManager : MonoBehaviour
     // Prefab for anchor points
     public GameObject anchorPointsPrefab;
     private GameObject anchorPoints;
-
+    public bool doorPlaced { get; private set; } = false;
     private const string confirmPath = "PlaceDoor/ButtonGroup_32x32mm_H3/ButtonCollection/ConfirmButton";
 
     private Vector3 scale = Vector3.one;
@@ -34,6 +34,9 @@ public class PlacementManager : MonoBehaviour
         // Activate confirm button 
         var pb = transform.Find(confirmPath).GetComponent<PressableButton>();
         pb.enabled = true;
+
+        // Set DoorPlaced to true to ativate confirm button
+        doorPlaced = true;
     }
 
     public void MoveDoor()
@@ -53,7 +56,9 @@ public class PlacementManager : MonoBehaviour
     // Action for when the "Confirm" button is pressed
     public void ConfirmAction()
     {
-        // Check if tutorial
+        // Check if door has been placed
+        if (doorPlaced==true){
+            // Check if tutorial
         if (NewSceneManager.Instance.TutorialActive)
         {
             BuildFinishPopUp2();
@@ -62,6 +67,19 @@ public class PlacementManager : MonoBehaviour
         {
             MoveToSteps();
         }
+                }
+        else { 
+             NewPopUpManager.Instance.ShowSinglePopup(
+            "Watch Out!",
+            "You tried to confirm without having placed the door. \n You must place the door first by clicking on 'Place Door' and then confirm. \n Click 'Try Again' and proceed with the correct order.",
+             "Try Again", 
+            () =>
+            {
+             Debug.Log("User tried to confirm before placing the door!");
+
+            }
+            );
+        }        
     }
 
     private void MoveToSteps(){

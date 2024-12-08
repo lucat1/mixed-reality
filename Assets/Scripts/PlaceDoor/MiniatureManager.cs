@@ -60,7 +60,7 @@ public class MiniatureManager : MonoBehaviour
 
     public bool IsVisible()
     {
-        return gameObject.activeSelf;
+        return transform.Find("HandMenu/MenuContent").gameObject.activeSelf;
     }
 
     List<GameObject> GetNearComponents(GameObject center)

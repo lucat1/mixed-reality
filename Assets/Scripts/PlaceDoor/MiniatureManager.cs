@@ -18,18 +18,24 @@ public class MiniatureManager : MonoBehaviour
     public Material transparentMaterial;
     public Material glowingMaterial;
 
-    private List<GameObject> displayedGroups = new();
+    private Dictionary<string, GameObject> displayedGroups = new();
+    private List<string> componentsInDisplayBlocks;
 
     public void InitializeDisplayBlocks(List<string> components)
     {
+        componentsInDisplayBlocks = components;
+
         Debug.Log("[MiniatureManager] Initialized display blocks");
-        displayedGroups.Clear();
         HighlightComponents(new HashSet<string>(components), false);
         
+        int i = 0;
         // Create the groups to display
         foreach (string c in components){
-            Debug.Log("[MiniatureManager] creating display group for component:"+c);
-            displayedGroups.Add(CreateDisplayGroup(GetDoorComponents(go => go.name == c)[0]));
+                if(!displayedGroups.ContainsKey(c)){
+                    Debug.Log("[MiniatureManager] creating display group for component:"+c);
+                    displayedGroups.Add(c, CreateDisplayGroup(GetDoorComponents(go => go.name == c)[0]));
+                }
+            i++;
         }
 
         Debug.Log("[MiniatureManager] Display blocks created");
@@ -39,11 +45,12 @@ public class MiniatureManager : MonoBehaviour
     public void ActivateDisplayBlock(int index)
     {
         Debug.Log("[MiniatureManager] Activating display block: " + index);
-        for (int i = 0; i < displayedGroups.Count; i++)
-            if(i == index)
-                displayedGroups[i].SetActive(true);
+        foreach(string c in displayedGroups.Keys){
+            if( componentsInDisplayBlocks[index] == c)
+                displayedGroups[c].SetActive(true);
             else
-                displayedGroups[i].SetActive(false);
+                displayedGroups[c].SetActive(false);
+        }
     }
 
     public void Hide()
@@ -75,11 +82,6 @@ public class MiniatureManager : MonoBehaviour
         {
             ob.SetActive(true);
             ob.transform.SetParent(component.transform);
-            // GameObject obCopy =  Instantiate(ob);
-            // obCopy.transform.position = ob.transform.position;
-            // obCopy.transform.rotation = ob.transform.rotation;
-            // obCopy.transform.localScale = ob.transform.localScale;
-            // obCopy.transform.SetParent(component.transform);
         }
 
         component.transform.SetParent(door.transform);

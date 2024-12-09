@@ -33,10 +33,18 @@ public class PlacementManager : MonoBehaviour
         {
             BuildStep2TutorialPopUp();
         }
+
     }
 
     // Re-show anchor points when going back to to the placement
     void OnEnable() {
+        if(NewSceneManager.Instance != null)
+            Debug.Log("DIOCANE previous scene is " + NewSceneManager.Instance.PreviousScene);
+        if (NewSceneManager.Instance && NewSceneManager.Instance.PreviousScene != "Door") {
+            Destroy(anchorPoints);
+            anchorPoints = null;
+        }
+
         if (anchorPoints != null)
             anchorPoints.SetActive(true);
     }

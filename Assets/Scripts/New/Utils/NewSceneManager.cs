@@ -140,7 +140,7 @@ public class NewSceneManager : MonoBehaviour
     {
         HideAllObjects();
         if(Scene != scene) {
-            PreviousScene = scene;
+            PreviousScene = Scene;
             Scene = scene;
             ShowObject(SceneObjectName());
             Timer.Instance.Action($"LoadScene[{scene}]");

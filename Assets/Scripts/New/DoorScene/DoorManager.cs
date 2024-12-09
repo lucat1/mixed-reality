@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using MixedReality.Toolkit;
-using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.Assertions;
 

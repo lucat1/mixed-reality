@@ -104,6 +104,11 @@ public class StepsManager : MonoBehaviour
         DisplayStep();
     }
 
+    // Go back and change the door position
+    public void RePlaceDoor() {
+        NewSceneManager.Instance.GoTo("Placement", new List<string> { "PlacementPanel", "PlaceDoor" });
+    }
+
     // if finished all steps -> button done
     public void Done() {
         if (NewSceneManager.Instance.TutorialActive){

@@ -177,7 +177,7 @@ public class DoorManager : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         // Set the door position
         transform.position = position;

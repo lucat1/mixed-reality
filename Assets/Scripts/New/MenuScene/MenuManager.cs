@@ -33,6 +33,7 @@ class NEntry
     public int id;
     public int priority;
     public string train_number;
+    public string coach_number;
     public string door_number;
     public string problem;
 }
@@ -196,30 +197,28 @@ public class MenuManager : MonoBehaviour
             // Set task details in the UI
             TextMeshProUGUI[] texts = itm.GetComponentsInChildren<TextMeshProUGUI>();
             Assert.IsNotNull(texts, "Task entry UI is missing Text components!");
-            texts[0].SetText(entry.problem);
-            texts[1].SetText(entry.train_number);
+            texts[0].SetText(entry.train_number);
+            texts[1].SetText(entry.coach_number);
             texts[2].SetText(entry.door_number);
-
-            // Set priority color
-            Image[] backgrounds = itm.GetComponentsInChildren<Image>(true);
-            foreach (Image background in backgrounds)
+            texts[3].SetText(entry.problem);
+            texts[4].SetText(entry.priority.ToString());
+            switch (entry.priority)
             {
-                if (background.name == "PriorityColor")
-                {
-                    switch (entry.priority)
-                    {
-                        case 1:
-                            background.color = Color.red;
-                            break;
-                        case 2:
-                            background.color = new Color(1f, 0.65f, 0f); 
-                            break;
-                        case 3:
-                            background.color = new Color(0f, 0.8f, 0f); 
-                            break;
-                    }
-                }
+                case 1:
+                    texts[4].color = Color.red; 
+                    break;
+                case 2:
+                    texts[4].color = new Color(1f, 0.65f, 0f); 
+                    break;
+                case 3:
+                    texts[4].color = new Color(0f, 0.8f, 0f);
+                    break;
+                default:
+                    texts[4].color = Color.black;
+                    break;
             }
+
+            
         }
     }
 

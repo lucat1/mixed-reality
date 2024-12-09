@@ -440,6 +440,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7443143248494954275, guid: a984b40f44325d44b935fc9a1c071630,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -145
+      objectReference: {fileID: 0}
     - target: {fileID: 8600882597892973894, guid: a984b40f44325d44b935fc9a1c071630,
         type: 3}
       propertyPath: m_ChildAlignment
@@ -9118,6 +9123,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 641529984}
     m_Modifications:
+    - target: {fileID: 333752462590257954, guid: a984b40f44325d44b935fc9a1c071630,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 47
+      objectReference: {fileID: 0}
     - target: {fileID: 333752462590257954, guid: a984b40f44325d44b935fc9a1c071630,
         type: 3}
       propertyPath: m_AnchoredPosition.y

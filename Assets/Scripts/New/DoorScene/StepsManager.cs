@@ -96,7 +96,6 @@ public class StepsManager : MonoBehaviour
         {
             DisplayStep();
         }
-
     }
 
     // go to previous step
@@ -117,14 +116,14 @@ public class StepsManager : MonoBehaviour
             {
                 Debug.Log("Challenge completed, user ready for SBB HoloGuide.");
                 NewSceneManager.Instance.EndChallenge();
-                NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel", "PalmMiniature" });
+                NewSceneManager.Instance.GoTo("Menu", new List<string> { "MenuPanel", "PalmMiniature" });
             }
         );
 
         }
         else // normal execution
         {
-        NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel", "PalmMiniature" });}
+        NewSceneManager.Instance.GoTo("Menu", new List<string> { "MenuPanel", "PalmMiniature" });}
         // if the challenge is not acative we go to main menu
         // otherwise the user can come back to main menu from challenge completed popoup
         // TODO: log!!

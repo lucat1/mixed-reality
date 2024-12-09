@@ -124,7 +124,7 @@ public class PlacementManager : MonoBehaviour
         anchorPoints.SetActive(false);
 
         // Move to the door scene and show the door
-        NewSceneManager.Instance.GoTo(new List<string> { "DoorSceneCanvas", "BigDoor", "Steps", "PalmMiniature" });
+        NewSceneManager.Instance.GoTo("Door", new List<string> { "BigDoor", "Steps", "PalmMiniature" });
 
         // GET TIME end place door timer and start actial manteinance timer
         if(TimeTracker.Instance){
@@ -136,7 +136,7 @@ public class PlacementManager : MonoBehaviour
     // Action for when the "Cancel" button is pressed
     public void CancelAction()
     {
-        NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel" });
+        NewSceneManager.Instance.GoTo("Menu", new List<string> { "MenuPanel" });
     }
 
     // step 2 tutorial popup

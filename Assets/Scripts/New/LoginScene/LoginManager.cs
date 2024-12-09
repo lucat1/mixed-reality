@@ -89,14 +89,14 @@ public class LoginManager : MonoBehaviour
             () =>
             {
                 Debug.Log(NewSceneManager.Instance.TutorialActive);
-                NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel" });
+                NewSceneManager.Instance.GoTo("Menu", new List<string> { "MenuPanel" });
             },
             () =>
             {
                 NewSceneManager.Instance.StartTutorial();
                 Debug.Log(NewSceneManager.Instance.TutorialActive);
                 Debug.Log("Tutorial Started");
-                NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel" });
+                NewSceneManager.Instance.GoTo("Menu", new List<string> { "MenuPanel" });
             }
             );
         }

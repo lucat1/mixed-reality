@@ -9,14 +9,18 @@ Key Features:
 This script serves as a central control point for scene transitions and navigation logic
 */
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class NewSceneManager : MonoBehaviour
 {
     public static NewSceneManager Instance; // singleton instance of SceneManager for global access
     public bool TutorialActive { get; private set; } = false; // boolean to track if the tutorial is active (read-only from outside SceneManager)
     public bool ChallengeActive { get; private set; } = false; // boolean to track if the challenge is active (read-only from outside SceneManager)
+    public string PreviousScene { get; private set; } = null;
+    public string Scene { get; private set; } = null;
 
     // sets up the singleton instance and ensures the SceneManager persists across scenes
     private void Awake()
@@ -27,7 +31,7 @@ public class NewSceneManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             // Hide all objects and show the initial scene
-            GoTo(new List<string> {"LoginSceneCanvas", "LoginPanel"});
+            GoTo("Login", new List<string> {"LoginPanel"});
             //GoTo(new List<string> { "PlacementSceneCanvas", "PlacementPanel" });
         }
         else
@@ -124,10 +128,20 @@ public class NewSceneManager : MonoBehaviour
         return null;
     }
 
+    public string SceneObjectName() {
+        Assert.IsTrue(Scene != "");
+        return Scene + "SceneCanvas";
+    }
+
     // this is the same as loadScene except it does not change scene - it deactivates everything except from what is in objsToShow list
-    public void GoTo(List<string> objsToShow)
+    public void GoTo(string scene, List<string> objsToShow)
     {
         HideAllObjects();
+        if(Scene != scene) {
+            PreviousScene = scene;
+            Scene = scene;
+            ShowObject(SceneObjectName());
+        }
         foreach (string obj in objsToShow)
         {
             ShowObject(obj);

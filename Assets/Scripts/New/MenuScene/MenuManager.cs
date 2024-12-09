@@ -275,7 +275,7 @@ public class MenuManager : MonoBehaviour
             "Continue",
             () =>
             {
-                NewSceneManager.Instance.GoTo(new List<string> { "PlacementSceneCanvas", "PlacementPanel" });
+                NewSceneManager.Instance.GoTo("Placement", new List<string> { "PlacementPanel" });
             }
         );
     }
@@ -310,7 +310,7 @@ public class MenuManager : MonoBehaviour
         else if (!NewSceneManager.Instance.ChallengeActive) // else: load placement scene
         {
             NewSceneManager.Instance.HideObject("MenuSceneCanvas");
-            NewSceneManager.Instance.GoTo(new List<string> { "PlacementSceneCanvas", "PlacementPanel", "PlaceDoor" });
+            NewSceneManager.Instance.GoTo("Placement", new List<string> { "PlacementPanel", "PlaceDoor" });
         }
     }
 
@@ -324,7 +324,7 @@ public class MenuManager : MonoBehaviour
         "Continue",
         () =>
         {
-            NewSceneManager.Instance.GoTo(new List<string> { "PlacementSceneCanvas", "PlacementPanel", "PlaceDoor" });
+            NewSceneManager.Instance.GoTo("Placement", new List<string> { "PlacementPanel", "PlaceDoor" });
         }
         );
 

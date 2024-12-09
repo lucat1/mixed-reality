@@ -172,14 +172,14 @@ public class MiniatureManager : MonoBehaviour
             () =>
             {
                 Debug.Log(NewSceneManager.Instance.ChallengeActive);
-                NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel" });
+                NewSceneManager.Instance.GoTo("Menu", new List<string> { "MenuPanel" });
             },
             () =>
             {
                 NewSceneManager.Instance.StartChallenge();
                 Debug.Log(NewSceneManager.Instance.ChallengeActive);
                 Debug.Log("Challenge Started");
-                NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel" });
+                NewSceneManager.Instance.GoTo("Menu", new List<string> { "MenuPanel" });
             }
             );
     }
@@ -187,7 +187,6 @@ public class MiniatureManager : MonoBehaviour
     private IEnumerator ShowPopupSequence()
     {
         bool firstPopupDone = false;
-        bool secondPopupDone = false;
 
         // First Popup
         NewPopUpManager.Instance.ShowSinglePopup(
@@ -214,14 +213,14 @@ public class MiniatureManager : MonoBehaviour
             () =>
             {
                 Debug.Log(NewSceneManager.Instance.ChallengeActive);
-                NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel" });
+                NewSceneManager.Instance.GoTo("Menu", new List<string> { "MenuPanel" });
             },
             () =>
             {
                 NewSceneManager.Instance.StartChallenge();
                 Debug.Log(NewSceneManager.Instance.ChallengeActive);
                 Debug.Log("Challenge Started");
-                NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel" });
+                NewSceneManager.Instance.GoTo("Menu", new List<string> { "MenuPanel" });
             }
             );
             

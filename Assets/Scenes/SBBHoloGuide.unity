@@ -1367,7 +1367,7 @@ MonoBehaviour:
   door: {fileID: 851401237}
   nearObjectRadius: 0.05
   transparentMaterial: {fileID: 2100000, guid: f273f15840c1edc438f9b36319c04506, type: 2}
-  glowingMaterial: {fileID: 2100000, guid: fdfee5f17a54a2b4c991fc1a42dba5f9, type: 2}
+  glowingMaterial: {fileID: 2100000, guid: ba8715ad5038eda45ba5a3eb6fdd0e8b, type: 2}
   showRingVolumeThreshold: 0
   ringPrefab: {fileID: -4320558180572046448, guid: 0a339d6c5a733184e9e0d852d2dac138,
     type: 3}
@@ -8217,7 +8217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volumeThreshold: 0
   transparentMaterial: {fileID: 2100000, guid: 519b09a7914189945afc88295f6054e2, type: 2}
-  glowingMaterial: {fileID: 2100000, guid: 96920e8165bf1e44c981a18d6d6f9c17, type: 2}
+  glowingMaterial: {fileID: 2100000, guid: f7f00189b767042489b7c7f991db8876, type: 2}
   hideDoorThreshold: 0
   showRingVolumeThreshold: 0.000005
   ringPrefab: {fileID: -4320558180572046448, guid: 0a339d6c5a733184e9e0d852d2dac138,
@@ -9126,12 +9126,12 @@ PrefabInstance:
     - target: {fileID: 333752462590257954, guid: a984b40f44325d44b935fc9a1c071630,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 47
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 333752462590257954, guid: a984b40f44325d44b935fc9a1c071630,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.0028
+      value: -0.002
       objectReference: {fileID: 0}
     - target: {fileID: 2045587447981033104, guid: a984b40f44325d44b935fc9a1c071630,
         type: 3}

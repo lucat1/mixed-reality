@@ -7412,7 +7412,7 @@ MonoBehaviour:
   pivotAxis: 7
   minDistance: 0.3
   maxDistance: 0.9
-  defaultDistance: 0.7
+  defaultDistance: 0.4
   maxViewHorizontalDegrees: 30
   maxViewVerticalDegrees: 20
   reorientWhenOutsideParameters: 1

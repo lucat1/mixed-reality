@@ -17,6 +17,15 @@ using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using MixedReality.Toolkit;
+using Unity.XR.CoreUtils;
+using UnityEngine;
+using UnityEngine.Assertions;
+using System.Linq;
+
 [Serializable]
 class NTasks
 {
@@ -43,23 +52,104 @@ public class MenuManager : MonoBehaviour
     // JSON file containing task data
     public TextAsset jsonFile;
 
+    public bool built = false;
+
     private void Start()
     {
+        print("ENTRATO START");
         // Check if tutorial
         if (NewSceneManager.Instance.TutorialActive)
         {
+            print("POPUPTUTORIAL");
             BuildStep1PopUp();
         }
-        else
+        else if (!built)
+        {
+            print("POPUPMENU");
+            BuildMenu();
+        }
+    }
+
+    private IEnumerator ShowPopupSequence()
+    {
+        NewSceneManager.Instance.HideObject("ManipulationContainer");
+        bool firstPopupDone = false;
+
+        // First Popup
+        NewPopUpManager.Instance.ShowSinglePopup(
+            "Welcome to the Challenge!",
+            "This challenge is made of 4 tasks to complete in order to win. \nClick \"Continue\" to proceed to the first one.",
+             "Continue", 
+            () =>
+            {
+                firstPopupDone = true;
+            }
+            );
+
+        // Wait until the first popup is closed
+        yield return new WaitUntil(() => firstPopupDone);
+
+        // Second Popup
+         NewPopUpManager.Instance.ShowSinglePopup(
+            "First Task",
+            "The first task is about picking the maintenance task with train number \"001-5\".",
+            "Continue", 
+            () =>
+            {
+                DestroyMenu();
+                NewSceneManager.Instance.ShowObject("ManipulationContainer");
+                BuildMenu();
+            }
+            );
+            
+        }
+    private IEnumerator WaitForPopupToClose(Action callback)
+    {
+        yield return new WaitUntil(() => !NewPopUpManager.Instance.IsPopupActive);
+        callback.Invoke();
+    }
+
+    private void OnEnable()
+    {
+        if (NewSceneManager.Instance)
+        {
+            if (NewPopUpManager.Instance.IsPopupActive)
+            {
+                Debug.Log("[OnEnable] Popup is already active, waiting for closure.");
+                StartCoroutine(WaitForPopupToClose(() =>
+                {
+                    ActivatePopupLogic();
+                }));
+            }
+            else
+            {
+                ActivatePopupLogic();
+            }
+        }
+    }
+
+    private void ActivatePopupLogic()
+    {
+        if (NewSceneManager.Instance.TutorialActive)
+        {
+
+        }
+        else if (NewSceneManager.Instance.ChallengeActive)
+        {
+            StartCoroutine(ShowPopupSequence());
+        }
+        else if (!built)
         {
             BuildMenu();
         }
     }
 
 
+    
     //Builds the menu dynamically from the JSON file.
     private void BuildMenu()
     {
+        built=true;
         Debug.Log("Loading task data from JSON file...");
         // Parse the JSON file into a list of tasks
         NTasks tasks = JsonUtility.FromJson<NTasks>(jsonFile.ToString());
@@ -89,11 +179,27 @@ public class MenuManager : MonoBehaviour
         grid.transform.localPosition = Vector3.zero;
 
         // Populate the grid with tasks
-        foreach (NEntry entry in tasks.tasks)
+         for (int i = 0; i < tasks.tasks.Count; i++)
         {
+            NEntry entry = tasks.tasks[i];
             GameObject itm = Instantiate(listEntry, Vector3.zero, Quaternion.identity, grid.transform);
             itm.transform.localPosition = Vector3.zero;
-            AddItemAction(itm);
+
+            // Set the action based on the index
+            if (i == 1 && NewSceneManager.Instance.ChallengeActive) // Second entry
+            {
+                print("si entrato");
+                AddSpecialItemActionSecond(itm);
+            }
+            else if(i != 1 && NewSceneManager.Instance.ChallengeActive)
+            {
+                print("si entrato");
+                AddSpecialItemActionGeneral(itm);
+            }
+            else
+            {
+                AddItemAction(itm);
+            }
 
             // Set task details in the UI
             TextMeshProUGUI[] texts = itm.GetComponentsInChildren<TextMeshProUGUI>();
@@ -125,6 +231,27 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    private void DestroyMenu()
+{
+    Debug.Log("Destroying the menu UI...");
+    
+    // Get the ManipulationContainer (root for UI elements)
+    Transform manipulationContainer = transform.GetChild(0);
+    Assert.IsNotNull(manipulationContainer, "ManipulationContainer is missing!");
+
+    // Find the ListContainer (menu container)
+    Transform listContainerTransform = manipulationContainer.Find(listContainer.name + "(Clone)");
+    if (listContainerTransform != null)
+    {
+        // Destroy all instantiated child objects
+        Destroy(listContainerTransform.gameObject);
+        Debug.Log("Menu successfully destroyed.");
+    }
+    else
+    {
+        Debug.LogWarning("Menu not found to destroy.");
+    }
+}
 
     // Builds the initial tutorial popup that explains the menu structure.
     private void BuildStep1PopUp()
@@ -172,6 +299,18 @@ public class MenuManager : MonoBehaviour
         pb.OnClicked.AddListener(Pick);
     }
 
+    private void AddSpecialItemActionSecond(GameObject item)
+    {
+        PressableButton pb = item.GetComponentInChildren<PressableButton>();
+        Assert.IsNotNull(pb, "PressableButton is missing on task entry!");
+        pb.OnClicked.AddListener(CorrectPick);
+    }
+     private void AddSpecialItemActionGeneral(GameObject item)
+    {
+        PressableButton pb = item.GetComponentInChildren<PressableButton>();
+        Assert.IsNotNull(pb, "PressableButton is missing on task entry!");
+        pb.OnClicked.AddListener(WongPick);
+    }
 
     // Loads the next scene when a task entry is clicked
     private void Pick()
@@ -180,10 +319,45 @@ public class MenuManager : MonoBehaviour
         {
             BuildFinishStep1PopUp();
         }
-        else
+        else if (!NewSceneManager.Instance.ChallengeActive)
         {
             NewSceneManager.Instance.HideObject("MenuSceneCanvas");
-            NewSceneManager.Instance.GoTo(new List<string> { "PlacementSceneCanvas", "PlacementPanel" });
+            NewSceneManager.Instance.GoTo(new List<string> { "PlacementSceneCanvas", "PlacementPanel", "PlaceDoor" });
         }
+    }
+
+    private void CorrectPick()
+    {
+        NewSceneManager.Instance.HideObject("MenuSceneCanvas");
+        NewPopUpManager.Instance.ShowSinglePopup(
+        "First Task Completed!",
+        "First task completed successfully! Now the second task regards placing the door correctly. Click continue to try!",
+        "Continue",
+        () =>
+        {
+            Debug.Log("Proceeding to the second task.");
+            // Add logic to proceed to the next step, e.g., go to the placement scene
+            NewSceneManager.Instance.GoTo(new List<string> { "PlacementSceneCanvas", "PlacementPanel", "PlaceDoor" });
+        }
+        );
+
+        
+    }
+    private void WongPick()
+    {
+        NewSceneManager.Instance.HideObject("MenuSceneCanvas");
+        NewPopUpManager.Instance.ShowSinglePopup(
+        "Watch Out!",
+        "The task required you to choose the task with train number '001-5'. Try again!",
+        "Try Again",
+        () =>
+        {
+            Debug.Log("Retrying task selection.");
+            NewSceneManager.Instance.ShowObject("MenuSceneCanvas");
+           
+        }
+    );
+
+        
     }
 }

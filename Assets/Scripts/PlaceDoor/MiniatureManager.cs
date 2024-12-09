@@ -177,6 +177,7 @@ public class MiniatureManager : MonoBehaviour
     private IEnumerator ShowPopupSequence()
     {
         bool firstPopupDone = false;
+        bool secondPopupDone = false;
 
         // First Popup
         NewPopUpManager.Instance.ShowSinglePopup(
@@ -213,6 +214,7 @@ public class MiniatureManager : MonoBehaviour
                 NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel" });
             }
             );
+            
         }
     void Update(){
         if (IsVisible() && NewSceneManager.Instance.TutorialActive)

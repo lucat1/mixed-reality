@@ -21,6 +21,8 @@ public class NewPopUpManager : MonoBehaviour
     [SerializeField] private GameObject singleButtonBrefab; // popup prefab with one button
     [SerializeField] private GameObject doubleButtonPrefab; // popup prefab with 2 buttons
     private GameObject currentPopup; // current active popup
+    public bool IsPopupActive => currentPopup != null;
+
 
     // singleton instance and makes sue the PopUpManager persists across scenes
     private void Awake()
@@ -161,8 +163,10 @@ public class NewPopUpManager : MonoBehaviour
         // only one is active
         if (currentPopup != null)
         {
-            Destroy(currentPopup);
+            ClosePopup();
         }
+
+        print("BLA");
 
         // instantiate the popup prefab
         currentPopup = Instantiate(singleButtonBrefab, transform);
@@ -204,8 +208,9 @@ public class NewPopUpManager : MonoBehaviour
                 buttonComponent.OnClicked.RemoveAllListeners(); 
                 buttonComponent.OnClicked.AddListener(() =>
                 {
-                    buttonCallback?.Invoke();
                     ClosePopup();
+                    buttonCallback?.Invoke();
+                    
                 });
             }
             else
@@ -319,6 +324,7 @@ public class NewPopUpManager : MonoBehaviour
     {
         if (currentPopup != null)
         {
+            print("closed");
             Destroy(currentPopup);
             currentPopup = null;
         }

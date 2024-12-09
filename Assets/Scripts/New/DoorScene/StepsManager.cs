@@ -96,8 +96,23 @@ public class StepsManager : MonoBehaviour
     }
 
     public void Done() {
-        NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel", "PalmMiniature" });
+        if (NewSceneManager.Instance.ChallengeActive)
+        {
+            NewPopUpManager.Instance.ShowSinglePopup(
+            "Congratulations!",
+            "You finished the challenge! Good job! Now you're ready to use SBB HoloGuide on your own.",
+            "Finish",
+            () =>
+            {
+                Debug.Log("Challenge completed, user ready for SBB HoloGuide.");
+                NewSceneManager.Instance.EndChallenge();
+                NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel", "PalmMiniature" });
+            }
+        );
 
+        }
+        else{
+        NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel", "PalmMiniature" });}
         // if the challenge is not acative we go to main menu
         // otherwise the user can come back to main menu from challenge completed popoup
         // TODO: log!!

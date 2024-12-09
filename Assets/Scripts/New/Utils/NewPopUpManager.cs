@@ -302,7 +302,7 @@ public class NewPopUpManager : MonoBehaviour
         {
             // scale of Y to 150
             Vector3 newScale = backplateTransform.localScale;
-            newScale.y = 150f;
+            newScale.y = 170f;
             backplateTransform.localScale = newScale;
 
             Debug.Log("[PopUpManager] Adjusted UX.Slate.ContentBackplate scale to: " + backplateTransform.localScale);

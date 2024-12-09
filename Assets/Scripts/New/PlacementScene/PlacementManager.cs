@@ -63,6 +63,10 @@ public class PlacementManager : MonoBehaviour
         {
             BuildFinishPopUp2();
         }
+        else if (NewSceneManager.Instance.ChallengeActive)
+        {
+            BuidSecondTaskChallengePopUp();
+        }
         else
         {
             MoveToSteps();
@@ -136,6 +140,20 @@ public class PlacementManager : MonoBehaviour
             () =>
             {
              NewSceneManager.Instance.ShowObject("PlaceDoor");
+
+            }
+            );
+    }
+
+    private void BuidSecondTaskChallengePopUp(){
+        NewSceneManager.Instance.HideObject("PlaceDoor");
+        NewPopUpManager.Instance.ShowBigPopUp(
+            "Second Task Completed!",
+            "Second task successfully completed! The next task is about showing the miniature view of step 1.",
+            "Continue", 
+            () =>
+            {
+             MoveToSteps();
 
             }
             );

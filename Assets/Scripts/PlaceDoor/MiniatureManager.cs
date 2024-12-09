@@ -21,6 +21,9 @@ public class MiniatureManager : MonoBehaviour
     private Dictionary<string, GameObject> displayedGroups = new();
     private List<string> componentsInDisplayBlocks;
 
+    private bool onceTutorial = false;
+    private bool onceChallenge = false;
+
     public void InitializeDisplayBlocks(List<string> components)
     {
         componentsInDisplayBlocks = components;
@@ -217,9 +220,24 @@ public class MiniatureManager : MonoBehaviour
             
         }
     void Update(){
-        if (IsVisible() && NewSceneManager.Instance.TutorialActive)
+        if (IsVisible() && NewSceneManager.Instance.TutorialActive && !onceTutorial)
         {
+            onceTutorial=true;
             StartCoroutine(ShowPopupSequence());
+        }
+        else if (IsVisible() && NewSceneManager.Instance.ChallengeActive && !onceChallenge){
+            onceChallenge =true;
+            NewPopUpManager.Instance.ShowSinglePopup(
+            "Third Task Completed!",
+            "Now it's time to do the maintenance for real! Follow all the steps carefully and then press \"Done\" when you're finished.",
+            "Start Maintenance",
+            () =>
+            {
+                Debug.Log("Proceeding to the real maintenance task.");
+                
+            }
+        );
+
         }
     }
 

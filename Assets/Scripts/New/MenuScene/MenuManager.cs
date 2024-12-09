@@ -63,11 +63,6 @@ public class MenuManager : MonoBehaviour
             print("POPUPTUTORIAL");
             BuildStep1PopUp();
         }
-        else if (!built)
-        {
-            print("POPUPMENU");
-            BuildMenu();
-        }
     }
 
     private IEnumerator ShowPopupSequence()
@@ -142,6 +137,10 @@ public class MenuManager : MonoBehaviour
         {
             BuildMenu();
         }
+        else if (built){
+            DestroyMenu();
+            BuildMenu();
+        }
     }
 
 
@@ -186,7 +185,7 @@ public class MenuManager : MonoBehaviour
             itm.transform.localPosition = Vector3.zero;
 
             // Set the action based on the index
-            if (i == 1 && NewSceneManager.Instance.ChallengeActive) // Second entry
+            if (i == 1 && NewSceneManager.Instance.ChallengeActive)
             {
                 print("si entrato");
                 AddSpecialItemActionSecond(itm);
@@ -345,7 +344,7 @@ public class MenuManager : MonoBehaviour
     }
     private void WongPick()
     {
-        NewSceneManager.Instance.HideObject("MenuSceneCanvas");
+        NewSceneManager.Instance.HideObject("ManipulationContainer");
         NewPopUpManager.Instance.ShowSinglePopup(
         "Watch Out!",
         "The task required you to choose the task with train number '001-5'. Try again!",
@@ -353,7 +352,7 @@ public class MenuManager : MonoBehaviour
         () =>
         {
             Debug.Log("Retrying task selection.");
-            NewSceneManager.Instance.ShowObject("MenuSceneCanvas");
+            NewSceneManager.Instance.ShowObject("ManipulationContainer");
            
         }
     );

@@ -143,53 +143,14 @@ public class MiniatureManager : MonoBehaviour
         // Hide();
     }
 
-    private void BuildFinishTutorialPopUp(){
-        bool active = true;
-        NewPopUpManager.Instance.ShowSinglePopup(
-            "Congratulations!",
-            "You finished the tutorial. You are now ready to explore the SBB HoloGuide on your own! \nClick \"Continue\" to proceed.",
-             "Continue", 
-            () =>
-            {
-             Debug.Log("isisisisis");
-             active = false;
-             print(active);
-
-            }
-            );
-        NewSceneManager.Instance.EndTutorial();
-        print("fuori");
-        print(active);
-    }
-
-    private void BuildStartChallengePopUp(){
-        print("ento");
-        NewPopUpManager.Instance.ShowDoublePopup(
-            "We have a challenge for you!",
-            "Accept this challenge to put your knowledge of the SBBHoloGuide app to the test.",
-            "Decline Challenge", 
-            "Accept Challenge", 
-            () =>
-            {
-                Debug.Log(NewSceneManager.Instance.ChallengeActive);
-                NewSceneManager.Instance.GoTo("Menu", new List<string> { "MenuPanel" });
-            },
-            () =>
-            {
-                NewSceneManager.Instance.StartChallenge();
-                Debug.Log(NewSceneManager.Instance.ChallengeActive);
-                Debug.Log("Challenge Started");
-                NewSceneManager.Instance.GoTo("Menu", new List<string> { "MenuPanel" });
-            }
-            );
-    }
-
     private IEnumerator ShowPopupSequence()
     {
         bool firstPopupDone = false;
 
         // First Popup
+        NewSceneManager.Instance.EndTutorial();
         NewPopUpManager.Instance.ShowSinglePopup(
+            "FinishTutorial",
             "Congratulations!",
             "You finished the tutorial. You are now ready to explore the SBB HoloGuide on your own! \nClick \"Continue\" to proceed.",
              "Continue", 
@@ -197,15 +158,14 @@ public class MiniatureManager : MonoBehaviour
             {
                 firstPopupDone = true;
             }
-            );
-        NewSceneManager.Instance.EndTutorial();
-        Debug.Log("tutorial finished");
+        );
 
         // Wait until the first popup is closed
         yield return new WaitUntil(() => firstPopupDone);
 
         // Second Popup
          NewPopUpManager.Instance.ShowDoublePopup(
+            "AskChallenge",
             "We have a challenge for you!",
             "Accept this challenge to put your knowledge of the SBBHoloGuide app to the test.",
             "Decline Challenge", 
@@ -237,6 +197,7 @@ public class MiniatureManager : MonoBehaviour
         {
             onceChallenge =true;
             NewPopUpManager.Instance.ShowSinglePopup(
+            "ChallengeCompleted",
             "Third Task Completed!",
             "Now it's time to do the maintenance for real! Follow all the steps carefully and then press \"Done\" when you're finished.",
             "Start Maintenance",

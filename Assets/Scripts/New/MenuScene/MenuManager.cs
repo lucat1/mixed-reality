@@ -101,6 +101,7 @@ public class MenuManager : MonoBehaviour
 
         // Popup #1
         NewPopUpManager.Instance.ShowSinglePopup(
+            "WelcomeChallenge",
             "Welcome to the Challenge!",
             "This challenge is made of 4 tasks to complete in order to win. \nClick \"Continue\" to proceed to the first one.",
              "Continue", 
@@ -115,13 +116,14 @@ public class MenuManager : MonoBehaviour
 
         // Popup #2
          NewPopUpManager.Instance.ShowSinglePopup(
+            "ChooseMaintenanceChallenge",
             "First Task",
             "The first task is about picking the maintenance task with train number \"001-5\".",
             "Continue", 
             () =>
             {
                 DestroyMenu();
-                NewSceneManager.Instance.ShowObject("ManipulationContainer");
+                NewSceneManager.Instance.ShowObjects(new () {"ManipulationContainer"});
                 BuildMenu();
             }
             );
@@ -245,9 +247,9 @@ public class MenuManager : MonoBehaviour
     // builds the initial tutorial popup that explains the menu structure
     private void BuildStep1TutorialPopUp()
     {
-        Debug.Log("Building the tutorial popup...");
         NewSceneManager.Instance.HideObject("ManipulationBar");
         NewPopUpManager.Instance.ShowBigPopUp(
+            "ChooseMaintenanceTutorial",
             "Step 1: Choose a Maintenance Task",
             "Each row represents a maintenance task that has to be done. Each task is identified by: \n" +
             "- The train and coach where it must be performed.\n" +
@@ -258,7 +260,7 @@ public class MenuManager : MonoBehaviour
             () =>
             {
                 Debug.Log("Continuing tutorial...");
-                NewSceneManager.Instance.ShowObject("ManipulationBar");
+                NewSceneManager.Instance.ShowObjects(new () {"ManipulationBar"});
                 BuildMenu();
             }
         );
@@ -270,12 +272,13 @@ public class MenuManager : MonoBehaviour
         Debug.Log("Building the finish step 1 popup...");
         NewSceneManager.Instance.HideObject("MenuPanel");
         NewPopUpManager.Instance.ShowSinglePopup(
+            "FinishChooseMaintenanceTutorial",
             "Step 1 successfully completed!",
             "Click \"Continue\" to proceed with the tutorial.",
             "Continue",
             () =>
             {
-                NewSceneManager.Instance.GoTo("Placement", new List<string> { "PlacementPanel" });
+                NewSceneManager.Instance.GoTo("Placement", new () { "PlacementPanel" });
             }
         );
     }
@@ -319,13 +322,14 @@ public class MenuManager : MonoBehaviour
     {
         NewSceneManager.Instance.HideObject("MenuSceneCanvas");
         NewPopUpManager.Instance.ShowSinglePopup(
-        "First Task Completed!",
-        "First task completed successfully! Now the second task regards placing the door correctly. Click continue to try!",
-        "Continue",
-        () =>
-        {
-            NewSceneManager.Instance.GoTo("Placement", new List<string> { "PlacementPanel", "PlaceDoor" });
-        }
+            "FinishChooseMaintenanceChallenge",
+            "First Task Completed!",
+            "First task completed successfully! Now the second task regards placing the door correctly. Click continue to try!",
+            "Continue",
+            () =>
+            {
+                NewSceneManager.Instance.GoTo("Placement", new List<string> { "PlacementPanel", "PlaceDoor" });
+            }
         );
 
         
@@ -335,14 +339,14 @@ public class MenuManager : MonoBehaviour
     {
         NewSceneManager.Instance.HideObject("ManipulationContainer");
         NewPopUpManager.Instance.ShowSinglePopup(
-        "Watch Out!",
-        "The task required you to choose the task with train number '001-5'. Try again!",
-        "Try Again",
-        () =>
-        {
-            NewSceneManager.Instance.ShowObject("ManipulationContainer");
-           
-        }
+            "WrongChooseMaintenanceChallenge",
+            "Watch Out!",
+            "The task required you to choose the task with train number '001-5'. Try again!",
+            "Try Again",
+            () =>
+            {
+                NewSceneManager.Instance.ShowObjects(new (){"ManipulationContainer"});
+            }
     );
 
         

@@ -109,12 +109,12 @@ public class StepsManager : MonoBehaviour
         if (NewSceneManager.Instance.ChallengeActive) // if challenge && done -> challege completed!
         {
             NewPopUpManager.Instance.ShowSinglePopup(
+            "FinishChallenge",
             "Congratulations!",
             "You finished the challenge! Good job! Now you're ready to use SBB HoloGuide on your own.",
             "Finish",
             () =>
             {
-                Debug.Log("Challenge completed, user ready for SBB HoloGuide.");
                 NewSceneManager.Instance.EndChallenge();
                 NewSceneManager.Instance.GoTo("Menu", new List<string> { "MenuPanel", "PalmMiniature" });
             }
@@ -123,13 +123,7 @@ public class StepsManager : MonoBehaviour
         }
         else // normal execution
         {
-        NewSceneManager.Instance.GoTo("Menu", new List<string> { "MenuPanel", "PalmMiniature" });}
-        // if the challenge is not acative we go to main menu
-        // otherwise the user can come back to main menu from challenge completed popoup
-        // TODO: log!!
-        if(TimeTracker.Instance){
-            if(!TimeTracker.Instance.challengeOn)
-                Debug.LogError("DO LOGGING!!");
+            NewSceneManager.Instance.GoTo("Menu", new List<string> { "MenuPanel", "PalmMiniature" });
         }
     }
 
@@ -161,14 +155,13 @@ public class StepsManager : MonoBehaviour
         NewSceneManager.Instance.HideObject("StepsContent");
         NewSceneManager.Instance.HideObject("StepsManipulationContainer");
         NewPopUpManager.Instance.ShowBigPopUp(
+            "NavigateSteps",
             "Step 3: Navigate Maintenance Steps",
             "The next step is about navigating through the steps of the maintenance process. \n Fo each step, you will see: \n- the instruction displayed in the menu \n - the involved component is highlighted on the door hologram  \n Use the buttons to explore the process and navigate to step 2 for more details about the tutorial. \n Click \"Continue\" to proceed.",
              "Continue", 
             () =>
             {
-            NewSceneManager.Instance.ShowObject("BigDoor");
-            NewSceneManager.Instance.ShowObject("StepsContent");
-            NewSceneManager.Instance.ShowObject("StepsManipulationContainer");
+            NewSceneManager.Instance.ShowObjects(new (){"BigDoor", "StepsContent", "StepsManipulationContainer"});
             BuildSteps();
 
             }
@@ -179,6 +172,7 @@ public class StepsManager : MonoBehaviour
     // step 4 tutorial popup
     private void BuildStep4TutorialPopUp(){
         NewPopUpManager.Instance.ShowSinglePopup(
+            "UseMiniature",
             "Step 4: Use the Miniature View",
             "This component is smaller and harder to see.This is where the miniature view becomes handy. \nSimply open your palm to view the component up close! ",
              "Continue", 

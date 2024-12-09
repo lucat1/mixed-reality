@@ -33,13 +33,6 @@ public class PlacementManager : MonoBehaviour
         {
             BuildStep2TutorialPopUp();
         }
-
-        if(TimeTracker.Instance){
-            if(TimeTracker.Instance.challengeOn){
-                Debug.Log("[PlacementManager] Started challenge: place door");
-                TimeTracker.Instance.StartAction("challenge|place the door");
-            }
-        }
     }
 
     // Re-show anchor points when going back to to the placement
@@ -104,6 +97,7 @@ public class PlacementManager : MonoBehaviour
         else // if door has not been placed -> give error thorough popup 
         { 
             NewPopUpManager.Instance.ShowSinglePopup(
+            "DoorNotPlaced",
             "Watch Out!",
             "You tried to confirm without having placed the door. \n You must place the door first by clicking on 'Place Door' and then confirm. \n Click 'Try Again' and proceed with the correct order.",
              "Try Again", 
@@ -124,19 +118,13 @@ public class PlacementManager : MonoBehaviour
         anchorPoints.SetActive(false);
 
         // Move to the door scene and show the door
-        NewSceneManager.Instance.GoTo(new List<string> { "DoorSceneCanvas", "BigDoor", "Steps", "PalmMiniature" });
-
-        // GET TIME end place door timer and start actial manteinance timer
-        if(TimeTracker.Instance){
-            TimeTracker.Instance.EndAction();
-            TimeTracker.Instance.StartAction("challenge|navigate steps");
-        }
+        NewSceneManager.Instance.GoTo("Door", new List<string> { "BigDoor", "Steps", "PalmMiniature" });
     }
 
     // Action for when the "Cancel" button is pressed
     public void CancelAction()
     {
-        NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel" });
+        NewSceneManager.Instance.GoTo("Menu", new List<string> { "MenuPanel" });
     }
 
     // step 2 tutorial popup
@@ -144,13 +132,13 @@ public class PlacementManager : MonoBehaviour
         NewSceneManager.Instance.HideObject("PlaceDoor");
         NewSceneManager.Instance.HideObject("AnchorPoints(Clone)");
         NewPopUpManager.Instance.ShowBigPopUp(
+            "PlaceDoor",
             "Step 2: Place Door",
             "In this step, you will need to align the holographic door with the real train door. \n First move the blue ball to match the bottom-right corner of the door. \nThen move the Red Ball to match the top left-corner of the door. \n When the door is correctly placed click \"Confirm\".",
              "Continue", 
             () =>
             {
-             NewSceneManager.Instance.ShowObject("PlaceDoor");
-
+             NewSceneManager.Instance.ShowObjects(new (){"PlaceDoor"});
             }
             );
     }
@@ -159,14 +147,11 @@ public class PlacementManager : MonoBehaviour
     private void BuildTask2ChallengePopUp(){
         NewSceneManager.Instance.HideObject("PlaceDoor");
         NewPopUpManager.Instance.ShowBigPopUp(
+            "PlaceDoorFinishChallenge",
             "Second Task Completed!",
             "Second task successfully completed! The next task is about showing the miniature view of step 1.",
             "Continue", 
-            () =>
-            {
-             MoveToSteps();
-
-            }
+            MoveToSteps
             );
     }
 
@@ -174,14 +159,11 @@ public class PlacementManager : MonoBehaviour
     private void BuildFinishStep2TutorialPopUp(){
         NewSceneManager.Instance.HideObject("PlaceDoor");
         NewPopUpManager.Instance.ShowSinglePopup(
+            "PlaceDoorFinishTutorial",
             "Step 2 Successfully Completed!",
             "Click \"Continue\" to proceed with the tutorial.",
              "Continue", 
-            () =>
-            {
-             MoveToSteps();
-
-            }
+            MoveToSteps
             );
     }
 }

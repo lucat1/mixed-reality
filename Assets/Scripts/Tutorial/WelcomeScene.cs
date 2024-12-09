@@ -25,9 +25,6 @@ public class WelcomeScene : MonoBehaviour
         // show loginPopUp
         PUManager.ShowPopup(loginPopUp);
 
-        // start timer
-        TimeTracker.Instance.StartAction("login|login the user");
-
         // set default values
         if (usernameInput != null){
             usernameInput.text = "Sbbuser";
@@ -51,9 +48,6 @@ public class WelcomeScene : MonoBehaviour
             // if login successful -> welcome user to the app
             loginPopUp.SetActive(false);
             PUManager.ShowPopup(welcomePopUp);
-
-            // GET TIME
-            TimeTracker.Instance.EndAction();
         }
         else
         {

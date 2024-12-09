@@ -21,7 +21,6 @@ public class NewPopUpManager : MonoBehaviour
     private GameObject currentPopup; // current active popup
     public bool IsPopupActive => currentPopup != null; // flag for current active popup
 
-
     // singleton instance and makes sure the PopUpManager persists across scenes
     private void Awake()
     {
@@ -46,6 +45,7 @@ public class NewPopUpManager : MonoBehaviour
        - rightButtonCallback: action to execute when the right button is clicked
     */
     public void ShowDoublePopup(
+        string popupId,
         string headerText,
         string mainText,
         string leftButtonText,
@@ -53,6 +53,7 @@ public class NewPopUpManager : MonoBehaviour
         Action leftButtonCallback,
         Action rightButtonCallback)
     {
+        Timer.Instance.Action($"Popup[{popupId}]");
         // only one is active
         if (currentPopup != null)
         {
@@ -153,11 +154,13 @@ public class NewPopUpManager : MonoBehaviour
        - rightButtonCallback: action to execute when the right button is clicked
     */
     public void ShowSinglePopup(
+        string popupId,
         string headerText,
         string mainText,
         string buttonText,
         Action buttonCallback)
     {
+        Timer.Instance.Action($"Popup[{popupId}]");
         // only one is active
         if (currentPopup != null)
         {
@@ -233,11 +236,13 @@ public class NewPopUpManager : MonoBehaviour
        - rightButtonCallback: action to execute when the right button is clicked
     */
     public void ShowBigPopUp(
+        string popupId,
         string headerText,
         string mainText,
         string buttonText,
         Action buttonCallback)
     {
+        Timer.Instance.Action($"Popup[{popupId}]");
         // only one is active
         if (currentPopup != null)
         {

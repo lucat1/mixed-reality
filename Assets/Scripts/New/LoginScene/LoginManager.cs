@@ -82,22 +82,21 @@ public class LoginManager : MonoBehaviour
             Debug.Log("Login successful");
             NewSceneManager.Instance.HideObject("LoginPanel");
             NewPopUpManager.Instance.ShowDoublePopup(
-            "Start Tutorial",
-            "Do you want to start the tutorial?",
-            "No", 
-            "Yes", 
-            () =>
-            {
-                Debug.Log(NewSceneManager.Instance.TutorialActive);
-                NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel" });
-            },
-            () =>
-            {
-                NewSceneManager.Instance.StartTutorial();
-                Debug.Log(NewSceneManager.Instance.TutorialActive);
-                Debug.Log("Tutorial Started");
-                NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel" });
-            }
+                "StartTutorial",
+                "Start Tutorial",
+                "Do you want to start the tutorial?",
+                "No", 
+                "Yes", 
+                () =>
+                {
+                    Debug.Log(NewSceneManager.Instance.TutorialActive);
+                    NewSceneManager.Instance.GoTo("Menu", new List<string> { "MenuPanel" });
+                },
+                () =>
+                {
+                    NewSceneManager.Instance.StartTutorial();
+                    NewSceneManager.Instance.GoTo("Menu", new List<string> { "MenuPanel" });
+                }
             );
         }
         else

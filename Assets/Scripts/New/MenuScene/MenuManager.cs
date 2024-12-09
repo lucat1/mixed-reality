@@ -58,7 +58,9 @@ public class MenuManager : MonoBehaviour
     */
     private void OnEnable()
     {
-        if (NewSceneManager.Instance && NewPopUpManager.Instance.IsPopupActive) // needed to avoid errors
+        if (NewSceneManager.Instance)
+        {
+            if (NewPopUpManager.Instance.IsPopupActive) // needed to avoid errors
             {
                 // wait until all popups are closed
                 StartCoroutine(WaitForPopupToClose(() =>
@@ -69,7 +71,7 @@ public class MenuManager : MonoBehaviour
             else
             {
                 ActivatePopupLogic();
-            }
+            }}
         
     }
 

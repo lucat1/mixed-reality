@@ -106,7 +106,20 @@ public class StepsManager : MonoBehaviour
 
     // if finished all steps -> button done
     public void Done() {
-        if (NewSceneManager.Instance.ChallengeActive) // if challenge && done -> challege completed!
+        if (NewSceneManager.Instance.TutorialActive){
+             NewPopUpManager.Instance.ShowBigPopUp(
+            "CannotFinishTutorialWithoutMiniature",
+            "Watch Out!",
+            "You tried to click \"Done\" without having followed the last step of the tutorial. \nOpen the palm of your hand and visualize the miniature to complete the tutorial!  \n Click 'Try Again' and proceed with the correct order of the tutorial.",
+             "Try Again", 
+            () =>
+            {
+             Debug.Log("User tried to finish steps before finisnih the tutorial!");
+
+            }
+            );
+        }
+        else if (NewSceneManager.Instance.ChallengeActive) // if challenge && done -> challege completed!
         {
             NewPopUpManager.Instance.ShowSinglePopup(
             "FinishChallenge",

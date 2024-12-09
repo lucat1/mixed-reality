@@ -361,6 +361,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 158263688}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &237776945 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8412504364231247770, guid: 2723d7ccb9294ba45aefc42cdab8121f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1613759787}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &282910812
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -805,6 +811,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -0}
   m_SizeDelta: {x: 1828.9999, y: 1336}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &851401237 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3342890075869375047, guid: 2723d7ccb9294ba45aefc42cdab8121f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1613759787}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &931348508
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1335,6 +1347,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1613759787}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1234945350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237776945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1318645546cbcf740adf3b3353d9347e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  door: {fileID: 851401237}
+  nearObjectRadius: 0.05
+  transparentMaterial: {fileID: 2100000, guid: f273f15840c1edc438f9b36319c04506, type: 2}
+  glowingMaterial: {fileID: 2100000, guid: fdfee5f17a54a2b4c991fc1a42dba5f9, type: 2}
+  showRingVolumeThreshold: 0
+  ringPrefab: {fileID: -4320558180572046448, guid: 0a339d6c5a733184e9e0d852d2dac138,
+    type: 3}
 --- !u!1 &1309762270
 GameObject:
   m_ObjectHideFlags: 0
@@ -3436,6 +3467,21 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 519b09a7914189945afc88295f6054e2, type: 2}
+    - target: {fileID: 2431949817895634933, guid: 398171464b5f01044b8cb1358224d316,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.222
+      objectReference: {fileID: 0}
+    - target: {fileID: 2431949817895634933, guid: 398171464b5f01044b8cb1358224d316,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 2431949817895634933, guid: 398171464b5f01044b8cb1358224d316,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.081
+      objectReference: {fileID: 0}
     - target: {fileID: 2433199272554387758, guid: 398171464b5f01044b8cb1358224d316,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -4984,7 +5030,7 @@ PrefabInstance:
     - target: {fileID: 4770694152908061417, guid: 398171464b5f01044b8cb1358224d316,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.008
+      value: -0.001
       objectReference: {fileID: 0}
     - target: {fileID: 4770694152908061417, guid: 398171464b5f01044b8cb1358224d316,
         type: 3}
@@ -8166,7 +8212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volumeThreshold: 0
   transparentMaterial: {fileID: 2100000, guid: 519b09a7914189945afc88295f6054e2, type: 2}
-  glowingMaterial: {fileID: 2100000, guid: a65bdc2b3c1319a4fa6b1623b98e084a, type: 2}
+  glowingMaterial: {fileID: 2100000, guid: 96920e8165bf1e44c981a18d6d6f9c17, type: 2}
   hideDoorThreshold: 0
   showRingVolumeThreshold: 0.000005
   ringPrefab: {fileID: -4320558180572046448, guid: 0a339d6c5a733184e9e0d852d2dac138,
@@ -8291,10 +8337,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8302039986081832792, guid: 2723d7ccb9294ba45aefc42cdab8121f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8412504364231247770, guid: 2723d7ccb9294ba45aefc42cdab8121f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1234945350}
   m_SourcePrefab: {fileID: 100100000, guid: 2723d7ccb9294ba45aefc42cdab8121f, type: 3}
 --- !u!1 &1666131369
 GameObject:

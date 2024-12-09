@@ -146,7 +146,7 @@ public class PlacementManager : MonoBehaviour
     // task 2 challenge popup
     private void BuildTask2ChallengePopUp(){
         NewSceneManager.Instance.HideObject("PlaceDoor");
-        NewPopUpManager.Instance.ShowBigPopUp(
+        NewPopUpManager.Instance.ShowSinglePopup(
             "PlaceDoorFinishChallenge",
             "Second Task Completed!",
             "Second task successfully completed! The next task is about showing the miniature view of step 1.",

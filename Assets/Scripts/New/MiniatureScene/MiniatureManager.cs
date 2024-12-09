@@ -190,8 +190,19 @@ public class MiniatureManager : MonoBehaviour
     void Update(){
         if (IsVisible() && NewSceneManager.Instance.TutorialActive && !onceTutorial) // if tutorial && never seen before
         {
+            GameObject stepsManagerObject = NewSceneManager.Instance.FindInScene("Steps");
+            StepsManager stepsManager = stepsManagerObject.GetComponent<StepsManager>();
+            //Debug.Log("Step4PopupShown: " + stepsManager.Step4PopupShown);
+            if (stepsManager.Step4PopupShown == false){
+
+            }
+            else{
             onceTutorial=true;
+
             StartCoroutine(ShowPopupSequence());
+
+            }
+            
         }
         else if (IsVisible() && NewSceneManager.Instance.ChallengeActive && !onceChallenge)  // if challenge && never seen before
         {

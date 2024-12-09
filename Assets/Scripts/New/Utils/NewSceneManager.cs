@@ -98,7 +98,7 @@ public class NewSceneManager : MonoBehaviour
     }
 
     // look for object in scene (even if inactive)
-    private GameObject FindInScene(string objectName)
+    public GameObject FindInScene(string objectName)
     {
         foreach (GameObject rootObj in UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects())
         {

@@ -15,9 +15,9 @@
         },
         {
             "stepN": 2,
-            "step_description": "Remove the cover of the distribution box.",
-            "component_code": "_25_375_0205_301",
-            "ring": true
+            "step_description": "Reattach the door leaf and test its operation.",
+            "component_code": "_25_350_0300_201",
+            "ring": false
         }
     ]
 }

@@ -26,11 +26,6 @@ public class PlaceDoorTutorial : MonoBehaviour
             placeDoorMenu.SetActive(false);
         if(step3Place != null)
             step3Place.SetActive(false);
-
-        // GET TIME
-        if(TimeTracker.Instance)
-            TimeTracker.Instance.StartAction("place door tutorial|intro message");
-
     }
 
     // 1 - if step3 && user clicks 'continue' -> load place door menu && step3 place popup
@@ -39,12 +34,6 @@ public class PlaceDoorTutorial : MonoBehaviour
         step3.SetActive(false);
         placeDoorMenu.SetActive(true);
         step3Place.SetActive(true);
-
-        // GET TIME
-        if(TimeTracker.Instance){
-            TimeTracker.Instance.EndAction();
-            TimeTracker.Instance.StartAction("place door tutorial|place door");
-        }
     }
 
     // 2 - if step3Place && user clicks 'place door' -> load step3AnchorPoints
@@ -60,12 +49,6 @@ public class PlaceDoorTutorial : MonoBehaviour
         step4.SetActive(true);
         completed.SetActive(false);
         //steps.SetActive(true);
-
-        // GET TIME
-        if(TimeTracker.Instance){
-            TimeTracker.Instance.EndAction();
-            TimeTracker.Instance.StartAction("place door tutorial|navigate steps");
-        }
     }
 
     public void Complete()
@@ -107,11 +90,6 @@ public class PlaceDoorTutorial : MonoBehaviour
     {
         end.SetActive(false);
         challenge.SetActive(true);
-
-        // GET TIME
-        if(TimeTracker.Instance){
-            TimeTracker.Instance.EndAction();
-        }
     }
 
     // 8 - if challengepopup && user clicks 'decline challenge' -> hide challenge pop up
@@ -123,13 +101,7 @@ public class PlaceDoorTutorial : MonoBehaviour
     // 9 - if challengepopup && user clicks 'accept challenge' -> hide challenge pop up & start timing
     public void Accept()
     {   
-        if(TimeTracker.Instance) {
-            TimeTracker.Instance.StartAction("challenge start");
-        }
         SceneManager.LoadScene("Menu");
-
-        if(TimeTracker.Instance)
-            SaveData();
     }
 
     // 10 - if challenge finished -> show finished challenge pop up
@@ -137,26 +109,11 @@ public class PlaceDoorTutorial : MonoBehaviour
     {    
         
         // GET TIME end navigate steps timer and set challenge to false
-        if(TimeTracker.Instance) {
-            if(TimeTracker.Instance.challengeOn){
-                challengeEnd.SetActive(true);
-                Debug.Log("finished with logs");
-                TimeTracker.Instance.EndAction();
-                TimeTracker.Instance.challengeOn = false;
-            }
-        }
-
-        if(TimeTracker.Instance)
-            SaveData();
+        challengeEnd.SetActive(true);
     }
     // if exit tutorial -> start menu scene
     public void ExitTutorial()
     {
         SceneManager.LoadScene("Menu");
-    }
-
-    public void SaveData() {
-        Assert.IsNotNull(TimeTracker.Instance);
-        TimeTracker.Instance.SaveTimings();
     }
 }

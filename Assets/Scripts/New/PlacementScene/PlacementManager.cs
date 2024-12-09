@@ -33,13 +33,6 @@ public class PlacementManager : MonoBehaviour
         {
             BuildStep2TutorialPopUp();
         }
-
-        if(TimeTracker.Instance){
-            if(TimeTracker.Instance.challengeOn){
-                Debug.Log("[PlacementManager] Started challenge: place door");
-                TimeTracker.Instance.StartAction("challenge|place the door");
-            }
-        }
     }
 
     // Re-show anchor points when going back to to the placement
@@ -126,12 +119,6 @@ public class PlacementManager : MonoBehaviour
 
         // Move to the door scene and show the door
         NewSceneManager.Instance.GoTo("Door", new List<string> { "BigDoor", "Steps", "PalmMiniature" });
-
-        // GET TIME end place door timer and start actial manteinance timer
-        if(TimeTracker.Instance){
-            TimeTracker.Instance.EndAction();
-            TimeTracker.Instance.StartAction("challenge|navigate steps");
-        }
     }
 
     // Action for when the "Cancel" button is pressed

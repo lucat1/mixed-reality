@@ -38,21 +38,13 @@ public class MenuTutorial : MonoBehaviour
         step2Row.SetActive(false);
         step2Pick.SetActive(false);
         step2Priority.SetActive(false);
-
-        // GET TIME
-        TimeTracker.Instance.StartAction("menu tasks tutorial|intro message");
-        Debug.Log("INIZIO TIMWR");}
+    }
 
     // if start && user clicks 'continue' -> go to step 1
     public void LoadStep1()
     {
         start.SetActive(false);
         PUManager.ShowPopup(step1);
-        // GET TIME
-        if(TimeTracker.Instance){
-            TimeTracker.Instance.EndAction();
-            TimeTracker.Instance.StartAction("menu tasks tutorial|learn manipulation bar");
-        }
     }
 
     // 2 - if step1 (or step1 completed) && 'continue' -> go to step 2
@@ -62,12 +54,6 @@ public class MenuTutorial : MonoBehaviour
         step1Completed.SetActive(false);
         manipulatorCheck.SetActive(false);
         PUManager.ShowPopup(menuT);
-        
-        // GET TIME
-        if(TimeTracker.Instance){
-            TimeTracker.Instance.EndAction();
-            TimeTracker.Instance.StartAction("menu tasks tutorial|Chose a manteinance task");
-        }
     }
 
     // 3 - if step1 && tried manipulator && worked -> go to step 1 completed
@@ -94,13 +80,8 @@ public class MenuTutorial : MonoBehaviour
     // 5 - if step2 && user clicks 'continue' -> go to step2Row
     public void GoToRow()
     {
-        if(TimeTracker.Instance){
-            TimeTracker.Instance.EndAction();
-            TimeTracker.Instance.StartAction("menu tasks tutorial|Chose a manteinance task");
-            step2.SetActive(false);
-            step2Row.SetActive(true);
-        }
-
+        step2.SetActive(false);
+        step2Row.SetActive(true);
     }
 
     // 6 - if step2Row && user clicks 'continue' -> go to step2Priority
@@ -150,14 +131,7 @@ public class MenuTutorial : MonoBehaviour
     // 12 - if correct pick && continue -> start plae door scene tutorial
     public void GoToPlaceDoorTutorial()
     {
-        // GET TIME
-        if(TimeTracker.Instance){
-            TimeTracker.Instance.EndAction();
-            SceneManager.LoadScene("PlaceDoorT");
-        }
-        else{
-            Debug.Log("miao");
-        }
+        SceneManager.LoadScene("PlaceDoorT");
     }
 
     // if exit tutorial -> start menu scene

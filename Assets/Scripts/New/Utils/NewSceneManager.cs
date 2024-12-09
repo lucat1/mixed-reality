@@ -14,13 +14,9 @@ using UnityEngine;
 
 public class NewSceneManager : MonoBehaviour
 {
-    // singleton instance of SceneManager for global access
-    public static NewSceneManager Instance;
-
-    // boolean to track if the tutorial is active (read-only from outside SceneManager)
-    public bool TutorialActive { get; private set; } = false;
-    // boolean to track if the challenge is active (read-only from outside SceneManager)
-    public bool ChallengeActive { get; private set; } = false;
+    public static NewSceneManager Instance; // singleton instance of SceneManager for global access
+    public bool TutorialActive { get; private set; } = false; // boolean to track if the tutorial is active (read-only from outside SceneManager)
+    public bool ChallengeActive { get; private set; } = false; // boolean to track if the challenge is active (read-only from outside SceneManager)
 
     // sets up the singleton instance and ensures the SceneManager persists across scenes
     private void Awake()
@@ -77,7 +73,7 @@ public class NewSceneManager : MonoBehaviour
         }
     }
 
-    // deactivates a specific GameObject by its name
+    // deactivate a specific GameObject by its name
     public void HideObject(string objectName)
     {
         if (!string.IsNullOrEmpty(objectName))
@@ -150,8 +146,7 @@ public class NewSceneManager : MonoBehaviour
         TutorialActive = false;
     }
 
-
-    // update TutorialActive flag (to True)
+    // update ChallengeActive flag (to True)
     public void StartChallenge()
     {
         ChallengeActive = true;

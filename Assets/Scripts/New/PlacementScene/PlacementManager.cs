@@ -1,3 +1,9 @@
+/*
+The PlacementManager script is responsible for managing the placement menu.
+
+Key Features:
+- Allows user to place virtual door on top of real door through anchor balls.
+*/
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using MixedReality.Toolkit.UX;
@@ -11,13 +17,35 @@ public class PlacementManager : MonoBehaviour
     // Prefab for anchor points
     public GameObject anchorPointsPrefab;
     private GameObject anchorPoints;
-    public bool doorPlaced { get; private set; } = false;
-    private const string confirmPath = "PlaceDoor/ButtonGroup_32x32mm_H3/ButtonCollection/ConfirmButton";
+    public bool doorPlaced { get; private set; } = false; // flag for door placement
+    private const string confirmPath = "PlaceDoor/ButtonGroup_32x32mm_H3/ButtonCollection/ConfirmButton"; // confirm button path
 
-    private Vector3 scale = Vector3.one;
+    private Vector3 scale = Vector3.one; // scale of popup
 
     public Vector3 Scale() {
         return scale;
+    }
+
+    
+    void Start()
+    {
+        if (NewSceneManager.Instance.TutorialActive)
+        {
+            BuildStep2TutorialPopUp();
+        }
+
+        if(TimeTracker.Instance){
+            if(TimeTracker.Instance.challengeOn){
+                Debug.Log("[PlacementManager] Started challenge: place door");
+                TimeTracker.Instance.StartAction("challenge|place the door");
+            }
+        }
+    }
+
+    // Re-show anchor points when going back to to the placement
+    void OnEnable() {
+        if (anchorPoints != null)
+            anchorPoints.SetActive(true);
     }
 
     // Action for when the "Place" button is pressed
@@ -58,22 +86,24 @@ public class PlacementManager : MonoBehaviour
     {
         // Check if door has been placed
         if (doorPlaced==true){
-            // Check if tutorial
+        // Check if tutorial
         if (NewSceneManager.Instance.TutorialActive)
         {
-            BuildFinishPopUp2();
+            BuildFinishStep2TutorialPopUp();
         }
+        // check if challenge
         else if (NewSceneManager.Instance.ChallengeActive)
         {
-            BuidSecondTaskChallengePopUp();
+            BuildTask2ChallengePopUp();
         }
         else
         {
             MoveToSteps();
         }
                 }
-        else { 
-             NewPopUpManager.Instance.ShowSinglePopup(
+        else // if door has not been placed -> give error thorough popup 
+        { 
+            NewPopUpManager.Instance.ShowSinglePopup(
             "Watch Out!",
             "You tried to confirm without having placed the door. \n You must place the door first by clicking on 'Place Door' and then confirm. \n Click 'Try Again' and proceed with the correct order.",
              "Try Again", 
@@ -86,8 +116,8 @@ public class PlacementManager : MonoBehaviour
         }        
     }
 
+    // move to steps menu
     private void MoveToSteps(){
-        Debug.Log("[PlacementManager] Moving to steps");
         MoveDoor();
 
         // Toggle anchor points anchor points
@@ -109,28 +139,8 @@ public class PlacementManager : MonoBehaviour
         NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel" });
     }
 
-    void Start()
-    {
-        if (NewSceneManager.Instance.TutorialActive)
-        {
-            BuildStep2PopUp();
-        }
-
-        if(TimeTracker.Instance){
-            if(TimeTracker.Instance.challengeOn){
-                Debug.Log("[PlacementManager] Started challenge: place door");
-                TimeTracker.Instance.StartAction("challenge|place the door");
-            }
-        }
-    }
-
-    void OnEnable() {
-        // Re-show anchor points when going back to to the placement
-        if (anchorPoints != null)
-            anchorPoints.SetActive(true);
-    }
-
-    private void BuildStep2PopUp(){
+    // step 2 tutorial popup
+    private void BuildStep2TutorialPopUp(){
         NewSceneManager.Instance.HideObject("PlaceDoor");
         NewSceneManager.Instance.HideObject("AnchorPoints(Clone)");
         NewPopUpManager.Instance.ShowBigPopUp(
@@ -145,7 +155,8 @@ public class PlacementManager : MonoBehaviour
             );
     }
 
-    private void BuidSecondTaskChallengePopUp(){
+    // task 2 challenge popup
+    private void BuildTask2ChallengePopUp(){
         NewSceneManager.Instance.HideObject("PlaceDoor");
         NewPopUpManager.Instance.ShowBigPopUp(
             "Second Task Completed!",
@@ -159,7 +170,8 @@ public class PlacementManager : MonoBehaviour
             );
     }
 
-    private void BuildFinishPopUp2(){
+    // finish step 2 tutorial popup
+    private void BuildFinishStep2TutorialPopUp(){
         NewSceneManager.Instance.HideObject("PlaceDoor");
         NewPopUpManager.Instance.ShowSinglePopup(
             "Step 2 Successfully Completed!",

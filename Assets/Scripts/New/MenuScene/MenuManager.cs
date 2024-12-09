@@ -8,6 +8,7 @@ Key Features:
 */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using MixedReality.Toolkit.UX;
 using TMPro;
@@ -16,14 +17,8 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using MixedReality.Toolkit;
 using Unity.XR.CoreUtils;
-using UnityEngine;
-using UnityEngine.Assertions;
 using System.Linq;
 
 [Serializable]
@@ -48,29 +43,63 @@ public class MenuManager : MonoBehaviour
     public GameObject listContainer; // The container for the task list
     public GameObject listGrid;      // The grid layout for task entries
     public GameObject listEntry;     // The individual task entry prefab
+    public TextAsset jsonFile; // JSON file containing task data
+    public bool built = false; // flag to keep track if menu built
 
-    // JSON file containing task data
-    public TextAsset jsonFile;
-
-    public bool built = false;
-
+    // start not needed -> can use only onEnable
     private void Start()
     {
-        print("ENTRATO START");
-        // Check if tutorial
-        if (NewSceneManager.Instance.TutorialActive)
+    }
+
+    /* called each time the menu is enabled, this happens in 3 cases:
+        1. if user chooses tutorial -> call tutorial popups
+        2. during the challenge -> call challenge popups
+        3. on normal execution -> no popups
+    */
+    private void OnEnable()
+    {
+        if (NewSceneManager.Instance && NewPopUpManager.Instance.IsPopupActive) // needed to avoid errors
+            {
+                // wait until all popups are closed
+                StartCoroutine(WaitForPopupToClose(() =>
+                {
+                    ActivatePopupLogic();
+                }));
+            }
+            else
+            {
+                ActivatePopupLogic();
+            }
+        
+    }
+
+    private void ActivatePopupLogic()
+    {
+        if (NewSceneManager.Instance.TutorialActive) // 1. tutorial
         {
-            print("POPUPTUTORIAL");
-            BuildStep1PopUp();
+            BuildStep1TutorialPopUp();
+        }
+        else if (NewSceneManager.Instance.ChallengeActive) // 2. challenge
+        {
+            StartCoroutine(ShowPopupSequence());
+        }
+        else if (!built) // 3. not built menu -> user did not select tutorial
+        {
+            BuildMenu();
+        }
+        else if (built){ // 4. built menu -> after tutorial && challenge
+            DestroyMenu();
+            BuildMenu();
         }
     }
 
+    // make one popup appear after another popup (wait until closed)
     private IEnumerator ShowPopupSequence()
     {
         NewSceneManager.Instance.HideObject("ManipulationContainer");
         bool firstPopupDone = false;
 
-        // First Popup
+        // Popup #1
         NewPopUpManager.Instance.ShowSinglePopup(
             "Welcome to the Challenge!",
             "This challenge is made of 4 tasks to complete in order to win. \nClick \"Continue\" to proceed to the first one.",
@@ -81,10 +110,10 @@ public class MenuManager : MonoBehaviour
             }
             );
 
-        // Wait until the first popup is closed
+        // Wait
         yield return new WaitUntil(() => firstPopupDone);
 
-        // Second Popup
+        // Popup #2
          NewPopUpManager.Instance.ShowSinglePopup(
             "First Task",
             "The first task is about picking the maintenance task with train number \"001-5\".",
@@ -98,54 +127,16 @@ public class MenuManager : MonoBehaviour
             );
             
         }
+
+    // wait for popup to be closed in order not to have errors with new popup
     private IEnumerator WaitForPopupToClose(Action callback)
     {
         yield return new WaitUntil(() => !NewPopUpManager.Instance.IsPopupActive);
         callback.Invoke();
     }
 
-    private void OnEnable()
-    {
-        if (NewSceneManager.Instance)
-        {
-            if (NewPopUpManager.Instance.IsPopupActive)
-            {
-                Debug.Log("[OnEnable] Popup is already active, waiting for closure.");
-                StartCoroutine(WaitForPopupToClose(() =>
-                {
-                    ActivatePopupLogic();
-                }));
-            }
-            else
-            {
-                ActivatePopupLogic();
-            }
-        }
-    }
 
-    private void ActivatePopupLogic()
-    {
-        if (NewSceneManager.Instance.TutorialActive)
-        {
-
-        }
-        else if (NewSceneManager.Instance.ChallengeActive)
-        {
-            StartCoroutine(ShowPopupSequence());
-        }
-        else if (!built)
-        {
-            BuildMenu();
-        }
-        else if (built){
-            DestroyMenu();
-            BuildMenu();
-        }
-    }
-
-
-    
-    //Builds the menu dynamically from the JSON file.
+    // builds the menu dynamically from the JSON file
     private void BuildMenu()
     {
         built=true;
@@ -184,15 +175,13 @@ public class MenuManager : MonoBehaviour
             GameObject itm = Instantiate(listEntry, Vector3.zero, Quaternion.identity, grid.transform);
             itm.transform.localPosition = Vector3.zero;
 
-            // Set the action based on the index
-            if (i == 1 && NewSceneManager.Instance.ChallengeActive)
+            // in the challenge differentiate between correct && wrong pick
+            if (i == 1 && NewSceneManager.Instance.ChallengeActive) // correct pick
             {
-                print("si entrato");
                 AddSpecialItemActionSecond(itm);
             }
-            else if(i != 1 && NewSceneManager.Instance.ChallengeActive)
+            else if(i != 1 && NewSceneManager.Instance.ChallengeActive) // wrong pick
             {
-                print("si entrato");
                 AddSpecialItemActionGeneral(itm);
             }
             else
@@ -219,10 +208,10 @@ public class MenuManager : MonoBehaviour
                             background.color = Color.red;
                             break;
                         case 2:
-                            background.color = new Color(1f, 0.65f, 0f); // Orange
+                            background.color = new Color(1f, 0.65f, 0f); 
                             break;
                         case 3:
-                            background.color = new Color(0f, 0.8f, 0f); // Green
+                            background.color = new Color(0f, 0.8f, 0f); 
                             break;
                     }
                 }
@@ -230,6 +219,7 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    // this is needed in order to have buttons behave differently in tutorial/challenge/normal execution
     private void DestroyMenu()
 {
     Debug.Log("Destroying the menu UI...");
@@ -252,8 +242,8 @@ public class MenuManager : MonoBehaviour
     }
 }
 
-    // Builds the initial tutorial popup that explains the menu structure.
-    private void BuildStep1PopUp()
+    // builds the initial tutorial popup that explains the menu structure
+    private void BuildStep1TutorialPopUp()
     {
         Debug.Log("Building the tutorial popup...");
         NewSceneManager.Instance.HideObject("ManipulationBar");
@@ -275,7 +265,7 @@ public class MenuManager : MonoBehaviour
     }
 
     // Builds the popup shown after completing Step 1 in the tutorial
-    private void BuildFinishStep1PopUp()
+    private void BuildFinishStep1TutorialPopUp()
     {
         Debug.Log("Building the finish step 1 popup...");
         NewSceneManager.Instance.HideObject("MenuPanel");
@@ -297,7 +287,6 @@ public class MenuManager : MonoBehaviour
         Assert.IsNotNull(pb, "PressableButton is missing on task entry!");
         pb.OnClicked.AddListener(Pick);
     }
-
     private void AddSpecialItemActionSecond(GameObject item)
     {
         PressableButton pb = item.GetComponentInChildren<PressableButton>();
@@ -314,17 +303,18 @@ public class MenuManager : MonoBehaviour
     // Loads the next scene when a task entry is clicked
     private void Pick()
     {
-        if (NewSceneManager.Instance.TutorialActive)
+        if (NewSceneManager.Instance.TutorialActive) // if tutorial: finish popup + load placement scene
         {
-            BuildFinishStep1PopUp();
+            BuildFinishStep1TutorialPopUp();
         }
-        else if (!NewSceneManager.Instance.ChallengeActive)
+        else if (!NewSceneManager.Instance.ChallengeActive) // else: load placement scene
         {
             NewSceneManager.Instance.HideObject("MenuSceneCanvas");
             NewSceneManager.Instance.GoTo(new List<string> { "PlacementSceneCanvas", "PlacementPanel", "PlaceDoor" });
         }
     }
 
+    // case challenge: correct pick for the challenge, popup + load placement scene
     private void CorrectPick()
     {
         NewSceneManager.Instance.HideObject("MenuSceneCanvas");
@@ -334,14 +324,13 @@ public class MenuManager : MonoBehaviour
         "Continue",
         () =>
         {
-            Debug.Log("Proceeding to the second task.");
-            // Add logic to proceed to the next step, e.g., go to the placement scene
             NewSceneManager.Instance.GoTo(new List<string> { "PlacementSceneCanvas", "PlacementPanel", "PlaceDoor" });
         }
         );
 
         
     }
+    // case challenge: wrong pick for the challenge, try again
     private void WongPick()
     {
         NewSceneManager.Instance.HideObject("ManipulationContainer");
@@ -351,7 +340,6 @@ public class MenuManager : MonoBehaviour
         "Try Again",
         () =>
         {
-            Debug.Log("Retrying task selection.");
             NewSceneManager.Instance.ShowObject("ManipulationContainer");
            
         }

@@ -1,3 +1,10 @@
+/*
+The MiniatureManager script is responsible for managing the miniature.
+
+Key Features:
+- Dynamically builds the miniature based on the related component.
+- Allows the user to see in greater detail the components.
+*/
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,8 +28,8 @@ public class MiniatureManager : MonoBehaviour
     private Dictionary<string, GameObject> displayedGroups = new();
     private List<string> componentsInDisplayBlocks;
 
-    private bool onceTutorial = false;
-    private bool onceChallenge = false;
+    private bool onceTutorial = false; // flag to make sure only once tutorial popups are activated
+    private bool onceChallenge = false; // flag to make sure only once challenge popups are activated
 
     public void InitializeDisplayBlocks(List<string> components)
     {
@@ -219,13 +226,16 @@ public class MiniatureManager : MonoBehaviour
             );
             
         }
+    
+    // frequently called so can catch when hand is visible
     void Update(){
-        if (IsVisible() && NewSceneManager.Instance.TutorialActive && !onceTutorial)
+        if (IsVisible() && NewSceneManager.Instance.TutorialActive && !onceTutorial) // if tutorial && never seen before
         {
             onceTutorial=true;
             StartCoroutine(ShowPopupSequence());
         }
-        else if (IsVisible() && NewSceneManager.Instance.ChallengeActive && !onceChallenge){
+        else if (IsVisible() && NewSceneManager.Instance.ChallengeActive && !onceChallenge)  // if challenge && never seen before
+        {
             onceChallenge =true;
             NewPopUpManager.Instance.ShowSinglePopup(
             "Third Task Completed!",

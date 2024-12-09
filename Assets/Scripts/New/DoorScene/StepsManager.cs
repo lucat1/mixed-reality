@@ -1,3 +1,10 @@
+/*
+The StepsManager script is responsible for managing the steps menu.
+
+Key Features:
+- Dynamically builds the steps based on tasks from a JSON file.
+- Allows the user to navigate through maintenance steps.
+*/
 using System;
 using System.Collections.Generic;
 using MixedReality.Toolkit.UX;
@@ -28,20 +35,20 @@ public class StepsManager : MonoBehaviour
     private JSONSteps steps;
     private DoorManager dm;
     private MiniatureManager mm;
-    public bool Step4PopupShown { get; private set; } = false;
-
-
+    public bool Step4PopupShown { get; private set; } = false; // flag to check if popup 4 has been shown
     int currentStepIndex;
+
+    // reset to first step
     public void Reset() {
-        // reset step
-        Debug.Log("[StepsManager] Resetting to first step");
         currentStepIndex = 0;
     }
 
+    // check if last step
     bool IsLastStep() {
         return currentStepIndex >= steps.steps.Count - 1;
     }
 
+    // check if current step
     JSONStep CurrentStep() {
         Assert.IsTrue(currentStepIndex < steps.steps.Count);
         Assert.IsTrue(currentStepIndex >= 0);
@@ -54,6 +61,7 @@ public class StepsManager : MonoBehaviour
     private const string prevPath = "StepsContent/PreviousButton";
     private const string nextPath = "StepsContent/NextButton";
 
+    // show step
     void DisplayStep() {
 
         // change text on the Steps panel
@@ -77,11 +85,12 @@ public class StepsManager : MonoBehaviour
         pb.enabled = currentStepIndex != 0;
     }
 
+    // go to next step
     public void NextStep() {
         currentStepIndex++;
         if (NewSceneManager.Instance.TutorialActive && currentStepIndex==1 && Step4PopupShown==false)
         {
-            BuildStep4PopUp();
+            BuildStep4TutorialPopUp();
         }
         else
         {
@@ -90,13 +99,15 @@ public class StepsManager : MonoBehaviour
 
     }
 
+    // go to previous step
     public void PrevStep() {
         currentStepIndex--;
         DisplayStep();
     }
 
+    // if finished all steps -> button done
     public void Done() {
-        if (NewSceneManager.Instance.ChallengeActive)
+        if (NewSceneManager.Instance.ChallengeActive) // if challenge && done -> challege completed!
         {
             NewPopUpManager.Instance.ShowSinglePopup(
             "Congratulations!",
@@ -111,7 +122,8 @@ public class StepsManager : MonoBehaviour
         );
 
         }
-        else{
+        else // normal execution
+        {
         NewSceneManager.Instance.GoTo(new List<string> { "MenuSceneCanvas", "MenuPanel", "PalmMiniature" });}
         // if the challenge is not acative we go to main menu
         // otherwise the user can come back to main menu from challenge completed popoup
@@ -128,7 +140,7 @@ public class StepsManager : MonoBehaviour
         // Check if tutorial
         if (NewSceneManager.Instance.TutorialActive)
         {
-            BuildStep3PopUp();
+            BuildStep3TutorialPopUp();
         }
         else
         {
@@ -144,7 +156,8 @@ public class StepsManager : MonoBehaviour
             DisplayStep();
     }
 
-    private void BuildStep3PopUp(){
+    // step 3 tutorial popup
+    private void BuildStep3TutorialPopUp(){
         NewSceneManager.Instance.HideObject("BigDoor");
         NewSceneManager.Instance.HideObject("StepsContent");
         NewSceneManager.Instance.HideObject("StepsManipulationContainer");
@@ -164,7 +177,8 @@ public class StepsManager : MonoBehaviour
             
     }
 
-    private void BuildStep4PopUp(){
+    // step 4 tutorial popup
+    private void BuildStep4TutorialPopUp(){
         NewPopUpManager.Instance.ShowSinglePopup(
             "Step 4: Use the Miniature View",
             "This component is smaller and harder to see.This is where the miniature view becomes handy. \nSimply open your palm to view the component up close! ",

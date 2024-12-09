@@ -15,16 +15,14 @@ using MixedReality.Toolkit.UX;
 
 public class NewPopUpManager : MonoBehaviour
 {
-    // Singleton instance of NewPopUpManager for global access
-    public static NewPopUpManager Instance;
-
+    public static NewPopUpManager Instance; // singleton instance of NewPopUpManager for global access
     [SerializeField] private GameObject singleButtonBrefab; // popup prefab with one button
     [SerializeField] private GameObject doubleButtonPrefab; // popup prefab with 2 buttons
     private GameObject currentPopup; // current active popup
-    public bool IsPopupActive => currentPopup != null;
+    public bool IsPopupActive => currentPopup != null; // flag for current active popup
 
 
-    // singleton instance and makes sue the PopUpManager persists across scenes
+    // singleton instance and makes sure the PopUpManager persists across scenes
     private void Awake()
     {
         if (Instance == null)
@@ -300,7 +298,7 @@ public class NewPopUpManager : MonoBehaviour
 
         if (backplateTransform != null)
         {
-            // scale of Y to 150
+            // scale of Y to 170
             Vector3 newScale = backplateTransform.localScale;
             newScale.y = 170f;
             backplateTransform.localScale = newScale;
@@ -324,7 +322,6 @@ public class NewPopUpManager : MonoBehaviour
     {
         if (currentPopup != null)
         {
-            print("closed");
             Destroy(currentPopup);
             currentPopup = null;
         }

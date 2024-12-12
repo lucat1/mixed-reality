@@ -12,14 +12,8 @@ using System.Collections;
 using System.Collections.Generic;
 using MixedReality.Toolkit.UX;
 using TMPro;
-using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using MixedReality.Toolkit;
-using Unity.XR.CoreUtils;
-using System.Linq;
 
 [Serializable]
 class NTasks
@@ -45,7 +39,6 @@ public class MenuManager : MonoBehaviour
     public GameObject listGrid;      // The grid layout for task entries
     public GameObject listEntry;     // The individual task entry prefab
     public TextAsset jsonFile; // JSON file containing task data
-    public bool built = false; // flag to keep track if menu built
 
     // start not needed -> can use only onEnable
     private void Start()
@@ -86,12 +79,8 @@ public class MenuManager : MonoBehaviour
         {
             StartCoroutine(ShowPopupSequence());
         }
-        else if (!built) // 3. not built menu -> user did not select tutorial
+        else 
         {
-            BuildMenu();
-        }
-        else if (built){ // 4. built menu -> after tutorial && challenge
-            DestroyMenu();
             BuildMenu();
         }
     }
@@ -125,8 +114,6 @@ public class MenuManager : MonoBehaviour
             "Continue", 
             () =>
             {
-                DestroyMenu();
-                NewSceneManager.Instance.ShowObjects(new () {"ManipulationContainer"});
                 BuildMenu();
             }
             );
@@ -144,7 +131,7 @@ public class MenuManager : MonoBehaviour
     // builds the menu dynamically from the JSON file
     private void BuildMenu()
     {
-        built=true;
+        DestroyMenu();
         Debug.Log("Loading task data from JSON file...");
         // Parse the JSON file into a list of tasks
         NTasks tasks = JsonUtility.FromJson<NTasks>(jsonFile.ToString());
@@ -161,7 +148,9 @@ public class MenuManager : MonoBehaviour
         Assert.IsNotNull(manipulationContainer, "ManipulationContainer is missing!");
 
         // Create the list container
-        GameObject sec = Instantiate(listContainer, Vector3.zero, Quaternion.identity, manipulationContainer);
+        // GameObject sec = Instantiate(listContainer, Vector3.zero, Quaternion.identity, manipulationContainer);
+        GameObject sec = Instantiate(listContainer, Vector3.zero, Quaternion.identity, transform);
+        sec.name = "Menu";
         sec.transform.localPosition = Vector3.zero;
 
         // Set the title of the task list
@@ -174,7 +163,7 @@ public class MenuManager : MonoBehaviour
         grid.transform.localPosition = Vector3.zero;
 
         // Populate the grid with tasks
-         for (int i = 0; i < tasks.tasks.Count; i++)
+        for (int i = 0; i < tasks.tasks.Count; i++)
         {
             NEntry entry = tasks.tasks[i];
             GameObject itm = Instantiate(listEntry, Vector3.zero, Quaternion.identity, grid.transform);
@@ -217,33 +206,21 @@ public class MenuManager : MonoBehaviour
                     texts[4].color = Color.black;
                     break;
             }
-
-            
         }
     }
 
     // this is needed in order to have buttons behave differently in tutorial/challenge/normal execution
     private void DestroyMenu()
-{
-    Debug.Log("Destroying the menu UI...");
-    
-    // Get the ManipulationContainer (root for UI elements)
-    Transform manipulationContainer = transform.GetChild(0);
-    Assert.IsNotNull(manipulationContainer, "ManipulationContainer is missing!");
-
-    // Find the ListContainer (menu container)
-    Transform listContainerTransform = manipulationContainer.Find(listContainer.name + "(Clone)");
-    if (listContainerTransform != null)
     {
-        // Destroy all instantiated child objects
-        Destroy(listContainerTransform.gameObject);
-        Debug.Log("Menu successfully destroyed.");
+        Debug.Log("Destroying the menu UI...");
+        
+        // Get the ManipulationContainer (root for UI elements)
+        Transform menu = transform.Find("Menu");
+        if(menu != null)
+            Destroy(menu.gameObject);
+        else
+            Debug.LogWarning("[MenuManager] menu not found, thus not deleting.");
     }
-    else
-    {
-        Debug.LogWarning("Menu not found to destroy.");
-    }
-}
 
     // builds the initial tutorial popup that explains the menu structure
     private void BuildStep1TutorialPopUp()
@@ -332,8 +309,6 @@ public class MenuManager : MonoBehaviour
                 NewSceneManager.Instance.GoTo("Placement", new List<string> { "PlacementPanel", "PlaceDoor" });
             }
         );
-
-        
     }
     // case challenge: wrong pick for the challenge, try again
     private void WongPick()
@@ -348,8 +323,6 @@ public class MenuManager : MonoBehaviour
             {
                 NewSceneManager.Instance.ShowObjects(new (){"ManipulationContainer"});
             }
-    );
-
-        
+        );
     }
 }

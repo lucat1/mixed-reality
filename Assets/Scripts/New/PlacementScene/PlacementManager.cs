@@ -78,6 +78,7 @@ public class PlacementManager : MonoBehaviour
         DoorManager.Instance.SetPosition(plane.position);
         DoorManager.Instance.SetRotation(plane.rotation * Quaternion.Euler(90, 0, 90));
         DoorManager.Instance.SetPlaneScale(planeScale);
+        DoorManager.Instance.UpdatePosition();
     }
 
     // Action for when the "Confirm" button is pressed

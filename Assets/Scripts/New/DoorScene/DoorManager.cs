@@ -41,22 +41,26 @@ public class DoorManager : MonoBehaviour
         Debug.Log("[Door " + gameObject.name + "] " + message);
     }
 
-    private Vector3 planeScale;
-    private Vector3 scale;
-    private Vector3 position;
-    private Quaternion rotation;
+    private Vector3 planeScale = Vector3.zero;
+    private Vector3 scale = Vector3.zero;
+    private Vector3 position = Vector3.zero;
+    private Quaternion rotation = Quaternion.identity;
 
     public void SetPlaneScale(Vector3 ps) {
+        Log($"Setting scale to = {ps}");
         planeScale = ps;
     }
     public void SetPosition(Vector3 p) {
+        Log($"Setting position to = {p}");
         position = p;
     }
     public void SetRotation(Quaternion r) {
+        Log($"Setting rotation to = {r}");
         rotation = r;
     }
     public float ScaleFactor() {
-        Assert.IsFalse(scale.x == 0);
+        Log("Getting scale factor");
+        Assert.IsFalse(scale == Vector3.zero);
         return scale.x;
     }
 
@@ -176,23 +180,34 @@ public class DoorManager : MonoBehaviour
         return b;
     }
 
-    // Start is called before the first frame update
-    void OnEnable()
-    {
-        // Set the door position
-        transform.position = position;
-        transform.rotation = rotation;
-
+    void ComputeScale() {
         Transform doorScaleContainer = transform.Find("DoorContainer/DoorScale");
         doorScaleContainer.localScale = Vector3.one;
         var doorScale = DoorBounds(doorScaleContainer.gameObject).size;
         var sc = Mathf.Max(planeScale.x / doorScale.x, planeScale.y / doorScale.y, planeScale.z / doorScale.z);
         scale = new Vector3(sc, sc, sc);
         doorScaleContainer.localScale = scale;
+    }
+
+    public void UpdatePosition() {
+        Assert.IsFalse(planeScale == Vector3.zero);
+        Assert.IsFalse(position == Vector3.zero);
+        Assert.IsFalse(rotation == Quaternion.identity);
+
+        // Set the door position
+        transform.position = position;
+        transform.rotation = rotation;
+
+        ComputeScale();
+        Assert.IsFalse(scale == Vector3.zero);
+        Transform doorScaleContainer = transform.Find("DoorContainer/DoorScale");
         doorScaleContainer.gameObject.SetActive(true);
 
         transform.Find("DoorContainer").localPosition = Vector3.zero;
+    }
 
+    void Start()
+    {
         RemoveSmallComponents();
         foreach(var t in GetDoorComponents(go => !currentlyHighlighted.Contains(go)))
             SetMaterial(t, transparentMaterial);

@@ -39,7 +39,7 @@ public class PlacementManager : MonoBehaviour
     // Re-show anchor points when going back to to the placement
     void OnEnable() {
         if (NewSceneManager.Instance && NewSceneManager.Instance.PreviousScene != "Door") {
-            Destroy(anchorPoints);
+            // Destroy(anchorPoints);
             anchorPoints = null;
         }
 

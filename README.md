@@ -82,7 +82,7 @@ This software requires Unity, version starting from 2022.3 on. This software als
 - MRTK3
 - Platform Support
 
-## 4. Project pipeline
+## 4. App developemnt pipeline
 The following diagram illustrates the steps to develop the application
 <br><br>
 ![Development pipeline](README_files/app_development.jpg)
@@ -115,6 +115,8 @@ We evaluate whether the tutorial provided in the application effectively helped 
 We evaluate the performance of SBB HoloGuide against the traditional mainte nance method using task completion time as the KPI. The above chart illustrates individual user times for both methods, with average times represented by dashed lines. The results clearly demonstrate that SBB HoloGuide consistently outperforms the use of the manual.
 For all users, the time required to complete the maintenance task with the AR application is significantly lower than with the traditional method. The average time for the traditional method is <b>201.78</b> seconds, compared to <b>70.92</b> seconds for SBB HoloGuide, achieving a <b>2.85x</b> speedup on average. This substantial reduction in task completion time empirically supports the conclusion that the AR application offers a faster, more efficient, and streamlined alternative for train door maintenance.
 ## 6. Conclusions
-
-We developed an AR app enabling novice SBB operators to efficiently maintain train doors,achieving tasks 3x faster. Future plans include automating door placement and integrating an ETL data layer.
-
+In this work, we introduced SBB HoloGuide, an innovative AR application designed for intuitive and efficient maintenance of SBB train doors.
+<br></br>
+Our user study shows that users with no AR experience perform maintenance tasks as quickly as those with AR expertise, demonstrating the application’s user-friendliness. Furthermore, the study revealed that the AR application achieves a remarkable 2.85x reduction in task completion time compared to traditional manual methods.
+<br></br>
+Future work could focus on optimizing the \texttt{Place Door} interface, identified as a bottleneck in both design and performance. Implementing an automatic door placement mechanism using 6D-pose estimation could further enhance efficiency by eliminating the need for manual placement. Additionally, integrating an Extract, Transform, and Load (ETL) layer could automate and streamline the organization of SBB's extensive and heterogeneous maintenance data, improving usability and expanding the application's potential capabilities.

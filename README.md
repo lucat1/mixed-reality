@@ -79,6 +79,8 @@ You can find the project report [here](//TODO)
 ```
 ## 3. Project Setup
 This software requires Unity, version starting from 2022.3 on. This software also require all the following dependencies to integrate the development environment with MRTK 3 Features (these features can be intalled using "MixedRealityFeatureTool"):
+- MRTK3
+- Platform Support
 
 ## 4. Project pipeline
 

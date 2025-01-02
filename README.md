@@ -5,7 +5,7 @@
 ## 1. Project Description
 Dynamic railway maintenance demands adaptability and expertise, yet current systems lack clear guidance. SBB HoloGuide bridges this gap with AR-powered train door maintenance. 
 
-You can find the project report [here](//TODO)
+You can find the project report [here](README_files/report.pdf)
 
 ## 2. Project Organization
 ```

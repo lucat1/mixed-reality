@@ -82,24 +82,25 @@ This software requires Unity, version starting from 2022.3 on. This software als
 - MRTK3
 - Platform Support
 
-## 4. App developemnt pipeline
-The following diagram illustrates the steps to develop the application
+## 4. Application flow
+The following diagram illustrates how the application works
 <br><br>
-![Development pipeline](README_files/app_development.jpg)
+![Development pipeline](README_files/methods.jpg)
 <br><br>
-the process has bee divided into 4 steps:
-- worked on the app alternating the developement with bi-Weekly General Users test to gather feedbacks
-- after the developement of the version 1.0 of the application we performed test with experienced Senior SBB operators. This allowed us to collect important feedbacks from potential users for the app.
-- Implementation of the features suggested by SBB operators to develop the 2.0 version
-- Rigorous User Study with general users
+the application experience consists of 6 parts:
+- once the application is started the user is asked to login.
+- in an easy to use menu the user is presented with all the tasks he has to perform
+- to start the maintenance process the user overlays a placeholder with the real door
+- the user can then carry out the maintenance by going through all the instructions
+- during the all process the user can also take advantage of the miniature view to better visualize the components
 
-## 5. Main results
-in the following section we will refere to 2 different type of users: 
+## 5. Results
+In the following section we will refer to 2 different types of users: 
 - Type 1: Users with no prior experience, either in AR or in industrial maintenance.
 - Type 2: Users with AR experience but no industrial maintenance experience.
 - Type 3: Users with experience in both AR and industrial maintenance.
 
-The following Plots illustrates the results we obtained thanks to the user tests
+The following Plots illustrate the results we obtained thanks to the user tests
 <br><br>
 ![Development pipeline](README_files/plot1.jpg)
 <br><br>

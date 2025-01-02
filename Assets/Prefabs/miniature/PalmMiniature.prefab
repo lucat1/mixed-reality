@@ -186,7 +186,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dd884402acb4fc948af005fd42774c9c, type: 2}
+  - {fileID: 2100000, guid: 67ea47c3251dc3644914201412ba632e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -217,7 +217,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9134294577307337975}
-  - component: {fileID: 8302039986081832792}
   m_Layer: 0
   m_Name: PalmMiniature
   m_TagString: Untagged
@@ -241,25 +240,6 @@ Transform:
   - {fileID: 8439182489397001545}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8302039986081832792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8412504364231247770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b54d7de5e7bce2441be9734c3e923689, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  door: {fileID: 3342890075869375047}
-  nearObjectRadius: 0.5
-  transparentMaterial: {fileID: 2100000, guid: f273f15840c1edc438f9b36319c04506, type: 2}
-  glowingMaterial: {fileID: 2100000, guid: 96920e8165bf1e44c981a18d6d6f9c17, type: 2}
-  showRingVolumeThreshold: 0
-  ringPrefab: {fileID: -4320558180572046448, guid: 0a339d6c5a733184e9e0d852d2dac138,
-    type: 3}
 --- !u!1001 &1936201850800251651
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12721,12 +12701,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 398171464b5f01044b8cb1358224d316, type: 3}
---- !u!1 &3342890075869375047 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3799509228225841476, guid: 398171464b5f01044b8cb1358224d316,
-    type: 3}
-  m_PrefabInstance: {fileID: 1936201850800251651}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5248295034959660942 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5911948490209010829, guid: 398171464b5f01044b8cb1358224d316,

@@ -99,7 +99,7 @@ in the following section we will refere to 2 different type of users:
 - Type 2: Users with AR experience but no industrial maintenance experience.
 - Type 3: Users with experience in both AR and industrial maintenance.
 
-The following Plots illustrates some preliminary results we obtained thanks to the user tests
+The following Plots illustrates the results we obtained thanks to the user tests
 <br><br>
 ![Development pipeline](README_files/plot1.jpg)
 <br><br>

@@ -4,7 +4,7 @@
 ## 1. Motivation & Project Description
 **Abstract:** : Complex workflows in dynamic industrial environments demand advanced solutions to enhance operator efficiency and support. To address these challenges, we present SBB HoloGuide, an augmented reality (AR) application developed for Swiss Federal Railways (SBB) to simplify train door maintenance. Designed for HoloLens 2, the system overlays virtual information onto physical components, en- abling operators—especially novices—to complete tasks efficiently using intuitive interfaces. Key features include precise 3D alignment of virtual-physical components, intuitive visual guidance, and an interactive miniature view for detailed maintenance tasks. The application integrates SBB’s maintenance data from manuals and logs, achieving a 2.85x average speedup in task completion compared to traditional methods, as validated through a user study involving participants with diverse AR experience levels. This work highlights AR’s potential to optimize industrial workflows and lays the groundwork for AR-based maintenance technologies.
 
-You can find the project paper [here](README_files/report.pdf).
+You can find the project paper [here](README_files/paper.pdf).
 You can find the project teaser video [here](https://youtu.be/Xzc1fEOiHZ0)
 
 This project is part of the [Mixed Reality](https://cvg.ethz.ch/lectures/Mixed-Reality/) (Fall semester 2024) course at ETH Zürich.

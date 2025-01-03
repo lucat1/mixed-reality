@@ -134,17 +134,17 @@ In the following section we will refer to 2 different types of users:
 The following Plots illustrate the main results we obtained through a comprehensive user test.
 
 <br><br>
-![plo1](README_files/plot1.jpg)
+![plo1](README_files/plot1.png)
 <br><br>
 - In the above plot we evaluate the usability of the application’s interfaces by comparing the time spent by **type 1** and **type 2** users. The above plot shows that for the **Tasks Menu** and **Place Door** interfaces, the median times for both user types are closely aligned, and the inter-quartile ranges show substantial overlap, indicating that these interfaces are equally user-friendly for novices and experienced users alike. However, in the **Steps Menu** interface, **type 1 users** exhibit longer completion times and greater variability compared to **type 2 users**. We believe this discrepancy arises because progressing through the Steps Menu requires users to perform a hand gesture, using the palm of the hand, to access the 3D miniature for visualizing small and intricate components. For users with no prior AR experience, mastering this gesture was less intuitive and smooth compared to those with AR experience. Despite this, the discrepancy is not that significant, and **overall, across all three interfaces, we can conclude that the application is user-friendly for users with no prior AR experience**.
 
 <br><br>
-![plot2](README_files/plot2.jpg)
+![plot2](README_files/plot2.png)
 <br><br>
 - In the above plot we evaluate whether the tutorial provided in the application effectively helped users understand the AR mechanisms and improved their performance in the subsequent challenge phase, where they carried out maintenance tasks. The above plot demonstrates the **tutorial’s impact, showing a consistent reduction in time spent across all three application interfaces: Tasks Menu, Place Door, and Steps Menu**. For each interface, the median time during the challenge phase is significantly lower than in the tutorial, indicating that users learned to perform the same tasks more efficiently. Furthermore, the narrower inter-quartile range and whiskers in the challenge phase reflect **reduced variability and greater consistency among users**. The Place Door interface shows the most pronounced improvement, with a substantial reduction in median time and a narrower spread, suggesting that this initially challenging task was mastered through the tutorial.
 
 <br><br>
-![plot3](README_files/plot3.jpg)
+![plot3](README_files/plot3.png)
 <br><br>
 - In the above plot we evaluate the performance of SBB HoloGuide against the traditional mainte nance method using task completion time as the Key Performance Indicator (KPI). The above chart illustrates individual user times for both methods, with average times represented by dashed lines. The results clearly demonstrate that **SBB HoloGuide consistently outperforms the use of the manual across all users**.
 **For all users, the time required to complete the maintenance task with the AR application is significantly lower than with the traditional method. The average time for the traditional method is <b>201.78</b> seconds, compared to <b>70.92</b> seconds for SBB HoloGuide, achieving a <b>2.85x</b> speedup on average**. This substantial reduction in task completion time empirically supports the conclusion that the AR application offers a faster, more efficient, and streamlined alternative for train door maintenance.

@@ -154,10 +154,10 @@ The following Plots illustrate the main results we obtained through a comprehens
 |------------------------------|----------|---------|
 | Perceived Frustration [1-5]  | 2        | 0.82    |
 | Perceived Fatigue [1-5]      | 2.38     | 0.87    |
-| Navigation                   | 4.85     | 0.38    |
-| Usability                    | 4.62     | 0.51    |
-| Appearance                   | 4.70     | 0.48    |
-| Content Quality              | 4.62     | 0.65    |
+| Navigation [1-5]                   | 4.85     | 0.38    |
+| Usability [1-5]                    | 4.62     | 0.51    |
+| Appearance [1-5]                   | 4.70     | 0.48    |
+| Content Quality [1-5]              | 4.62     | 0.65    |
 
 
 - We summarize some key findings from the user study form completed by participants in the above table.

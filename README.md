@@ -174,7 +174,7 @@ Nearly 90% of users reported no increased frustration or mental fatigue after us
 
 ```
 @misc{bollati_bruni_tagliavini_zanoli_MR2024, 
-  title={SBB HoloGuide: An Intuitive Augmented Reality Application for Improving the Industrial Maintenance of Train Doors},
+  title={SBB HoloGuide: Augmented Reality–Driven Train Door Maintenance},
   url={https://github.com/lucat1/mixed-reality},
   journal={ETHZ - Mixed Reality Fall Semester 2024},
   author={Bollati, Riccardo and Bruni, Federica and Tagliavini, Luca and Zanoli, Christopher},
